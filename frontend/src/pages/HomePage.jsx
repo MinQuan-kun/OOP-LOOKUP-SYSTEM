@@ -40,7 +40,7 @@ const HomePage = () => {
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
                                 {/* CỘT 1: (Cây kiến thức) - Chiếm 3 phần (3/12 ~ 25%) */}
-                                <div className="lg:col-span-3 sticky top-[250px]">
+                                <div className="lg:col-span-3">
                                     <KnowledgeTree />
                                 </div>
                                 {/* CỘT 2: Nội dung chính (Chiếm 6/12) */}

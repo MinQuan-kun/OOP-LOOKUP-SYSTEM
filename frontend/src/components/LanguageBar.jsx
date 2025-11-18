@@ -17,8 +17,6 @@ const LanguageBar = () => {
     <div className="w-full bg-black text-white h-12 flex items-center px-4 md:px-20 shadow-md z-40 -mt-10">
       
       {/* Danh sách ngôn ngữ */}
-      {/* 1. Thêm w-full: Để div này chiếm hết chiều rộng của cha */}
-      {/* 2. Xóa gap cố định (md:gap-6): Để các nút tự chia khoảng cách */}
       <div className="flex items-center w-full h-full">
         {languages.map((lang) => (
           <button

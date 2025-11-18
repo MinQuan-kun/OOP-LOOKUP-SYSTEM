@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// TODO: Hiện tại chỉ là dữ liệu giả
+// TODO: Đang sử dụng dữ liệu giả, cần fix sau này
 const treeData = [
   {
     id: 'c1',
@@ -33,7 +33,7 @@ const treeData = [
 ];
 
 const KnowledgeTree = () => {
-  // State lưu các chương đang mở (mặc định mở hết)
+  // State lưu các chương đang mở
   const [expandedNodes, setExpandedNodes] = useState(['c1', 'c2', 'c3']);
   // State lưu bài học đang chọn
   const [activeNode, setActiveNode] = useState('');
@@ -48,10 +48,10 @@ const KnowledgeTree = () => {
   };
 
   return (
-    <div className="w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full max-h-[calc(100vh-280px)]">
+      <div className="w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col sticky top-[250px] max-h-[calc(100vh-260px)]">
       
       {/* Header của Cây kiến thức */}
-      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 shrink-0">
         <h2 className="font-bold text-gray-800 flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -60,7 +60,7 @@ const KnowledgeTree = () => {
         </h2>
       </div>
 
-      {/* Danh sách cây (Có thanh cuộn riêng nếu dài quá) */}
+      {/* Danh sách cây (Có thanh cuộn riêng bên trong) */}
       <div className="p-2 overflow-y-auto custom-scrollbar flex-1">
         {treeData.map((chapter) => {
             const isExpanded = expandedNodes.includes(chapter.id);
@@ -91,7 +91,7 @@ const KnowledgeTree = () => {
                   </span>
                 </button>
 
-                {/* Node Con (Bài học) - Render có điều kiện */}
+                {/* Node Con (Bài học) */}
                 {isExpanded && (
                   <div className="ml-4 pl-3 border-l border-gray-200 mt-1 space-y-1">
                     {chapter.children.map((lesson) => (
@@ -101,16 +101,14 @@ const KnowledgeTree = () => {
                         className={`
                           w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-all text-left
                           ${activeNode === lesson.id 
-                            ? 'bg-blue-50 text-blue-700 font-medium' // Đang chọn
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900' // Bình thường
+                            ? 'bg-blue-50 text-blue-700 font-medium' 
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                           }
                         `}
                       >
-                        {/* Icon File */}
                         <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 shrink-0 ${activeNode === lesson.id ? 'text-blue-500' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        
                         <span className="truncate">
                             {lesson.title}
                         </span>
