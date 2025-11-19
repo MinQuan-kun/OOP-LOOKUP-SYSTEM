@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+
 import Header from "@/components/Header";
 import LanguageBar from "@/components/LanguageBar";
 import LoginButton from "../components/LoginButton";
@@ -6,7 +7,12 @@ import SearchFilterBar from "@/components/SearchFilterBar";
 import KnowledgeTree from "@/components/KnowledgeTree";
 import MainContent from "@/components/MainContent";
 import RelatedContent from "@/components/RelatedContent";
+
+
 const HomePage = () => {
+    // State toàn cục
+    const [currentLang, setCurrentLang] = useState('cpp'); // Mặc định C++
+    const [currentSlug, setCurrentSlug] = useState('');    // Slug bài học đang chọn
 
     return (
         <div className="min-h-screen w-full relative">
@@ -26,7 +32,10 @@ const HomePage = () => {
                     {/* Đầu Trang */}
                     <Header />
                     {/* Thanh ngôn ngữ*/}
-                    <LanguageBar />
+                    <LanguageBar
+                        activeLang={currentLang}
+                        setActiveLang={setCurrentLang}
+                    />
                     {/* --- MAIN CONTENT --- */}
                     {/* MAIN CONTENT */}
                     <div className="relative z-10 container mx-auto pb-10 px-4">
@@ -39,16 +48,19 @@ const HomePage = () => {
                             {/* lg:grid-cols-12: Chia màn hình làm 12 phần bằng nhau */}
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-                                {/* CỘT 1: (Cây kiến thức) - Chiếm 3 phần (3/12 ~ 25%) */}
+                                {/* Cột 1: Cây kiến thức */}
                                 <div className="lg:col-span-3">
-                                    <KnowledgeTree />
-                                </div>
-                                {/* CỘT 2: Nội dung chính (Chiếm 6/12) */}
-                                <div className="lg:col-span-6">
-                                    <MainContent />
+                                    {/* Truyền hàm setSlug để khi bấm vào bài học thì cập nhật MainContent */}
+                                    <KnowledgeTree onSelectLesson={(slug) => setCurrentSlug(slug)} />
                                 </div>
 
-                                {/* CỘT 3: Kiến thức liên quan (Chiếm 3/12) */}
+                                {/* Cột 2: Nội dung chính */}
+                                <div className="lg:col-span-6">
+                                    {/* Truyền slug và ngôn ngữ để nó tự fetch dữ liệu */}
+                                    <MainContent slug={currentSlug} lang={currentLang} />
+                                </div>
+
+                                {/* Cột 3: Liên quan */}
                                 <div className="lg:col-span-3">
                                     <RelatedContent />
                                 </div>

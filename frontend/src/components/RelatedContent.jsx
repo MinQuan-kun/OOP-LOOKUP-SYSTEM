@@ -41,12 +41,12 @@ const RelatedContent = () => {
       </ul>
 
       {/* Banner quảng cáo hoặc Note nhỏ (Optional) */}
-      <div className="mt-6 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg p-3 text-center">
+      {/* <div className="mt-6 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg p-3 text-center">
         <p className="text-xs text-gray-600 font-medium">Bạn muốn đóng góp bài viết?</p>
         <button className="mt-2 text-xs bg-white text-blue-600 px-3 py-1 rounded shadow-sm font-bold hover:bg-blue-50">
           Gửi bài ngay
         </button>
-      </div>
+      </div> */}
 
     </div>
   );

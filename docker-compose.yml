@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: oop-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - oop-network
+
+  # Seeder Service (Đã sửa lỗi thụt lề)
+  seeder:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: oop-seeder
+    # Đảm bảo lệnh chạy file seed.js
+    command: sh -c "sleep 15 && node seed.js"
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+    networks:
+      - oop-network
+    restart: "no" 
+    
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: oop-backend
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+    # Đảm bảo backend đợi seeder hoàn thành
+    depends_on:
+      - mongodb
+      - seeder 
+    networks:
+      - oop-network
+    restart: unless-stopped
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: oop-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://backend:5001/api
+    depends_on:
+      - backend
+    networks:
+      - oop-network
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+
+networks:
+  oop-network:
+    driver: bridge
