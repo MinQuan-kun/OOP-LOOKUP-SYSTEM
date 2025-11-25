@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
-const SearchFilterBar = () => {
-  // 1. Đổi state thành mảng để lưu được nhiều lựa chọn
-  // Mặc định chọn 'khai-niem' (bạn có thể để [] nếu muốn không chọn gì lúc đầu)
-  const [selectedFilters, setSelectedFilters] = useState(['khai-niem']);
+// Nhận selectedFilters và setSelectedFilters từ HomePage truyền vào
+const SearchFilterBar = ({ selectedFilters, setSelectedFilters }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
+  // ID này phải khớp với ID trong KNOWLEDGE_ROOTS ở KnowledgeTree.jsx
   const filters = [
     { id: 'khai-niem', label: 'Khái niệm' },
     { id: 'tinh-chat', label: 'Tính chất' },
@@ -13,22 +12,20 @@ const SearchFilterBar = () => {
     { id: 'phuong-phap', label: 'Phương pháp' },
   ];
 
-  // Hàm xử lý khi click vào checkbox
+  // Hàm xử lý khi click checkbox
   const toggleFilter = (id) => {
-    setSelectedFilters(prev => {
-      if (prev.includes(id)) {
-        // Nếu đã có thì bỏ chọn (lọc nó ra khỏi mảng)
-        return prev.filter(item => item !== id);
-      } else {
-        // Nếu chưa có thì thêm vào mảng
-        return [...prev, id];
-      }
-    });
+    if (selectedFilters.includes(id)) {
+      // Nếu đang chọn -> Bỏ chọn (Lọc bỏ ID đó ra khỏi mảng)
+      setSelectedFilters(selectedFilters.filter(item => item !== id));
+    } else {
+      // Nếu chưa chọn -> Thêm vào mảng
+      setSelectedFilters([...selectedFilters, id]);
+    }
   };
 
-  // Hàm làm mới: Reset về mặc định (ví dụ chỉ chọn Khái niệm hoặc rỗng)
+  // Hàm làm mới: Chọn lại tất cả
   const handleReset = () => {
-    setSelectedFilters(['khai-niem']); 
+    setSelectedFilters(['khai-niem', 'tinh-chat', 'dang-bai-tap', 'phuong-phap']); 
     setSearchQuery('');
   };
 
@@ -38,6 +35,7 @@ const SearchFilterBar = () => {
       {/* 1. NHÓM CHECKBOXES */}
       <div className="flex items-center gap-4 md:gap-6 shrink-0 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 no-scrollbar">
         {filters.map((filter) => {
+          // Kiểm tra xem ID này có đang nằm trong danh sách được chọn không
           const isChecked = selectedFilters.includes(filter.id);
           
           return (
@@ -47,21 +45,19 @@ const SearchFilterBar = () => {
             >
               <div className="relative flex items-center justify-center">
                 <input
-                  type="checkbox" // Đổi type thành checkbox
+                  type="checkbox"
                   value={filter.id}
                   checked={isChecked}
                   onChange={() => toggleFilter(filter.id)}
                   className="peer sr-only"
                 />
                 
-                {/* Hình vuông (Checkbox) thay vì hình tròn */}
-                {/* rounded: bo góc nhẹ hình vuông */}
+                {/* Giao diện checkbox tùy chỉnh */}
                 <div className={`w-5 h-5 border-2 rounded transition-all duration-200 flex items-center justify-center ${
                   isChecked 
-                    ? 'bg-blue-600 border-blue-600' // Khi chọn: Nền xanh
-                    : 'bg-white border-gray-300 group-hover:border-blue-400' // Chưa chọn: Nền trắng
+                    ? 'bg-blue-600 border-blue-600' 
+                    : 'bg-white border-gray-300 group-hover:border-blue-400'
                 }`}>
-                  {/* Dấu tích (Checkmark icon) */}
                   <svg 
                     className={`w-3.5 h-3.5 text-white transition-transform duration-200 ${isChecked ? 'scale-100' : 'scale-0'}`} 
                     fill="none" 
@@ -84,7 +80,7 @@ const SearchFilterBar = () => {
         })}
       </div>
 
-      {/* 2. THANH TÌM KIẾM */}
+      {/* 2. THANH TÌM KIẾM (Giữ nguyên logic UI) */}
       <div className="relative w-full lg:flex-1">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

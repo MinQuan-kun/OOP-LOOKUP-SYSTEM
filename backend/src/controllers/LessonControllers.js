@@ -1,16 +1,19 @@
 import Lesson from "../models/Lesson.js";
 import Chapter from "../models/Chapter.js";
 import CodeExample from "../models/CodeExample.js";
+import KnowledgeType from "../models/KnowledgeType.js"; 
 
 // 1. Lấy Cây kiến thức (Sidebar Tree)
-// Cấu trúc trả về: [{ id, title, children: [{ id, title, slug }] }]
 export const getKnowledgeTree = async (req, res) => {
   try {
     // Lấy tất cả chương, sắp xếp theo thứ tự (order)
     const chapters = await Chapter.find().sort({ order: 1 }).lean();
 
     // Lấy tất cả bài học, chỉ lấy các trường cần thiết để nhẹ gánh
-    const lessons = await Lesson.find().select("title slug chapter").lean();
+    const lessons = await Lesson.find()
+    .select("title slug chapter").lean()
+    .populate("knowledge_type", "slug")
+    .lean();
 
     // Ghép bài học vào chương tương ứng
     const treeData = chapters.map((chapter) => {
@@ -25,6 +28,7 @@ export const getKnowledgeTree = async (req, res) => {
           id: l._id,
           title: l.title,
           slug: l.slug,
+          type: l.knowledge_type ? l.knowledge_type.slug : "" 
         })),
       };
     });
@@ -44,14 +48,15 @@ export const getLessonDetail = async (req, res) => {
     const lang = req.query.lang || "cpp"; // Mặc định là C++ nếu không truyền
 
     // Tìm bài học
-    const lesson = await Lesson.findOne({ slug }).populate("chapter", "title");
+    const lesson = await Lesson.findOne({ slug })
+    .populate("chapter", "title")
+    .populate("knowledge_type", "name");
 
     if (!lesson) {
       return res.status(404).json({ message: "Không tìm thấy bài học" });
     }
 
     // Tăng lượt xem (View count)
-    lesson.views += 1;
     await lesson.save();
 
     // Tìm ví dụ code tương ứng với ngôn ngữ được chọn
@@ -95,5 +100,42 @@ export const searchLessons = async (req, res) => {
   } catch (error) {
     console.error("Error searching lessons:", error);
     res.status(500).json({ message: "Lỗi Server khi tìm kiếm" });
+  }
+};
+
+// 4. Cập nhật bài học (Update Lesson) - ĐÃ NÂNG CẤP LOGIC
+export const updateLesson = async (req, res) => {
+  try {
+    const { id } = req.params; // ID của Lesson
+    const { title, content, code_content, explanation, has_code, lang } = req.body;
+
+    // 1. Cập nhật nội dung bài học (Tiêu đề, Nội dung HTML)
+    const updatedLesson = await Lesson.findByIdAndUpdate(
+      id,
+      { title, content },
+      { new: true }
+    );
+
+    if (!updatedLesson) {
+      return res.status(404).json({ message: "Không tìm thấy bài học" });
+    }
+
+    // 2. Xử lý Code Example (Dùng Lesson ID + Language làm khóa chính)
+    if (has_code === true) {
+        await CodeExample.findOneAndUpdate(
+            { lesson: id, language: lang }, // Điều kiện tìm
+            { code_content, explanation },  // Dữ liệu update
+            { upsert: true, new: true }     // Tùy chọn: tạo mới nếu ko tìm thấy
+        );
+    } else {
+        // Bỏ code example
+        await CodeExample.findOneAndDelete({ lesson: id, language: lang });
+    }
+
+    res.status(200).json({ message: "Cập nhật thành công!", lesson: updatedLesson });
+
+  } catch (error) {
+    console.error("Error updating lesson:", error);
+    res.status(500).json({ message: "Lỗi Server khi cập nhật: " + error.message });
   }
 };

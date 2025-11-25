@@ -3,26 +3,18 @@ import mongoose from 'mongoose';
 const lessonSchema = new mongoose.Schema({
   chapter: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Chapter',
+    ref: 'Chapter', 
     required: true 
   },
-  title: { 
-    type: String, 
-    required: true 
+  knowledge_type: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'KnowledgeType',
+    required: true
   },
-  slug: { 
-    type: String, 
-    required: true, 
-    unique: true 
-  }, // URL
-  content: { 
-    type: String, 
-    required: true 
-  }, // Nội dung lý thuyết
-  views: { 
-    type: Number, 
-    default: 0 
-  }
+  // ---------------------
+  title: { type: String, required: true },
+  slug: { type: String, required: true, unique: true }, 
+  content: { type: String, required: true }, 
 }, { 
   timestamps: true 
 });

@@ -12,13 +12,13 @@ const languageSchema = new mongoose.Schema({
   color: { 
     type: String,
     default: '#000000'
-  }, // Màu sắc đại diện (cho UI đẹp)
+  }, // Màu sắc đại diện 
   icon: { 
     type: String 
   } // Đường dẫn icon
 }, { 
   timestamps: true,
-  _id: false // Tắt ID tự động của Mongo vì mình đã tự set _id ở trên
+  _id: false // Tắt ID tự động của Mongo đã tự set _id ở trên
 });
 
 const Language = mongoose.model('Language', languageSchema);

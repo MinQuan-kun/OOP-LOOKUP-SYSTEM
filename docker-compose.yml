@@ -12,13 +12,12 @@ services:
     networks:
       - oop-network
 
-  # Seeder Service (Đã sửa lỗi thụt lề)
+  # Seeder Service
   seeder:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: oop-seeder
-    # Đảm bảo lệnh chạy file seed.js
     command: sh -c "sleep 15 && node seed.js"
     env_file:
       - ./backend/.env
@@ -42,7 +41,6 @@ services:
       - ./backend/.env
     environment:
       - NODE_ENV=production
-    # Đảm bảo backend đợi seeder hoàn thành
     depends_on:
       - mongodb
       - seeder 

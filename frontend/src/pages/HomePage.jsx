@@ -8,12 +8,13 @@ import KnowledgeTree from "@/components/KnowledgeTree";
 import MainContent from "@/components/MainContent";
 import RelatedContent from "@/components/RelatedContent";
 
-
 const HomePage = () => {
     // State toàn cục
     const [currentLang, setCurrentLang] = useState('cpp'); // Mặc định C++
     const [currentSlug, setCurrentSlug] = useState('');    // Slug bài học đang chọn
-
+      const [selectedFilters, setSelectedFilters] = useState([
+    'khai-niem', 'tinh-chat', 'dang-bai-tap', 'phuong-phap'
+    ]);
     return (
         <div className="min-h-screen w-full relative">
             {/* Radial Gradient Background from Top */}
@@ -42,7 +43,7 @@ const HomePage = () => {
                         <div className="w-full max-w-7xl mx-auto space-y-6">
 
                             {/* 1. Thanh Search & Filter */}
-                            <SearchFilterBar />
+                            <SearchFilterBar selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 
                             {/* 2. BỐ CỤC 3 CỘT (GRID LAYOUT) */}
                             {/* lg:grid-cols-12: Chia màn hình làm 12 phần bằng nhau */}
@@ -51,7 +52,10 @@ const HomePage = () => {
                                 {/* Cột 1: Cây kiến thức */}
                                 <div className="lg:col-span-3">
                                     {/* Truyền hàm setSlug để khi bấm vào bài học thì cập nhật MainContent */}
-                                    <KnowledgeTree onSelectLesson={(slug) => setCurrentSlug(slug)} />
+                                <KnowledgeTree 
+                                    onSelectLesson={(slug) => setCurrentSlug(slug)} 
+                                    filters={selectedFilters}
+                                />
                                 </div>
 
                                 {/* Cột 2: Nội dung chính */}
