@@ -61,7 +61,7 @@ export const chatWithBot = async (req, res) => {
 
     // 3. Gọi Gemini
     const model = genAI.getGenerativeModel({ 
-        model: "gemini-pro",
+        model: "gemini-2.5-flash",
         systemInstruction: {
             role: "system",
             parts: [{ text: `
