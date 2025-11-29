@@ -9,13 +9,6 @@ const languageSchema = new mongoose.Schema({
     type: String, 
     required: true 
   }, // Tên hiển thị: 'C++', 'Java'
-  color: { 
-    type: String,
-    default: '#000000'
-  }, // Màu sắc đại diện 
-  icon: { 
-    type: String 
-  } // Đường dẫn icon
 }, { 
   timestamps: true,
   _id: false // Tắt ID tự động của Mongo đã tự set _id ở trên

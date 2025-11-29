@@ -10,9 +10,9 @@ const chapterSchema = new mongoose.Schema({
     type: Number, 
     required: true, 
     default: 0 
-  } // Dùng để sắp xếp thứ tự hiển thị (1, 2, 3...)
+  } 
 }, { 
-  timestamps: true // Tự động tạo createdAt, updatedAt
+  timestamps: true 
 });
 
 const Chapter = mongoose.model('Chapter', chapterSchema);

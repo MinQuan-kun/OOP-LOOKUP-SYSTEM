@@ -7,12 +7,19 @@ import Language from "./src/models/Language.js";
 import KnowledgeType from "./src/models/KnowledgeType.js";
 import User from "./src/models/User.js";
 
-dotenv.config({ path: ".env.development" });
+dotenv.config({ path: ".env" }); // Nếu chạy test thì để về .env.development
 
 const seedData = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_CONNECT_STRING);
     console.log("🔌 Đã kết nối MongoDB...");
+    // Kiểm tra xem đã có bài học nào chưa. Nếu có rồi thì thôi, không seed nữa.
+    const count = await Lesson.countDocuments();
+    if (count > 0) {
+        console.log("Database đã có dữ liệu. Bỏ qua quá trình Seed để giữ lại dữ liệu cũ.");
+        process.exit(0);
+        return;
+    }
 
     //Dọn dẹp dữ liệu cũ
     await Promise.all([
@@ -20,15 +27,16 @@ const seedData = async () => {
       Lesson.deleteMany(),
       CodeExample.deleteMany(),
       Language.deleteMany(),
-      KnowledgeType.deleteMany()
+      KnowledgeType.deleteMany(),
+      User.deleteMany()
     ]);
 
     // --- TẠO TÀI KHOẢN ADMIN MẪU ---
     await User.create({
-        username: "admin",
-        password: "123456", // Mật khẩu demo (chưa mã hóa)
-        name: "Quản trị viên",
-        role: "admin"
+      username: "admin",
+      password: "123456", // Mật khẩu demo (chưa mã hóa)
+      name: "Quản trị viên",
+      role: "admin"
     });
     console.log("Đã tạo tài khoản Admin: admin / 123456");
 
@@ -40,12 +48,12 @@ const seedData = async () => {
 
     //Tạo ĐỦ 6 NGÔN NGỮ
     const languages = [
-      { _id: "cpp", name: "C++", color: "#00599C" },
-      { _id: "csharp", name: "C#", color: "#239120" },
-      { _id: "java", name: "Java", color: "#007396" },
-      { _id: "dart", name: "Dart", color: "#0175C2" },
-      { _id: "ruby", name: "Ruby", color: "#CC342D" },
-      { _id: "php", name: "PHP", color: "#777BB4" }
+      { _id: "cpp", name: "C++" },
+      { _id: "csharp", name: "C#" },
+      { _id: "java", name: "Java" },
+      { _id: "dart", name: "Dart" },
+      { _id: "ruby", name: "Ruby" },
+      { _id: "php", name: "PHP" }
     ];
     await Language.insertMany(languages);
 
@@ -53,7 +61,7 @@ const seedData = async () => {
     const c1 = await Chapter.create({ title: "CHƯƠNG 1: TỔNG QUAN VỀ OOP", order: 1 });
     const c2 = await Chapter.create({ title: "CHƯƠNG 2: MÔI TRƯỜNG & CÚ PHÁP", order: 2 });
     const c3 = await Chapter.create({ title: "CHƯƠNG 3: LỚP VÀ ĐỐI TƯỢNG", order: 3 });
-    
+
     const c4 = await Chapter.create({ title: "CHƯƠNG 4: TÍNH KẾ THỪA", order: 4 });
     const c5 = await Chapter.create({ title: "CHƯƠNG 5: TÍNH ĐA HÌNH", order: 5 });
     const c6 = await Chapter.create({ title: "CHƯƠNG 6: TÍNH TRỪU TƯỢNG", order: 6 });
@@ -105,7 +113,7 @@ const seedData = async () => {
       knowledge_type: t1._id, // <--- KHÁI NIỆM
       content: "<p>Class là khuôn mẫu, Object là thực thể cụ thể được tạo ra từ khuôn mẫu đó.</p>"
     });
-    
+
     // Code ví dụ cho bài Class
     await CodeExample.create({ lesson: lessonClass._id, language: "cpp", code_content: "class Car {\npublic:\n  string brand;\n};", explanation: "Khai báo Class trong C++" });
     await CodeExample.create({ lesson: lessonClass._id, language: "java", code_content: "public class Car {\n  String brand;\n}", explanation: "Khai báo Class trong Java" });
@@ -157,23 +165,23 @@ const seedData = async () => {
     // ====================================================
     // DỮ LIỆU MẪU CHO DẠNG BÀI TẬP & PHƯƠNG PHÁP (Để test hiển thị)
     // ====================================================
-    
+
     // Một bài tập thuộc Chương 3 nhưng nằm ở mục DẠNG BÀI TẬP
     await Lesson.create({
-        title: "Bài tập: Quản lý sinh viên bằng Class",
-        slug: "bai-tap-class",
-        chapter: c3._id,
-        knowledge_type: t3._id, // <--- DẠNG BÀI TẬP
-        content: "<p>Đề bài: Viết chương trình tạo class Student...</p>"
+      title: "Bài tập: Quản lý sinh viên bằng Class",
+      slug: "bai-tap-class",
+      chapter: c3._id,
+      knowledge_type: t3._id, // <--- DẠNG BÀI TẬP
+      content: "<p>Đề bài: Viết chương trình tạo class Student...</p>"
     });
 
     // Một phương pháp thuộc Chương 4 nhưng nằm ở mục PHƯƠNG PHÁP GIẢI
     await Lesson.create({
-        title: "Mẹo xử lý lỗi Diamond Problem trong Đa kế thừa",
-        slug: "meo-da-ke-thua",
-        chapter: c4._id,
-        knowledge_type: t4._id, // <--- PHƯƠNG PHÁP GIẢI
-        content: "<p>Trong C++, khi kế thừa hình thoi cần dùng virtual inheritance...</p>"
+      title: "Mẹo xử lý lỗi Diamond Problem trong Đa kế thừa",
+      slug: "meo-da-ke-thua",
+      chapter: c4._id,
+      knowledge_type: t4._id, // <--- PHƯƠNG PHÁP GIẢI
+      content: "<p>Trong C++, khi kế thừa hình thoi cần dùng virtual inheritance...</p>"
     });
 
     console.log("✅ Đã nạp dữ liệu mẫu thành công!");

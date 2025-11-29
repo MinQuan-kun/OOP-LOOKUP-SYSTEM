@@ -5,18 +5,24 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
+import CuteBot from './components/CuteBot';
+
 
 function App() {
   return (
     <>
       <Toaster richColors />
-
       <BrowserRouter>
         <Routes>
           {/* Trang chủ */}
           <Route 
             path='/' 
-            element={<HomePage />} 
+            element={
+              <>
+                <HomePage />
+                <CuteBot />
+              </>
+            }
           />
 
           {/*Route cho trang Login */}
