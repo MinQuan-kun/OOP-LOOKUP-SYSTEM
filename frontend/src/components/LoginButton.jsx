@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "@/context/AuthContext"; // 1. Import useAuth
 
 const LoginButton = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
-  // Kiểm tra trạng thái đăng nhập khi component load
-  useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  
+  // 2. Thay thế logic cũ (localStorage thủ công) bằng Hook từ Context
+  // user: thông tin người dùng hiện tại (null nếu chưa đăng nhập)
+  // logout: hàm đăng xuất đã viết sẵn trong Context
+  const { user, logout } = useAuth(); 
 
   const handleLogout = () => {
-    // 1. Xóa thông tin user khỏi localStorage
-    localStorage.removeItem('currentUser');
-    
-    // 2. Reset state để giao diện cập nhật ngay lập tức
-    setUser(null);
-    
-    navigate('/');
+    logout(); // Gọi hàm logout từ Context (nó sẽ tự xóa localStorage, toast thông báo, v.v.)
+    // Không cần navigate('/') ở đây vì trong AuthContext đã có navigate('/login') hoặc bạn có thể tùy chỉnh
   };
 
+  // --- PHẦN GIAO DIỆN (UI) GIỮ NGUYÊN HOÀN TOÀN ---
   return (
     <div className="absolute top-0 left-0 w-full flex justify-end items-center px-8 py-4 z-50 pointer-events-none">
       
@@ -31,11 +24,13 @@ const LoginButton = () => {
         <div className="pointer-events-auto flex items-center gap-3 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-lg border border-white/50 transition-all hover:bg-white">
           {/* Avatar hoặc Icon User */}
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
+            {/* Lấy ký tự đầu của username, fallback là 'U' */}
             {user.username?.charAt(0).toUpperCase() || 'U'}
           </div>
           
           <div className="flex flex-col">
             <span className="text-xs text-gray-500 font-medium">Xin chào,</span>
+            {/* Hiển thị tên (username hoặc name) */}
             <span className="text-sm font-bold text-gray-800 leading-none">{user.username || user.name}</span>
           </div>
 

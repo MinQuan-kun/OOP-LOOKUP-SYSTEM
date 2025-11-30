@@ -12,7 +12,7 @@ import Language from './src/models/Language.js';
 import User from './src/models/User.js';
 
 const __dirname = path.resolve();
-const envFile = process.env.NODE_ENV === "production" ? ".env" : ".env.development";
+const envFile = process.env.NODE_ENV === "production" ? ".env" : ".env";
 dotenv.config({ path: path.resolve(__dirname, envFile) });
 
 // --- DỮ LIỆU ĐƯỢC EXPORT TỪ DB CŨ ---
@@ -309,7 +309,7 @@ const examples = [
     "_id": "692ae7577fdaad24a2aec506",
     "lesson": "692ae7577fdaad24a2aec504",
     "language": "cpp",
-    "code_content": "Test",
+    "code_content": "class Dog : public Animal { ... };",
     "explanation": "C++ dùng dấu hai chấm :",
     "is_supported": true,
     "syntax_note": ""
@@ -345,7 +345,7 @@ const examples = [
     "_id": "692b0712eaa2f83d2b966580",
     "lesson": "692ae7577fdaad24a2aec50c",
     "language": "ruby",
-    "code_content": "# Module trừu tượng (tương tự interface)\nmodule Shape\n  def calculate_area\n    raise NotImplementedError, \"Phương thức calculate_area phải được triển khai\"\n  end\nend\n\n# Lớp triển khai cụ thể\nclass Circle\n  include Shape\n\n  def initialize(radius)\n    @radius = radius\n  end\n\n  def calculate_area\n    Math::PI * @radius * @radius  # Triển khai cụ thể\n  end\nend\n\n# Sử dụng\ncircle = Circle.new(5)  # Trừu tượng: Sử dụng qua module Shape\nputs \"Diện tích: #{circle.calculate_area}\"  # Kết quả: ~78.54",
+    "code_content": "# Module trừu tượng (tương tự interface)\nmodule Shape\n  def calculate_area\n    raise NotImplementedError, \"Phương thức calculate_area phải được triển khai\"\n  end\nend\n\n// Lớp triển khai cụ thể\nclass Circle\n  include Shape\n\n  def initialize(radius)\n    @radius = radius\n  end\n\n  def calculate_area\n    Math::PI * @radius * @radius  # Triển khai cụ thể\n  end\nend\n\n// Sử dụng\ncircle = Circle.new(5)  # Trừu tượng: Sử dụng qua module Shape\nputs \"Diện tích: #{circle.calculate_area}\"  # Kết quả: ~78.54",
     "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết.",
     "is_supported": true,
     "syntax_note": ""
@@ -372,8 +372,8 @@ const examples = [
     "_id": "692b32adeaa2f83d2b966590",
     "language": "java",
     "lesson": "692b1c06c5044e5f5eff746e",
-    "code_content": "",
-    "explanation": "",
+    "code_content": "// Ví dụ Getter Setter trong Java\npublic class Person {\n    private String name;\n    // Getter\n    public String getName() {\n        return name;\n    }\n    // Setter\n    public void setName(String newName) {\n        this.name = newName;\n    }\n}",
+    "explanation": "Ví dụ cơ bản về Getter Setter",
     "is_supported": true,
     "syntax_note": ""
   },
@@ -381,8 +381,8 @@ const examples = [
     "_id": "692b33b6eaa2f83d2b966591",
     "language": "dart",
     "lesson": "692b1b8ec5044e5f5eff746c",
-    "code_content": "",
-    "explanation": "",
+    "code_content": "// Trong Dart, thuộc tính bắt đầu bằng _ là private\nclass BankAccount {\n  double _balance = 0.0;\n}",
+    "explanation": "Ví dụ về Access Modifier trong Dart",
     "is_supported": true,
     "syntax_note": ""
   },
@@ -390,8 +390,8 @@ const examples = [
     "_id": "692b3591eaa2f83d2b966593",
     "language": "cpp",
     "lesson": "692ae7577fdaad24a2aec50a",
-    "code_content": "",
-    "explanation": "",
+    "code_content": "// Ví dụ đa hình C++\nclass Animal {\npublic:\n  virtual void sound() {\n    cout << \"Animal sound\" << endl;\n  }\n};\nclass Dog : public Animal {\npublic:\n  void sound() override {\n    cout << \"Woof\" << endl;\n  }\n};",
+    "explanation": "Ví dụ về tính đa hình",
     "is_supported": true,
     "syntax_note": ""
   },

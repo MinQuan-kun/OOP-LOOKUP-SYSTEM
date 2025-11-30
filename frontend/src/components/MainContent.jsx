@@ -23,12 +23,12 @@ const MainContent = ({ slug, lang }) => {
     is_supported: true    // Ngôn ngữ này có hỗ trợ tính năng này không?
   });
 
-  // Check login
   useEffect(() => {
-    const storedUser = localStorage.getItem('currentUser');
+    // SỬA: Đổi 'currentUser' thành 'user' cho khớp với AuthContext
+    const storedUser = localStorage.getItem('user'); 
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
-
+  
   // Reset showCode khi đổi bài hoặc đổi ngôn ngữ
   useEffect(() => {
     setShowCode(false);

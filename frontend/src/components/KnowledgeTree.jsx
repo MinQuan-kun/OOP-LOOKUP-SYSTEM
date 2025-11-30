@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
   const { isAdmin } = useAuth(); // Lấy trạng thái Admin
   const [transformedData, setTransformedData] = useState([]);
+  const [originalChapters, setOriginalChapters] = useState([]); // Lưu data gốc để đếm số chương
   const [expandedNodes, setExpandedNodes] = useState([]);
   const [activeNode, setActiveNode] = useState('');
   const [loading, setLoading] = useState(true);
@@ -23,14 +24,14 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
       try {
         const res = await API.get('/lesson/tree');
         const originalData = res.data;
+        setOriginalChapters(originalData); // Lưu lại để dùng khi thêm chương
 
         const newStructure = KNOWLEDGE_ROOTS.map(rootType => {
           const chaptersWithMatchingLessons = originalData.map(chapter => {
             // Lọc bài học theo loại
             const matchingLessons = chapter.children.filter(lesson => lesson.type === rootType.id);
             
-            // --- LOGIC QUAN TRỌNG ---
-            // Nếu chương không có bài học nào VÀ người dùng KHÔNG phải Admin -> Ẩn luôn chương đó
+            // Nếu chương không có bài học nào VÀ không phải Admin -> Ẩn chương đó
             if (matchingLessons.length === 0 && !isAdmin) {
                 return null;
             }
@@ -41,10 +42,8 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
               originalChapterId: chapter.id, 
               children: matchingLessons
             };
-          }).filter(Boolean); // Lọc bỏ các giá trị null (các chương đã bị ẩn)
+          }).filter(Boolean);
 
-          // Nếu mục lớn (vd: Dạng bài tập) không có chương nào -> Cũng có thể ẩn hoặc giữ tùy ý
-          // Ở đây mình giữ lại để hiển thị folder gốc, báo là "Trống" bên trong
           return {
             id: rootType.id,
             title: rootType.label,
@@ -55,7 +54,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
 
         setTransformedData(newStructure);
         
-        // Mặc định mở hết các folder gốc
+        // Mặc định mở hết các folder gốc nếu chưa mở
         if (expandedNodes.length === 0) {
             setExpandedNodes(KNOWLEDGE_ROOTS.map(k => k.id));
         }
@@ -69,7 +68,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
 
     fetchAndTransformData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refreshKey, isAdmin]); // Khi quyền Admin thay đổi -> Load lại cây để hiện/ẩn chương trống
+  }, [refreshKey, isAdmin]);
 
   const toggleNode = (id) => {
     if (expandedNodes.includes(id)) {
@@ -79,10 +78,46 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     }
   };
 
-  // --- XỬ LÝ THÊM BÀI ---
+  // --- 1. XỬ LÝ THÊM CHƯƠNG (MỚI) ---
+  const handleAddChapter = async (e) => {
+    e.stopPropagation();
+    const title = window.prompt("Nhập tên CHƯƠNG mới (Ví dụ: CHƯƠNG 8: DESIGN PATTERN):");
+    if (!title) return;
+
+    try {
+        // Tự động tính order để chương mới nằm cuối cùng
+        const newOrder = originalChapters.length + 1;
+        
+        await API.post('/chapter', {
+            title: title,
+            order: newOrder
+        });
+        toast.success("Đã thêm chương mới!");
+        setRefreshKey(prev => prev + 1);
+    } catch (error) {
+        toast.error("Lỗi thêm chương: " + (error.response?.data?.message || error.message));
+    }
+  };
+
+  // --- 2. XỬ LÝ XÓA CHƯƠNG (MỚI) ---
+  const handleDeleteChapter = async (e, chapterId, chapterTitle) => {
+    e.stopPropagation();
+    // Cảnh báo kỹ hơn vì xóa chương có thể ảnh hưởng bài học (tùy backend config)
+    if (!window.confirm(`CẢNH BÁO: Bạn có chắc muốn xóa "${chapterTitle}"?\nNếu xóa, các bài học trong chương này cũng có thể bị mất hoặc ẩn đi.`)) return;
+
+    try {
+        await API.delete(`/chapter/${chapterId}`);
+        toast.success("Đã xóa chương!");
+        setRefreshKey(prev => prev + 1);
+    } catch (error) {
+        toast.error("Lỗi xóa chương: " + (error.response?.data?.message || error.message));
+    }
+  };
+
+  // --- 3. XỬ LÝ THÊM BÀI HỌC (ĐÃ CÓ) ---
   const handleAddLesson = async (e, chapterId, rootSlug) => {
     e.stopPropagation();
-    const title = window.prompt("Nhập tên bài học mới:");
+    const title = window.prompt("Nhập tên BÀI HỌC mới:");
     if (!title) return;
 
     try {
@@ -98,7 +133,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     }
   };
 
-  // --- XỬ LÝ XÓA BÀI ---
+  // --- 4. XỬ LÝ XÓA BÀI HỌC (ĐÃ CÓ) ---
   const handleDeleteLesson = async (e, lessonId, lessonTitle) => {
     e.stopPropagation();
     if (!window.confirm(`Xóa bài "${lessonTitle}"?`)) return;
@@ -119,11 +154,23 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     <div className="w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col sticky top-24 max-h-[calc(100vh-120px)]">
 
       {/* Header */}
-      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 shrink-0">
+      <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 shrink-0 flex justify-between items-center">
         <h2 className="font-bold text-gray-800 flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
           Cây kiến thức
         </h2>
+        
+        {/* Nút Thêm Chương (Chỉ Admin) */}
+        {isAdmin && (
+            <button 
+                onClick={handleAddChapter}
+                className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-1"
+                title="Thêm chương mới"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" /></svg>
+                Chương
+            </button>
+        )}
       </div>
 
       {/* Body Scrollable */}
@@ -137,7 +184,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
           return (
             <div key={rootFolder.id} className="mb-2 border-b border-gray-100 last:border-0 pb-2">
 
-              {/* 1. FOLDER GỐC */}
+              {/* 1. FOLDER GỐC (Loại kiến thức) */}
               <button
                 onClick={() => toggleNode(rootFolder.id)}
                 className="w-full flex items-center gap-2 px-2 py-2 text-left hover:bg-blue-50 rounded-lg transition-colors group"
@@ -158,14 +205,14 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
                 <div className="ml-3 pl-2 border-l border-gray-200 mt-1 space-y-1">
                   
                   {rootFolder.children.length === 0 && (
-                    <div className="text-xs text-gray-400 italic pl-4 py-1">Không có dữ liệu</div>
+                    <div className="text-xs text-gray-400 italic pl-4 py-1">Chưa có dữ liệu</div>
                   )}
 
                   {rootFolder.children.map(chapter => {
                     const isChapterExpanded = expandedNodes.includes(chapter.id);
                     return (
                       <div key={chapter.id}>
-                        {/* Wrapper div cho Chương + Nút Add */}
+                        {/* Wrapper div cho Chương + Nút Action */}
                         <div className="flex items-center justify-between hover:bg-gray-100 rounded transition-colors pr-2 group/chapter">
                             <button
                               onClick={() => toggleNode(chapter.id)}
@@ -180,15 +227,29 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
                               <span className="font-semibold text-xs text-gray-700">{chapter.title}</span>
                             </button>
 
-                            {/* Nút (+) Thêm bài học - Chỉ hiện khi Admin hover */}
+                            {/* --- ADMIN ACTION BUTTONS CHO CHƯƠNG --- */}
                             {isAdmin && (
-                                <button 
-                                    onClick={(e) => handleAddLesson(e, chapter.originalChapterId, rootFolder.id)}
-                                    className="p-1 text-blue-400 hover:text-blue-600 hover:bg-blue-50 rounded opacity-0 group-hover/chapter:opacity-100 transition-opacity"
-                                    title="Thêm bài học mới"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
-                                </button>
+                                <div className="flex items-center gap-1 opacity-0 group-hover/chapter:opacity-100 transition-opacity">
+                                    {/* Nút Thêm bài vào chương */}
+                                    <button 
+                                        onClick={(e) => handleAddLesson(e, chapter.originalChapterId, rootFolder.id)}
+                                        className="p-1 text-blue-400 hover:text-blue-600 hover:bg-blue-50 rounded"
+                                        title="Thêm bài học mới vào chương này"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
+                                    </button>
+                                    
+                                    {/* Nút Xóa chương */}
+                                    <button 
+                                        onClick={(e) => handleDeleteChapter(e, chapter.originalChapterId, chapter.title)}
+                                        className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded"
+                                        title="Xóa chương này"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
                             )}
                         </div>
 
