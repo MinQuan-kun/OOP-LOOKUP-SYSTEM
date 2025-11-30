@@ -3,7 +3,9 @@ import {
   getKnowledgeTree, 
   getLessonDetail, 
   searchLessons,
-  updateLesson
+  updateLesson,
+  createLesson,
+  deleteLesson
 } from "../controllers/LessonControllers.js";
 
 const router = express.Router();
@@ -21,4 +23,10 @@ router.get("/:slug", getLessonDetail);
 
 // 4. Cập nhật bài học
 router.put("/:id", updateLesson);
+
+// 5. Tạo bài học mới
+router.post("/", createLesson);  
+
+// 6. Xóa bài học
+router.delete("/:id", deleteLesson);
 export default router;

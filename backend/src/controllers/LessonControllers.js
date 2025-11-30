@@ -56,7 +56,6 @@ export const getLessonDetail = async (req, res) => {
       return res.status(404).json({ message: "Không tìm thấy bài học" });
     }
 
-    // Tăng lượt xem (View count)
     await lesson.save();
 
     // Tìm ví dụ code tương ứng với ngôn ngữ được chọn
@@ -103,7 +102,7 @@ export const searchLessons = async (req, res) => {
   }
 };
 
-// 4. Cập nhật bài học (Update Lesson) - ĐÃ NÂNG CẤP LOGIC
+// 4. Cập nhật bài học (Update Lesson)
 export const updateLesson = async (req, res) => {
   try {
     const { id } = req.params; // ID của Lesson
@@ -137,5 +136,61 @@ export const updateLesson = async (req, res) => {
   } catch (error) {
     console.error("Error updating lesson:", error);
     res.status(500).json({ message: "Lỗi Server khi cập nhật: " + error.message });
+  }
+};
+
+// 5. Tạo bài học mới (Create Lesson)
+export const createLesson = async (req, res) => {
+  try {
+    const { title, chapter_id, knowledge_type_slug } = req.body;
+
+    // 1. Tìm KnowledgeType ID từ slug (vd: 'khai-niem' -> ObjectId)
+    const kType = await KnowledgeType.findOne({ slug: knowledge_type_slug });
+    if (!kType) return res.status(400).json({ message: "Loại kiến thức không hợp lệ" });
+
+    // 2. Tạo Slug từ Title (Tiếng Việt có dấu -> Slug không dấu)
+    // Vd: "Bài học mới" -> "bai-hoc-moi"
+    const generateSlug = (str) => {
+      return str
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[đĐ]/g, "d")
+        .replace(/([^0-9a-z-\s])/g, "")
+        .replace(/(\s+)/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    };
+    
+    // Thêm timestamp để tránh trùng slug
+    const slug = generateSlug(title) + "-" + Date.now();
+
+    // 3. Tạo bài học
+    const newLesson = await Lesson.create({
+      title,
+      slug,
+      chapter: chapter_id,
+      knowledge_type: kType._id,
+      content: "<p>Nội dung mới đang cập nhật...</p>" // Nội dung mặc định
+    });
+
+    res.status(201).json(newLesson);
+  } catch (error) {
+    console.error("Create error:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// --- 6. XÓA BÀI HỌC ---
+export const deleteLesson = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Lesson.findByIdAndDelete(id);
+    // Xóa luôn Code Example liên quan (nếu có)
+    await CodeExample.deleteMany({ lesson: id });
+    
+    res.status(200).json({ message: "Xóa thành công" });
+  } catch (error) {
+    console.error("Delete error:", error);
+    res.status(500).json({ message: error.message });
   }
 };

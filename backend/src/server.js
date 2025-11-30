@@ -2,6 +2,7 @@ import express from "express";
 import LessonRoute from "./routes/LessonRouter.js";
 import AuthRouter from "./routes/AuthRouter.js";
 import ChatRouter from "./routes/ChatRouter.js";
+import ChapterRouter from "./routes/ChapterRouter.js";
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -29,6 +30,7 @@ app.use(
 app.use("/api/lesson", LessonRoute)
 app.use("/api/auth", AuthRouter);
 app.use("/api/chat", ChatRouter);
+app.use("/api/chapter", ChapterRouter);
 
 console.log(`Đang kết nối đến MongoDB... (${process.env.MONGODB_CONNECT_STRING})`);
 

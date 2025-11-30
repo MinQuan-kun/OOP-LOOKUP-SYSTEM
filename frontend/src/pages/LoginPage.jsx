@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "@/context/AuthContext";
 // Import file cấu hình API vừa tạo
 import API from "@/lib/axios";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   
   // State quản lý form
   const [username, setUsername] = useState('');
@@ -26,7 +28,7 @@ const LoginPage = () => {
 
       // 2. Nếu thành công -> Lưu user vào localStorage
       // res.data chứa { _id, username, role, ... }
-      localStorage.setItem('currentUser', JSON.stringify(res.data));
+      login(res.data);
 
       // 3. Chuyển hướng về trang chủ
       navigate('/');

@@ -1,5 +1,6 @@
 import { Toaster } from 'sonner';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 
 // Import các trang
 import HomePage from './pages/HomePage';
@@ -13,30 +14,33 @@ function App() {
     <>
       <Toaster richColors />
       <BrowserRouter>
-        <Routes>
-          {/* Trang chủ */}
-          <Route 
-            path='/' 
-            element={
-              <>
-                <HomePage />
-                <CuteBot />
-              </>
-            }
-          />
+        {/* Bọc AuthProvider vào đây để toàn bộ app có thể dùng useAuth */}
+        <AuthProvider>
+          <Routes>
+            {/* Trang chủ */}
+            <Route 
+              path='/' 
+              element={
+                <>
+                  <HomePage />
+                  <CuteBot />
+                </>
+              }
+            />
 
-          {/*Route cho trang Login */}
-          <Route 
-            path='/login' 
-            element={<LoginPage />} 
-          />
+            {/*Route cho trang Login */}
+            <Route 
+              path='/login' 
+              element={<LoginPage />} 
+            />
 
-          {/* Trang 404*/}
-          <Route 
-            path='*' 
-            element={<NotFound />} 
-          />
-        </Routes>
+            {/* Trang 404*/}
+            <Route 
+              path='*' 
+              element={<NotFound />} 
+            />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </>
   )

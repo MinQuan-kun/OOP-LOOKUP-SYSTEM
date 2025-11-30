@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import API from '@/lib/axios';
-import { useAuth } from '@/context/AuthContext'; // Khuyên dùng hook này thay vì localStorage thủ công
+import { useAuth } from '@/context/AuthContext';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const MainContent = ({ slug, lang }) => {
   const [lesson, setLesson] = useState(null);
   const [showCode, setShowCode] = useState(false);
   const [loading, setLoading] = useState(false);
-  // Dùng context hoặc state user (ở đây giữ nguyên logic cũ của bạn để tránh lỗi)
   const [user, setUser] = useState(null);
 
   // State cho chế độ chỉnh sửa
@@ -176,19 +177,35 @@ const MainContent = ({ slug, lang }) => {
                     </label>
                   </div>
 
-                  {/* --- KHUNG CODE (Chỉ hiện khi showCode = true) --- */}
+                  {/* --- KHUNG CODE --- */}
                   {showCode && (
                     <div className="animate-in fade-in slide-in-from-top-4 duration-300">
                       <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                         Ví dụ minh họa ({lesson.code_example.language.toUpperCase()})
                       </h3>
-                      <div className="relative group">
-                        <div className="absolute top-0 right-0 bg-gray-700 text-xs text-white px-2 py-1 rounded-bl-md">
+
+                      <div className="relative group rounded-lg overflow-hidden border border-gray-700 shadow-inner">
+                        {/* Label ngôn ngữ ở góc */}
+                        <div className="absolute top-0 right-0 bg-gray-700 text-xs text-white px-2 py-1 rounded-bl-md z-10">
                           {lesson.code_example.language}
                         </div>
-                        <pre className="bg-[#1e1e1e] text-gray-100 p-4 rounded-lg overflow-x-auto font-mono text-sm shadow-inner border border-gray-700">
-                          <code>{lesson.code_example.code_content}</code>
-                        </pre>
+
+                        {/* Component Highlighting */}
+                        <SyntaxHighlighter
+                          language={lesson.code_example.language === 'csharp' ? 'c#' : lesson.code_example.language} // Fix nhỏ cho C# nếu cần
+                          style={vscDarkPlus}
+                          customStyle={{
+                            margin: 0,
+                            padding: '1.5rem',
+                            fontSize: '0.875rem', 
+                            lineHeight: '1.5',
+                            backgroundColor: '#1e1e1e', 
+                          }}
+                          showLineNumbers={true} 
+                          wrapLongLines={true}   
+                        >
+                          {lesson.code_example.code_content}
+                        </SyntaxHighlighter>
                       </div>
 
                       <div className="mt-4 space-y-3">
