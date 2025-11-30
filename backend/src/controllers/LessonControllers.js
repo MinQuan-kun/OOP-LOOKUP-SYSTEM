@@ -105,10 +105,20 @@ export const searchLessons = async (req, res) => {
 // 4. Cập nhật bài học (Update Lesson)
 export const updateLesson = async (req, res) => {
   try {
-    const { id } = req.params; // ID của Lesson
-    const { title, content, code_content, explanation, has_code, lang } = req.body;
+    const { id } = req.params; 
+    // 1. Lấy thêm syntax_note và is_supported từ request
+    const { 
+      title, 
+      content, 
+      code_content, 
+      explanation, 
+      has_code, 
+      lang,
+      syntax_note,   
+      is_supported   
+    } = req.body;
 
-    // 1. Cập nhật nội dung bài học (Tiêu đề, Nội dung HTML)
+    // Cập nhật nội dung bài học (Tiêu đề, Nội dung HTML)
     const updatedLesson = await Lesson.findByIdAndUpdate(
       id,
       { title, content },
@@ -119,12 +129,18 @@ export const updateLesson = async (req, res) => {
       return res.status(404).json({ message: "Không tìm thấy bài học" });
     }
 
-    // 2. Xử lý Code Example (Dùng Lesson ID + Language làm khóa chính)
+    // 2. Xử lý Code Example 
     if (has_code === true) {
         await CodeExample.findOneAndUpdate(
-            { lesson: id, language: lang }, // Điều kiện tìm
-            { code_content, explanation },  // Dữ liệu update
-            { upsert: true, new: true }     // Tùy chọn: tạo mới nếu ko tìm thấy
+            { lesson: id, language: lang }, 
+            { 
+              code_content, 
+              explanation,
+              // 3. Cập nhật thêm 2 trường này vào Database
+              syntax_note: syntax_note || "", 
+              is_supported: is_supported 
+            },  
+            { upsert: true, new: true }     
         );
     } else {
         // Bỏ code example
