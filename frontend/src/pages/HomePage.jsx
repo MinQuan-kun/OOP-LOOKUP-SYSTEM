@@ -26,7 +26,7 @@ const HomePage = () => {
             />
             {/* Your Content/Components */}
 
-            <div className="container relative z-10 pt-8 mx-auto">
+            <div className="w-full relative z-10 pt-8 mx-auto">
                 <div className="w-full max-w-13xl p-6 mx-auto space-y-6">
                     {/*Nút login*/}
                     <LoginButton />
@@ -39,14 +39,13 @@ const HomePage = () => {
                     />
                     {/* --- MAIN CONTENT --- */}
                     {/* MAIN CONTENT */}
-                    <div className="relative z-10 container mx-auto pb-10 px-4">
-                        <div className="w-full max-w-7xl mx-auto space-y-6">
+                    <div className="relative z-10 w-full pb-10 px-4 lg:px-8 mx-auto">
+                        <div className="w-full max-w-[1800px] mx-auto space-y-6">
 
                             {/* 1. Thanh Search & Filter */}
                             <SearchFilterBar selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
 
-                            {/* 2. BỐ CỤC 3 CỘT (GRID LAYOUT) */}
-                            {/* lg:grid-cols-12: Chia màn hình làm 12 phần bằng nhau */}
+                            {/* 2. Bố cục 3 cột */}
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
                                 {/* Cột 1: Cây kiến thức */}
