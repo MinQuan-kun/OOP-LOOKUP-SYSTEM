@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  # MongoDB Database
+  # 1. Database 
   mongodb:
     image: mongo:7.0
     container_name: oop-mongodb
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_data:/data/db 
     networks:
       - oop-network
     
-  # Backend API
+  # 2. Backend API
   backend:
     build:
       context: ./backend
@@ -23,6 +23,8 @@ services:
     env_file:
       - ./backend/.env
     environment:
+      - PORT=5001
+      - DB_URI=mongodb://mongodb:27017/oop_lookup_system 
       - NODE_ENV=production
     depends_on:
       - mongodb
@@ -30,7 +32,7 @@ services:
       - oop-network
     restart: unless-stopped
 
-  # Frontend React App
+  # 3. Frontend React App
   frontend:
     build:
       context: ./frontend
@@ -38,8 +40,6 @@ services:
     container_name: oop-frontend
     ports:
       - "5173:5173"
-    environment:
-      - VITE_API_URL=http://backend:5001/api
     depends_on:
       - backend
     networks:

@@ -1,23 +1,27 @@
-echo "🚀 Khởi động To-do App bằng Docker Compose..."
-echo "--------------------------------------------"
+#!/bin/bash
+echo "========================================================"
+echo "  🚀 KHỞI ĐỘNG HỆ THỐNG OOP LOOKUP SYSTEM (DOCKER)"
+echo "========================================================"
 
-# 1️⃣ Build lại tất cả image 
-echo "🔧 Đang build các service..."
+# 1. Build
+echo "🔧 [1/3] Đang build lại các service..."
 docker compose build --no-cache
 
-# 2️⃣ Khởi chạy toàn bộ stack
-echo "▶️ Đang khởi động MongoDB, Backend và Frontend..."
+# 2. Up
+echo "▶️ [2/3] Đang khởi động containers..."
 docker compose up -d
 
-# 3️⃣ Kiểm tra trạng thái container
+# 3. Status
 echo ""
-echo "🧩 Trạng thái container:"
+echo "🧩 [3/3] Trạng thái container:"
 docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 
-# 4️⃣ Kiểm tra backend API
 echo ""
-echo "🌐 Kiểm tra backend API tại: http://localhost:5001/lesson/tree"
-echo "🔗 Frontend đang chạy tại:  http://localhost:5173"
+echo "--------------------------------------------------------"
+echo "  ✅ SUCCESS! Hệ thống đã sẵn sàng:"
+echo "  👉 Frontend:    http://localhost:5173"
+echo "  👉 Backend API: http://localhost:5001"
+echo "--------------------------------------------------------"
 echo ""
-echo "📜 Xem log realtime (Ctrl+C để dừng):"
+echo "📜 Đang hiển thị logs (Nhấn Ctrl+C để thoát)..."
 docker compose logs -f
