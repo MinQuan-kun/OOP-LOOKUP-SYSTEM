@@ -142,3 +142,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Tùy chỉnh thanh cuộn cho class .custom-scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* slate-300 */
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* slate-400 */
+  }
+}

@@ -7,6 +7,7 @@ import SearchFilterBar from "@/components/SearchFilterBar";
 import KnowledgeTree from "@/components/KnowledgeTree";
 import MainContent from "@/components/MainContent";
 import RelatedContent from "@/components/RelatedContent";
+import Footer from "@/components/Footer";
 
 const HomePage = () => {
     // State toàn cục
@@ -72,6 +73,8 @@ const HomePage = () => {
 
                         </div>
                     </div>
+                    {/* Footer */}
+                        <Footer />
 
                 </div>
             </div>

@@ -25,10 +25,10 @@ const MainContent = ({ slug, lang }) => {
 
   useEffect(() => {
     // SỬA: Đổi 'currentUser' thành 'user' cho khớp với AuthContext
-    const storedUser = localStorage.getItem('user'); 
+    const storedUser = localStorage.getItem('user');
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
-  
+
   // Reset showCode khi đổi bài hoặc đổi ngôn ngữ
   useEffect(() => {
     setShowCode(false);
@@ -118,12 +118,12 @@ const MainContent = ({ slug, lang }) => {
   if (!lesson) return <div className="bg-white min-h-[500px] rounded-xl shadow-sm border border-gray-200 p-10 text-red-500">Không tìm thấy nội dung.</div>;
 
   return (
-    <div className="bg-white min-h-[500px] rounded-xl shadow-sm border border-gray-200 p-6 md:p-10 relative">
+    <div className="bg-white h-[calc(100vh-140px)] min-h-[500px] overflow-y-auto custom-scrollbar rounded-xl shadow-sm border border-gray-200 p-6 md:p-10 relative">
 
       {!isEditing ? (
         <>
-          {/* Header giữ nguyên */}
-          <div className="absolute top-6 right-6">
+          {/* Header*/}
+          <div className="absolute top-6 right-8 z-10">
             <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase border border-gray-200">{lang}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
@@ -197,12 +197,12 @@ const MainContent = ({ slug, lang }) => {
                           customStyle={{
                             margin: 0,
                             padding: '1.5rem',
-                            fontSize: '0.875rem', 
+                            fontSize: '0.875rem',
                             lineHeight: '1.5',
-                            backgroundColor: '#1e1e1e', 
+                            backgroundColor: '#1e1e1e',
                           }}
-                          showLineNumbers={true} 
-                          wrapLongLines={true}   
+                          showLineNumbers={true}
+                          wrapLongLines={true}
                         >
                           {lesson.code_example.code_content}
                         </SyntaxHighlighter>
@@ -266,7 +266,7 @@ const MainContent = ({ slug, lang }) => {
                   <textarea rows={3} className="w-full p-2 border border-amber-200 rounded focus:ring-2 focus:ring-amber-500 outline-none text-sm bg-amber-50/50" value={editForm.syntax_note} onChange={(e) => setEditForm({ ...editForm, syntax_note: e.target.value })} placeholder="Ví dụ: C++ dùng dấu :, Java dùng extends..." />
                 </div>
 
-                {/* 3. CODE CONTENT (Chỉ hiện nếu Supported = true) */}
+                {/* 3. CODE CONTENT*/}
                 {editForm.is_supported && (
                   <>
                     <div>

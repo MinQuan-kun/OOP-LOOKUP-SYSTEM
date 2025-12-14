@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
 import CuteBot from './components/CuteBot';
-
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
@@ -38,6 +38,11 @@ function App() {
             <Route 
               path='*' 
               element={<NotFound />} 
+            />
+            {/* Trang About */}
+            <Route 
+                  path='/about' 
+                  element={<AboutPage />} 
             />
           </Routes>
         </AuthProvider>
