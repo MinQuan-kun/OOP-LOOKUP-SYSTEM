@@ -1,16 +1,15 @@
-'use client'; // Bắt buộc dòng này ở đầu file trong Next.js App Router
+'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Thay thế react-router-dom
+import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/AuthContext";
 import API from "@/lib/axios";
 import Link from 'next/link';
 
 const LoginPage = () => {
-  const router = useRouter(); // Khởi tạo router
+  const router = useRouter();
   const { login } = useAuth();
   
-  // State quản lý form
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,20 +21,17 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      // 1. Gọi API Login
+      // Gọi API Login
       const res = await API.post('/auth/login', {
         username: username,
         password: password
       });
 
-      // 2. Nếu thành công -> Lưu user thông qua Context
       login(res.data);
 
-      // 3. Chuyển hướng về trang chủ
       router.push('/'); 
       
     } catch (err) {
-      // Xử lý lỗi trả về từ server
       const msg = err.response?.data?.message || "Đăng nhập thất bại!";
       setError(msg);
     } finally {
@@ -54,15 +50,11 @@ const LoginPage = () => {
         
         {/* Phần Logo và Tiêu đề */}
         <div className="text-center mb-8">
-            {/* Nếu bạn muốn dùng ảnh Title.png (chữ) */}
             <img 
                 src="/img/Title.png" 
                 alt="Logo Title" 
                 className="h-16 mx-auto object-contain mb-2" 
             />
-            
-            {/* Hoặc nếu bạn muốn dùng Logo biểu tượng (Logo.png) thì bỏ comment dòng dưới */}
-            {/* <img src="/Logo.png" alt="App Logo" className="h-16 w-16 mx-auto object-contain mb-4" /> */}
 
             <h2 className="text-2xl font-bold text-gray-800">Chào mừng trở lại!</h2>
             <p className="text-gray-500 text-sm mt-1">Đăng nhập hệ thống tra cứu OOP</p>

@@ -1,6 +1,5 @@
 import Chapter from "../models/Chapter.js";
-import Lesson from "../models/Lesson.js"; // Import nếu muốn xóa cascade (xóa chương -> xóa bài)
-
+import Lesson from "../models/Lesson.js";
 // 1. Tạo Chương mới
 export const createChapter = async (req, res) => {
   try {
@@ -11,22 +10,19 @@ export const createChapter = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 // 2. Xóa Chương
 export const deleteChapter = async (req, res) => {
   try {
     const { id } = req.params;
-
-    // Đếm số bài học thuộc chương này
+// Đếm số bài học thuộc chương này
     const lessonCount = await Lesson.countDocuments({ chapter: id });
 
     if (lessonCount > 0) {
-      // Nếu còn bài học, trả về lỗi 400 và thông báo
+// Nếu còn bài học, trả về lỗi 400 và thông báo
       return res.status(400).json({ 
         message: `Không thể xóa! Chương này đang chứa ${lessonCount} bài học. Vui lòng xóa hoặc di chuyển các bài học trước.` 
       });
     }
-    // --------------------------
 
     await Chapter.findByIdAndDelete(id);
     

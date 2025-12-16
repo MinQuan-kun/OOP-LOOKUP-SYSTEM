@@ -3,7 +3,7 @@ import { createChapter, deleteChapter } from "../controllers/ChapterController.j
 
 const router = express.Router();
 
-router.post("/", createChapter);       // POST /api/chapter
-router.delete("/:id", deleteChapter);  // DELETE /api/chapter/:id
+router.post("/", createChapter);       
+router.delete("/:id", deleteChapter); 
 
 export default router;

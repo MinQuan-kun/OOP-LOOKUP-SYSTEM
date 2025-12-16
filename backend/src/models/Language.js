@@ -11,7 +11,7 @@ const languageSchema = new mongoose.Schema({
   }, // Tên hiển thị: 'C++', 'Java'
 }, { 
   timestamps: true,
-  _id: false // Tắt ID tự động của Mongo đã tự set _id ở trên
+  _id: false
 });
 
 const Language = mongoose.model('Language', languageSchema);

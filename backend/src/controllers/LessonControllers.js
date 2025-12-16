@@ -41,7 +41,6 @@ export const getKnowledgeTree = async (req, res) => {
 };
 
 // 2. Lấy chi tiết bài học theo Slug + Ngôn ngữ
-// API: /api/lessons/:slug?lang=cpp
 export const getLessonDetail = async (req, res) => {
   try {
     const { slug } = req.params;
@@ -66,7 +65,7 @@ export const getLessonDetail = async (req, res) => {
 
     // Trả về dữ liệu gộp
     res.status(200).json({
-      ...lesson.toObject(), // Convert mongoose doc to JS object
+      ...lesson.toObject(),
       code_example: codeExample || null, // Nếu chưa có code ngôn ngữ này thì trả về null
     });
   } catch (error) {
@@ -76,7 +75,6 @@ export const getLessonDetail = async (req, res) => {
 };
 
 // 3. Tìm kiếm bài học
-// API: /api/lessons/search?q=ke+thua
 export const searchLessons = async (req, res) => {
   try {
     const { q } = req.query;
@@ -85,15 +83,15 @@ export const searchLessons = async (req, res) => {
       return res.status(400).json({ message: "Vui lòng nhập từ khóa" });
     }
 
-    // Tìm kiếm theo tiêu đề hoặc nội dung (Regex - không phân biệt hoa thường)
+    // Tìm kiếm theo tiêu đề hoặc nội dung
     const results = await Lesson.find({
       $or: [
         { title: { $regex: q, $options: "i" } },
         { content: { $regex: q, $options: "i" } },
       ],
     })
-      .select("title slug views") // Chỉ lấy field cần hiển thị ở kết quả tìm kiếm
-      .limit(10); // Giới hạn 10 kết quả
+      .select("title slug views")
+      .limit(10);
 
     res.status(200).json(results);
   } catch (error) {
@@ -143,7 +141,7 @@ export const updateLesson = async (req, res) => {
             { upsert: true, new: true }     
         );
     } else {
-        // Bỏ code example
+       // Bỏ code example
         await CodeExample.findOneAndDelete({ lesson: id, language: lang });
     }
 
@@ -201,7 +199,6 @@ export const deleteLesson = async (req, res) => {
   try {
     const { id } = req.params;
     await Lesson.findByIdAndDelete(id);
-    // Xóa luôn Code Example liên quan (nếu có)
     await CodeExample.deleteMany({ lesson: id });
     
     res.status(200).json({ message: "Xóa thành công" });

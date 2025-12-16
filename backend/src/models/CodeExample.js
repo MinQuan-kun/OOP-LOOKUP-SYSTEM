@@ -6,22 +6,21 @@ const codeExampleSchema = new mongoose.Schema({
     ref: 'Lesson', 
     required: true 
   },
+  
   language: { 
-    type: String, 
+    type: String,
+    ref: 'Language',
     required: true 
   },
   
-  // --- PHẦN THÊM MỚI ---
   is_supported: {
     type: Boolean,
-    default: true // <--- QUAN TRỌNG: Mặc định là true cho data cũ
+    default: true
   },
   syntax_note: { 
     type: String,
-    default: ""   // <--- QUAN TRỌNG: Mặc định là rỗng cho data cũ
+    default: ""
   },
-  // ---------------------
-
   code_content: { 
     type: String, 
     required: true 

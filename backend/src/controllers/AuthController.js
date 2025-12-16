@@ -11,17 +11,17 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Tài khoản không tồn tại!" });
     }
 
-    // 2. Kiểm tra mật khẩu (Lưu ý: Ở dự án thật phải dùng bcrypt để mã hóa, đây là demo nên so sánh chuỗi thường)
+    // 2. Kiểm tra mật khẩu
     if (user.password !== password) {
       return res.status(400).json({ message: "Mật khẩu không đúng!" });
     }
 
-    // 3. Trả về thông tin user (bỏ password đi)
+    // 3. Trả về thông tin user
     res.status(200).json({
       _id: user._id,
       username: user.username,
       name: user.name,
-      role: user.role // Quan trọng: để frontend biết có phải admin không
+      role: user.role 
     });
 
   } catch (error) {

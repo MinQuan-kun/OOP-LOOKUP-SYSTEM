@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/Header'; // Import đúng chuẩn alias
-import Link from 'next/link'; // Thay react-router-dom bằng next/link
+import Header from '@/components/Header';
+import Link from 'next/link';
 
 const teamMembers = [
   {
@@ -10,7 +10,7 @@ const teamMembers = [
     name: "Nguyễn Hữu Minh Quân (Người nghẹo)",
     code: "49.01.104.120",
     role: "Trưởng nhóm",
-    avatar: "/img/MinQuan.jpg", // Thêm dấu / ở đầu
+    avatar: "/img/MinQuan.jpg",
     task: "Thiết kế cơ sở dữ liệu, Xây dựng giao diện, Triển khai hệ thống, Xử lý Frontend, Backend, Viết báo cáo"
   },
   {
@@ -18,7 +18,7 @@ const teamMembers = [
     name: "Bùi Minh Tín (Bộ trưởng Hitler)",
     code: "49.01.104.152",
     role: "Thành viên",
-    avatar: "/img/MrTin.jpg", // Thêm dấu / ở đầu
+    avatar: "/img/MrTin.jpg",
     task: "Xử lý Backend, Xử lý tìm kiếm và lọc nội dung"
   },
   {
@@ -26,7 +26,7 @@ const teamMembers = [
     name: "Nguyễn Thái Bình (Anh Gymer)",
     code: "49.01.104.011",
     role: "Thành viên",
-    avatar: "/img/TB.jpg", // Thêm dấu / ở đầu
+    avatar: "/img/TB.jpg",
     task: "Soạn thảo nội dung, Làm Database, Viết báo cáo"
   },
   {
@@ -34,7 +34,7 @@ const teamMembers = [
     name: "Võ Nguyễn Minh Hoàng (Tội đồ tham lam)",
     code: "49.01.104.048",
     role: "Thành viên",
-    avatar: "/img/HoangLon.jpg", // Thêm dấu / ở đầu
+    avatar: "/img/HoangLon.jpg",
     task: "Kiểm thử (Tester), Làm Database, Viết báo cáo, Thiết kế giao diện"
   },
   {
@@ -42,7 +42,7 @@ const teamMembers = [
     name: "Nguyễn Uyên Vy (Kẻ nghiện mèo)",
     code: "49.01.104.180",
     role: "Thành viên",
-    avatar: "/img/UyenVy.jpg", // Thêm dấu / ở đầu
+    avatar: "/img/UyenVy.jpg",
     task: "Thu thập tài liệu, Hỗ trợ viết báo cáo, Hỗ trợ làm Database"
   }
 ];
@@ -51,7 +51,6 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-20 relative pt-16">
       
-      {/* Nút Back - Đã sửa Link */}
       <Link 
         href="/" 
         className="absolute top-8 left-6 z-20 flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-md border border-white/60 shadow-sm rounded-full text-indigo-600 font-bold hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:-translate-x-1 group"

@@ -10,15 +10,13 @@ import {
 
 const router = express.Router();
 
-// Định nghĩa các route
-
 // 1. Lấy cây kiến thức (Sidebar)
 router.get("/tree", getKnowledgeTree);
 
-// 2. Tìm kiếm (Đặt trước route /:slug để tránh nhầm lẫn search là slug)
+// 2. Tìm kiếm
 router.get("/search", searchLessons);
 
-// 3. Lấy chi tiết bài học (Vd: /api/lesson/tinh-ke-thua?lang=java)
+// 3. Lấy chi tiết bài học
 router.get("/:slug", getLessonDetail);
 
 // 4. Cập nhật bài học

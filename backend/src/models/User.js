@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   password: { 
     type: String, 
     required: true 
-  }, // Trong dự án thật nên mã hóa password, demo thì lưu text thường
+  },
   name: { 
     type: String 
   },
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String, 
     enum: ['user', 'admin'], 
     default: 'user' 
-  } // Phân quyền: admin mới được sửa
+  }
 }, { 
   timestamps: true 
 });

@@ -89,16 +89,16 @@ const types = [
 
 const languages = [
   {
-    "_id": "cpp",
-    "name": "C++"
-  },
-  {
-    "_id": "csharp",
-    "name": "C#"
+    "_id": "php",
+    "name": "PHP"
   },
   {
     "_id": "java",
     "name": "Java"
+  },
+  {
+    "_id": "csharp",
+    "name": "C#"
   },
   {
     "_id": "dart",
@@ -109,52 +109,12 @@ const languages = [
     "name": "Ruby"
   },
   {
-    "_id": "php",
-    "name": "PHP"
+    "_id": "cpp",
+    "name": "C++"
   }
 ];
 
 const lessons = [
-  {
-    "_id": "692ae7567fdaad24a2aec4ee",
-    "chapter": "692ae7567fdaad24a2aec4e0",
-    "knowledge_type": "692ae7567fdaad24a2aec4d7",
-    "title": "1.1 Khái niệm",
-    "slug": "gioi-thieu-oop",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 1: Tổng quan OOP - Khái Niệm</title>\n</head>\n<body>\n    \n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Định nghĩa</h2>\n    <p>Lập trình hướng đối tượng (Object-Oriented Programming - OOP) là một mô hình lập trình dựa trên khái niệm <strong>\"đối tượng\" (Object)</strong>. Thay vì tập trung vào các hàm và logic thực thi tuần tự như lập trình thủ tục, OOP tổ chức phần mềm thành các đối tượng chứa đựng cả dữ liệu (thuộc tính) và mã nguồn (phương thức) thao tác trên dữ liệu đó.</p>\n    <p>Mục tiêu cốt lõi của OOP là mô hình hóa các thực thể trong thế giới thực (như Sinh viên, Ô tô, Tài khoản ngân hàng) vào trong mã nguồn máy tính, giúp hệ thống trở nên gần gũi với tư duy con người.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Sự chuyển dịch tư duy</h2>\n    <p>Để hiểu OOP, cần phân biệt rõ với Lập trình thủ tục (Procedural Programming):</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li><strong>Lập trình thủ tục (Ví dụ: PHP thuần, C++ phong cách C):</strong> Tập trung vào hành động. Câu hỏi chính là: <em>\"Hệ thống cần làm gì?\"</em> (Viết hàm A, hàm B, hàm C và chạy tuần tự).</li>\n        <li><strong>Lập trình hướng đối tượng (Ví dụ: Java, C#):</strong> Tập trung vào chủ thể. Câu hỏi chính là: <em>\"Hệ thống bao gồm những cái gì?\"</em> (Đối tượng Khách hàng, Đối tượng Hóa đơn) và chúng tương tác với nhau ra sao.</li>\n    </ul>\n\n    <div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px;\">\n        <strong>Ghi nhớ:</strong> Nếu lập trình thủ tục giống như làm theo một công thức nấu ăn (Bước 1, Bước 2...), thì OOP giống như việc lắp ráp một chiếc xe hơi từ các linh kiện (Động cơ, Bánh xe, Khung xe) hoạt động phối hợp với nhau.\n    </div>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec4fe",
-    "chapter": "692ae7567fdaad24a2aec4e4",
-    "knowledge_type": "692ae7567fdaad24a2aec4d7",
-    "title": "3.1 Khái niệm",
-    "slug": "class-object",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 3: Class và Object</title>\n</head>\n<body>\n\n    <p>Đây là hai khái niệm nền tảng không thể tách rời trong OOP. Hiểu đúng mối quan hệ giữa chúng là bước đầu tiên để làm chủ mô hình này.</p>\n    \n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Lớp (Class) - Bản thiết kế</h2>\n    <p>Lớp là một khuôn mẫu (template) hoặc bản vẽ kỹ thuật dùng để tạo ra các đối tượng. Nó định nghĩa các đặc tính và hành vi chung mà mọi đối tượng thuộc loại đó sẽ có.</p>\n    <p>Ví dụ: Class <code>Car</code> (Ô tô) sẽ quy định rằng mọi chiếc xe đều phải có thuộc tính <code>color</code> (màu sắc) và phương thức <code>drive()</code> (lái), nhưng nó không chứa dữ liệu cụ thể của chiếc xe nào.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Đối tượng (Object) - Thực thể cụ thể</h2>\n    <p>Đối tượng là một <strong>thể hiện (instance)</strong> cụ thể được tạo ra từ Lớp. Nó tồn tại thực sự trong bộ nhớ khi chương trình chạy và chứa các giá trị dữ liệu riêng biệt.</p>\n    <p>Ví dụ: Từ Class <code>Car</code>, ta tạo ra:</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li>Object A: Chiếc Ferrari màu đỏ.</li>\n        <li>Object B: Chiếc Toyota màu trắng.</li>\n    </ul>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Sự khác nhau giữa các ngôn ngữ</h2>\n    <p>Mặc dù khái niệm là nhất quán, cú pháp để định nghĩa Lớp và khởi tạo Đối tượng có sự khác biệt nhất định giữa các ngôn ngữ lập trình:</p>\n\n    <div style=\"overflow-x: auto;\">\n        <table style=\"border-collapse: collapse; width: 100%; border: 1px solid black; margin-top: 15px; font-size: 0.8em;\">\n            <thead>\n                <tr style=\"background-color: #f2f2f2;\">\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left; min-width: 100px;\">Đặc trưng</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">C++</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Java</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">C#</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Dart</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Ruby</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">PHP</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr>\n                    <td style=\"border: 1px solid black; padding: 5px; font-weight: bold;\">Kết thúc Class</td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn + chấm phẩy<br><code>};</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Từ khóa<br><code>end</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                </tr>\n                <tr>\n                    <td style=\"border: 1px solid black; padding: 5px; font-weight: bold;\">Khởi tạo Object (Instantiation)</td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Stack: <code>Car c;</code><br>Heap: <code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Bắt buộc dùng<br><code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Bắt buộc dùng<br><code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Có thể bỏ <code>new</code><br><code>Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dùng phương thức<br><code>Car.new</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dùng<br><code>new Car();</code></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec504",
-    "chapter": "692ae7567fdaad24a2aec4e6",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "4.1 Khái niệm Kế thừa (Inheritance)",
-    "slug": "tinh-ke-thua",
-    "content": "<p>Kế thừa cho phép tạo lớp mới dựa trên lớp đã có.</p>"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec50a",
-    "chapter": "692ae7567fdaad24a2aec4e8",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "5.1 Khái niệm",
-    "slug": "tinh-da-hinh",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 5: Khái niệm Đa hình</title>\n</head>\n<body>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Định nghĩa</h2>\n    <p>Thuật ngữ <strong>\"Polymorphism\"</strong> xuất phát từ tiếng Hy Lạp, là sự kết hợp của <em>\"Poly\"</em> (nhiều) và <em>\"Morphs\"</em> (hình thái). Trong khoa học máy tính, Đa hình là khả năng một đối tượng hoặc một hành động có thể giả lập nhiều hình thái khác nhau tùy thuộc vào ngữ cảnh sử dụng.</p>\n    <p>Nói một cách ngắn gọn theo tư duy lập trình: <strong>\"Một giao diện (interface), nhiều cách thực thi (implementation).\"</strong></p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Ví dụ thực tế</h2>\n    <p>Hãy xem xét hành động <strong>\"Phát âm thanh\"</strong>:</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li>Khi ngữ cảnh là một con <strong>Người</strong>, âm thanh là tiếng nói.</li>\n        <li>Khi ngữ cảnh là một con <strong>Chó</strong>, âm thanh là tiếng sủa.</li>\n        <li>Khi ngữ cảnh là một con <strong>Mèo</strong>, âm thanh là tiếng kêu meo meo.</li>\n    </ul>\n    <p>Hệ thống chỉ cần gửi đi một thông điệp duy nhất là \"Phát âm thanh\", nhưng mỗi đối tượng sẽ tự biết cách phản hồi theo bản chất riêng của nó mà không cần hệ thống phải kiểm tra từng loại đối tượng thủ công.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Phân loại</h2>\n    <p>Đa hình thường được chia thành hai loại chính dựa trên thời điểm liên kết (Binding):</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li><strong>Đa hình tĩnh (Compile-time Polymorphism):</strong> Xử lý thông qua Nạp chồng (Overloading).</li>\n        <li><strong>Đa hình động (Runtime Polymorphism):</strong> Xử lý thông qua Ghi đè (Overriding).</li>\n    </ul>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec50c",
-    "chapter": "692ae7567fdaad24a2aec4ea",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "6.1 Tính Trừu tượng (Abstraction)",
-    "slug": "tinh-truu-tuong",
-    "content": "<big><strong>Định nghĩa</strong></big><p>Trong Lập trình hướng đối tượng (OOP), <strong>Abstraction (Tính trừu tượng)</strong> là quá trình chọn lọc các đặc điểm chung, thiết yếu của một đối tượng để xây dựng mô hình, đồng thời <strong>ẩn đi các chi tiết thực thi phức tạp</strong> không cần thiết đối với người sử dụng.</p>\n<p>Tư duy cốt lõi của Abstraction là tập trung vào câu hỏi: <strong>&quot;Hệ thống này làm được cái gì?&quot; (WHAT)</strong> thay vì đi sâu vào việc <strong>&quot;Nó hoạt động chi tiết ra sao?&quot; (HOW)</strong>.</p><big><strong>Ví dụ thực tế: Chiếc xe hơi (Car)</big></strong><p>Để lái được xe, bạn không cần phải là một kỹ sư cơ khí. Đây là cách Abstraction hoạt động:</p>\n<ul>\n<li><strong>- Phần Trừu tượng (Giao diện):</strong> Vô lăng, Chân ga, Chân phanh. Đây là những thứ bạn tương tác. Bạn biết rằng đạp phanh thì xe sẽ dừng.</li>\n<li><strong>- Phần Ẩn (Triển khai):</strong> Hệ thống piston, trục khuỷu, cơ chế bơm xăng, hay hệ thống phanh ABS điện tử. Những thứ này cực kỳ phức tạp nhưng được giấu kín dưới nắp ca-pô.</li></ul>\n<big><strong>Tại sao Abstraction lại quan trọng?</big></strong><ul>\n<li><strong>- Giảm độ phức tạp (Complexity Management):</strong> Giúp lập trình viên không bị choáng ngợp bởi hàng nghìn dòng code chi tiết. Họ chỉ cần gọi hàm và tin tưởng nó chạy đúng.</li>\n<li><strong>- Tăng tính bảo mật (Security):</strong> Giấu đi các dữ liệu hoặc thuật toán nhạy cảm, chỉ lộ ra những gì an toàn cho người dùng cuối.</li>\n<li><strong>- Dễ dàng nâng cấp:</strong> Bạn có thể thay đổi hoàn toàn động cơ từ &quot;Xăng&quot; sang &quot;Điện&quot; (thay đổi Implementation) mà người lái xe không cần học lái lại từ đầu (Giao diện giữ nguyên).</li>\n</ul>\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px; font-size = 5px;\">\n<p><strong>Ghi nhớ: Nguyên tắc &quot;Tảng băng trôi&quot;</strong></p>\n<ul>\n<li><strong>● Phần nổi (Abstraction):</strong> Là những gì người dùng thấy và sử dụng (Giao diện, Tên hàm).</li>\n<li><strong>● Phần chìm (Implementation):</strong> Là logic phức tạp bên dưới (Code xử lý).</li>\n<li><strong>● Khẩu quyết:</strong> &quot;Quan tâm <strong>WHAT</strong> (Làm gì), bỏ qua <strong>HOW</strong> (Làm thế nào).&quot;</li>\n</ul>\n</div>"
-  },
   {
     "_id": "692ae7577fdaad24a2aec50e",
     "chapter": "692ae7567fdaad24a2aec4ec",
@@ -180,60 +140,12 @@ const lessons = [
     "content": "<!DOCTYPE html><html lang=\"vi\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Chương 3: Tính Đóng Gói - Access Modifier</title></head><body><h2 style=\"font-weight: bold; font-size: 1.5em;\">Khái niệm</h2><p>Access Modifier giống như các ổ khóa và chìa khóa. Chúng xác định xem ai (lớp nào, gói nào) có quyền mở cửa để xem hoặc chỉnh sửa các thành phần bên trong một lớp.</p><h2 style=\"font-weight: bold; font-size: 1.5em;\">Các mức truy cập và Phạm vi (Scope)</h2><p>Trong lập trình hướng đối tượng, quyền truy cập thường được phân chia thành bốn mức độ cơ bản, sắp xếp theo thứ tự từ ít hạn chế nhất đến hạn chế nhất:</p><ul><li><strong>Public (Công khai):</strong> Đây là mức truy cập rộng nhất. Các thành phần được khai báo là <code>public</code> có thể được truy cập từ bất kỳ đâu trong chương trình: từ nội bộ lớp, từ các lớp khác trong cùng gói, hoặc từ bất kỳ lớp nào bên ngoài (miễn là có tham chiếu tới đối tượng).</li><li><strong>Protected (Được bảo vệ):</strong> Mức truy cập này được thiết kế chủ yếu cho cơ chế kế thừa. Thành phần <code>protected</code> cho phép truy cập từ bên trong cùng lớp, các lớp khác trong cùng gói và đặc biệt là các lớp con (subclass), ngay cả khi lớp con đó nằm ở một gói khác. Tuy nhiên, nó vẫn đóng lại đối với các lớp không liên quan nằm ngoài gói.</li><li><strong>Default (Mặc định - Package Private):</strong> Đây là mức truy cập được áp dụng khi lập trình viên không chỉ định từ khóa nào (đặc thù trong Java). Phạm vi của nó giới hạn trong \"gói\" (package). Chỉ các lớp nằm cùng gói mới có thể nhìn thấy và truy cập thành phần này.</li><li><strong>Private (Riêng tư):</strong> Đây là mức truy cập hạn chế nhất và là nền tảng cốt lõi của kỹ thuật ẩn dữ liệu. Thành phần <code>private</code> chỉ có thể được truy cập và thao tác từ bên trong chính lớp khai báo nó. Mọi nỗ lực truy cập từ bên ngoài, kể cả từ lớp con, đều bị trình biên dịch từ chối.</li></ul><h2 style=\"font-weight: bold; font-size: 1.5em;\"> Ý nghĩa của access modifier với đóng gói</h2><p>Để đạt được sự đóng gói chuẩn mực, chúng ta thường tuân theo quy tắc:</p><ul><li><strong>Dữ liệu (Thuộc tính):</strong> Luôn để <code>private</code> để giấu kín bên trong.</li><li><strong>Hành vi (Phương thức):</strong> Để <code>public</code> nếu muốn bên ngoài sử dụng, hoặc <code>private</code> nếu chỉ dùng nội bộ.</li></ul></body></html>"
   },
   {
-    "_id": "692b1bf0c5044e5f5eff746d",
-    "chapter": "692ae7567fdaad24a2aec4ec",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "7.3 Data Hiding",
-    "slug": "tinh-dong-goi-hd",
-    "content": "<h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Tại sao biến không nên để public?</h2>\n<p>Khi bạn để một biến là <code>public</code>, bạn mất hoàn toàn quyền kiểm soát nó. Bất kỳ ai cũng có thể gán giá trị sai, gây lỗi logic nghiêm trọng cho chương trình.</p>\n\n<h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Nguyên tắc ẩn dữ liệu (Data Hiding)</h2>\n<p>Nguyên tắc vàng trong OOP: <strong>Thuộc tính nên là <code>private</code>, phương thức giao tiếp nên là <code>public</code>.</strong></p>\n<p>Điều này giúp:</p>\n<ul style=\"list-style-type: disc; margin-left: 20px;\">\n    <li><strong>Kiểm soát dữ liệu đầu vào:</strong> Chỉ chấp nhận giá trị hợp lệ.</li>\n    <li><strong>Bảo vệ toàn vẹn dữ liệu:</strong> Ngăn chặn truy cập trái phép.</li>\n    <li><strong>Dễ bảo trì:</strong> Thay đổi logic bên trong không ảnh hưởng bên ngoài.</li>\n</ul>\n\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px;\">\n    <strong>Ghi nhớ:</strong> Đóng gói biến đối tượng thành một chiếc \"hộp đen\". Người dùng chỉ cần biết các nút bấm (hàm public) mà không cần quan tâm đến dây điện bên trong (biến private).\n</div>"
-  },
-  {
     "_id": "692b1c06c5044e5f5eff746e",
     "chapter": "692ae7567fdaad24a2aec4ec",
     "knowledge_type": "692ae7567fdaad24a2aec4d9",
     "title": "7.4 Getter & Setter",
     "slug": "tinh-dong-goi-gs",
     "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 3: Tính Đóng Gói - Getter và Setter</title>\n</head>\n<body>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Khái niệm và vai trò</h2>\n    \n    <ul>\n        <li><strong>Getter:</strong> Phương thức công khai giúp bên ngoài \"xem\" giá trị.</li>\n        <li><strong>Setter:</strong> Phương thức công khai giúp bên ngoài \"đề nghị thay đổi\" giá trị. Tại đây, ta có thể chấp nhận hoặc từ chối đề nghị đó.</li>\n    </ul>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Validate dữ liệu trong setter</h2>\n    <p>Sức mạnh thực sự của Setter nằm ở khả năng <strong>kiểm tra tính hợp lệ (Validation)</strong>. Nếu dữ liệu đầu vào không hợp lệ, Setter sẽ chặn lại ngay lập tức, bảo vệ đối tượng khỏi trạng thái lỗi.</p>\n    \n    <p><strong>Ví dụ minh họa Logic kiểm tra (C++):</strong></p>\n    <pre style=\"background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: monospace;\">\n#include &lt;iostream&gt;\nusing namespace std;\n\nclass NhanVien {\nprivate:\n    int tuoi; // Dữ liệu bị ẩn\n\npublic:\n    // Getter: Cho phép xem tuổi\n    int getTuoi() {\n        return tuoi;\n    }\n\n    // Setter: Kiểm tra tuổi trước khi gán\n    void setTuoi(int tuoiMoi) {\n        // Validation: Tuổi phải từ 18 đến 65\n        if (tuoiMoi >= 18 && tuoiMoi <= 65) {\n            tuoi = tuoiMoi;\n        } else {\n            cout << \"Tuổi không hợp lệ!\" << endl;\n        }\n    }\n};\n    </pre>\n    <p>Trong ví dụ trên, nếu ai đó cố tình gán <code>setTuoi(-5)</code>, đoạn code trong <code>if</code> sẽ chặn lại, giữ cho biến <code>tuoi</code> luôn an toàn.</p>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692b1c28c5044e5f5eff746f",
-    "chapter": "692ae7567fdaad24a2aec4ec",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "7.5 Tổng kết",
-    "slug": "tinh-dong-goi-tk",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 3: Tính Đóng Gói - Tổng Kết</title>\n</head>\n<body>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Điểm cốt lõi cần nhớ</h2>\n    <p>Tính đóng gói không phải là cấm đoán truy cập, mà là <strong>quản lý truy cập</strong>. Nó giúp mã nguồn của bạn trở nên chuyên nghiệp, an toàn và dễ sửa lỗi hơn.</p>\n    <blockquote>\n        <p><strong>Công thức Đóng gói = Dữ liệu Private + Phương thức Public (Getter/Setter).</strong></p>\n    </blockquote>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Vai trò của đóng gói trong 4 tính chất OOP</h2>\n    <p>Đóng gói là nền tảng đầu tiên để xây dựng một đối tượng hoàn chỉnh:</p>\n    <ul>\n        <li>Nó tạo ra ranh giới rõ ràng cho đối tượng.</li>\n        <li>Nó chuẩn bị cơ sở dữ liệu an toàn để các tính chất khác như Kế thừa và Đa hình có thể hoạt động chính xác mà không lo ngại dữ liệu bị hỏng hóc từ bên trong.</li>\n    </ul>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Đóng gói và Trừu tượng: Khác nhau thế nào?</h2>\n    <p>Sinh viên thường hay nhầm lẫn hai khái niệm này. Cách đơn giản nhất để phân biệt:</p>\n    <ul>\n        <li><strong>Tính trừu tượng (Abstraction):</strong> Là về mặt <em>thiết kế</em>. Giúp người dùng chỉ nhìn thấy những gì họ CẦN thấy (đơn giản hóa).</li>\n        <li><strong>Tính đóng gói (Encapsulation):</strong> Là về mặt <em>thực thi</em>. Giúp bảo vệ những gì người dùng KHÔNG CẦN (và không nên) thấy (an toàn dữ liệu).</li>\n    </ul>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692bb799a0a7add9d4493891",
-    "chapter": "692ae7567fdaad24a2aec4ea",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "6.2 Phương thức trừu tượng (Abstraction Method)",
-    "slug": "phuong-thuc-truu-tuong",
-    "content": "<big><strong>Khái niệm</strong></big><p>Phương thức trừu tượng (Abstract Method), hay trong C++ gọi là <em>Hàm ảo thuần túy (Pure Virtual Function)</em>, là một phương thức được khai báo trong lớp cha nhưng <strong>hoàn toàn không có phần thân (body)</strong>. Nó kết thúc bằng dấu chấm phẩy <code>;</code> thay vì cặp ngoặc nhọn <code>{}</code>.</p><big><strong>Tại sao lại sinh ra hàm &quot;rỗng&quot; này?</big></strong><p>Nó đóng vai trò như một <strong>bản hợp đồng bắt buộc</strong>. Lớp cha (Parent Class) biết rằng hành động này tồn tại, nhưng nhường quyền quyết định cách thực hiện chi tiết cho các lớp con (Child Class).</p><big><strong>Ví dụ minh họa: Hệ thống gửi thông báo</big></strong><p>Giả sử bạn có lớp cha là <code>ThongBao</code>. Ta biết mọi thông báo đều cần phải <code>guiDi()</code>, nhưng:</p><ul><li>Với <strong>SMS</strong>: Cần kết nối mạng viễn thông, giới hạn 160 ký tự.</li><li>Với <strong>Email</strong>: Cần giao thức SMTP, có tiêu đề và nội dung HTML.</li></ul><p>Lúc này, tại lớp cha, bạn chỉ khai báo: <code>abstract void guiDi();</code>. Các lớp con <code>SMS</code> và <code>Email</code> bắt buộc phải <strong>Ghi đè (Override)</strong> hàm này. Nếu không viết, chương trình sẽ báo lỗi.</p>"
-  },
-  {
-    "_id": "692bb7dba0a7add9d4493892",
-    "chapter": "692ae7567fdaad24a2aec4ea",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "6.3 Lớp trừu tượng và interface",
-    "slug": "lop-truu-tuong-va-interface",
-    "content": "<big><strong>Lớp trừu tượng (Abstract Class)</big></strong>\n<p><strong>Bản chất:</strong> Là một bản thiết kế &quot;bán hoàn thiện&quot;. Nó thường đóng vai trò là lớp cha (Base Class) cho các đối tượng có cùng huyết thống.</p>\n<ul><li><strong>Đặc điểm:</strong> Có thể chứa cả hàm đã viết xong (logic chung) và hàm chưa viết (abstract).</li>\n<li><strong>Quy tắc:</strong> Không thể tạo đối tượng trực tiếp (<code>new AbstractClass()</code> là lỗi).</li>\n<li><strong>Ví dụ:</strong> Lớp <code>DongVat</code> có hàm <code>Ngu()</code> (ai cũng ngủ giống nhau) và hàm abstract <code>Keu()</code> (mỗi con kêu một kiểu).</li>\n</ul>\n<big><strong>Giao diện (Interface)</big></strong>\n<p><strong>Bản chất:</strong> Là một bản hợp đồng hay chuẩn kết nối. Nó quy định các hành vi &quot;phải có&quot; mà không quan tâm đối tượng đó là gì.</p>\n<ul>\n<li><strong>Đặc điểm:</strong> Chỉ chứa các khai báo hàm (rỗng hoàn toàn) và hằng số (trong OOP thuần túy).</li>\n<li><strong>Sức mạnh:</strong> Hỗ trợ <strong>Đa kế thừa (Multiple Inheritance)</strong>. Một lớp có thể thực thi nhiều Interface cùng lúc.</li>\n<li><strong>Ví dụ:</strong> Interface <code>USB</code>. Chuột, Phím, Ổ cứng đều có thể cắm vào cổng USB dù chúng khác nhau hoàn toàn.</li>\n</ul>\n<big><strong>Phân biệt abstract class và interface</strong></big>\n<table style=\"border-collapse: collapse; width: 100%; text-align: center;\">\n    <thead>\n        <tr style=\"background-color: #f2f2f2;\">\n            <th style=\"border: 1px solid black; text-align: center;\">Tiêu chí</th>\n            <th style=\"border: 1px solid black; text-align: center;\">Abstract Class</th>\n            <th style=\"border: 1px solid black; text-align: center;\">Interface</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Mối quan hệ</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">\n                <strong>IS-A</strong> (Là một...)<br><em>VD: Chó là Động vật.</em>\n            </td>\n            <td style=\"border: 1px solid black; text-align: center;\">\n                <strong>CAN-DO</strong> (Có khả năng...)<br><em>VD: Chó biết Bơi.</em>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Dữ liệu</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">Có thể lưu trạng thái (biến).</td>\n            <td style=\"border: 1px solid black; text-align: center;\">Chỉ chứa hằng số (không đổi).</td>\n        </tr>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Kế thừa</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">Đơn kế thừa (Chỉ 1 cha).</td>\n            <td style=\"border: 1px solid black; text-align: center;\">Đa kế thừa (Nhiều interface).</td>\n        </tr>\n    </tbody>\n</table>"
-  },
-  {
-    "_id": "692c0259e45d607d6488908c",
-    "chapter": "692ae7567fdaad24a2aec4ea",
-    "knowledge_type": "692ae7567fdaad24a2aec4d9",
-    "title": "6.4 Tổng kết",
-    "slug": "64-tong-ket-1764491865046",
-    "content": "<big><strong>Hệ thống hóa kiến thức</big></strong><p>Chúng ta đã đi qua một trong những khái niệm quan trọng nhất của OOP. Bây giờ ta hãy nhìn lại bức tranh toàn cảnh:</p>\n<ul>\n<li><strong>Abstraction (Tư duy):</strong> Là nền tảng. Mục tiêu là đơn giản hóa hệ thống bằng cách ẩn đi sự phức tạp (Hide Implementation) và chỉ hiện ra giao diện sử dụng (Show Interface).</li>\n<li><strong>Abstract Method (Công cụ nhỏ):</strong> Là những viên gạch nhỏ nhất để ép buộc các lớp con phải tuân thủ logic.</li>\n<li><strong>Abstract Class &amp; Interface (Công cụ lớn):</strong> Là các khuôn mẫu thiết kế để tổ chức code, giúp code dễ bảo trì và mở rộng.</li>\n</ul>\n<big><strong>Những sai lầm thường gặp (Common Pitfalls)</big></strong>\n<ul>\n<li><strong>Lầm tưởng:</strong> Nghĩ rằng Abstraction chỉ để cho &quot;ngầu&quot;. <br><em>Thực tế:</em> Nó giúp bảo vệ code của chúng ta khỏi bị phá vỡ khi yêu cầu thay đổi.</li>\n<li><strong>Lạm dụng:</strong> Tạo ra quá nhiều Interface/Abstract class cho những thứ đơn giản. <br><em>Lời khuyên:</em> Chỉ dùng khi thấy có khả năng mở rộng hoặc có nhiều đối tượng chia sẻ chung logic.</li>\n</ul>\n<big><strong>Từ khóa cốt lõi (Keywords)</big></strong>\n<ul>\n<li><strong>What vs How:</strong> Quan tâm cái gì, bỏ qua thế nào.</li>\n<li><strong>Blueprint:</strong> Bản thiết kế (Abstract Class).</li>\n<li><strong>Contract:</strong> Hợp đồng (Interface).</li><li><strong>Decoupling:</strong> Giảm sự phụ thuộc giữa các thành phần.</li>\n</ul>\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px; font-size = 5px;\"><p><big><strong>Tổng kết cuối cùng:</strong></big></p><p>Abstraction giống như việc ta dùng một chiếc ổ cắm điện. Ta không cần biết điện được tạo ra từ thủy điện hay nhiệt điện, đi dây như thế nào. Ta chỉ cần biết ổ cắm có 2 lỗ (Interface) và cắm phích vào là có điện. Đó chính là đỉnh cao của thiết kế phần mềm.</p></div>"
-  },
-  {
-    "_id": "692c0855e45d607d64889190",
-    "chapter": "692ae7567fdaad24a2aec4e6",
-    "knowledge_type": "692ae7567fdaad24a2aec4db",
-    "title": "Bài tập: Tính kế thừa",
-    "slug": "bai-tap-tinh-ke-thua-1764493397085",
-    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <style>\n    body {\n      font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial;\n      line-height: 1.6;\n      padding: 24px;\n      background: #f9f9fb;\n      color: #111;\n    }\n    .card {\n      max-width: 800px;\n      margin: 0 auto 24px auto;\n      background: #fff;\n      border: 1px solid #e5e7eb;\n      border-radius: 8px;\n      padding: 20px;\n      box-shadow: 0 6px 18px rgba(18,24,31,0.04);\n    }\n    h1 {\n      font-size: 20px;\n      margin: 0 0 12px;\n    }\n    ol {\n      padding-left: 20px;\n    }\n    li {\n      margin: 16px 0;\n      font-size: 16px;\n    }\n    .note {\n      margin-top: 12px;\n      font-size: 14px;\n      color: #555;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"card\">\n<p><big><strong>Bài tập thực hành OOP: Kế thừa</strong></big></p>\n    <ol>\n      <li>\n        <strong>Tạo lớp cha \"DongVat\" với phương thức \"phatTiengKeu()\".  \n        Tạo lớp con \"Cho\" và \"Meo\" kế thừa \"DongVat\" và override phương thức \"phatTiengKeu()\".</strong>\n        <div class=\"note\">Kiểm tra tạo đối tượng và gọi phương thức từ các lớp con để thấy đa hình.</div>\n      </li>\n      <li>\n        <strong>Tạo lớp cha \"HinhHoc\" với phương thức trừu tượng \"tinhDienTich()\".  \n        Tạo các lớp con \"HinhVuong\", \"HinhTron\" kế thừa và cài đặt phương thức tính diện tích.</strong>\n        <div class=\"note\">Nhập dữ liệu và hiển thị diện tích của từng hình.</div>\n      </li>\n      <li>\n        <strong>Tạo lớp \"NhanVien\" với các thuộc tính cơ bản (tên, lương).  \n        Tạo lớp con \"NhanVienFullTime\" và \"NhanVienPartTime\" kế thừa và thêm phương thức tính thu nhập riêng.</strong>\n        <div class=\"note\">Tạo vài đối tượng nhân viên và in ra thu nhập của từng loại.</div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Có thể thực hiện bằng Java, C++, C#, Python hoặc Dart.</p>\n  </div>\n</body>\n</html>\n"
   },
   {
     "_id": "692c08e3e45d607d648891a4",
@@ -244,44 +156,12 @@ const lessons = [
     "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Đáp án Trắc nghiệm OOP</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;\">\n\n    <p style=\"color: black; font-size: 1.6em; font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 10px; text-align: left; margin-bottom: 25px;\">\n        <big><strong>ĐÁP ÁN VÀ GIẢI THÍCH CHI TIẾT (TỔNG QUAN OOP)</strong></big>\n    </p>\n\n    <div style=\"margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 1: Lập trình hướng đối tượng (OOP) là gì?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Là phương pháp lập trình dựa trên các hàm và thủ tục tuyến tính.<br>\n            <strong style=\"color: #000;\">B. Là mô hình lập trình dựa trên khái niệm \"đối tượng\" chứa dữ liệu và mã nguồn.</strong><br>\n            C. Là ngôn ngữ lập trình chỉ dùng để thiết kế giao diện web.<br>\n            D. Là cách viết code không cần sử dụng biến hay hàm.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> OOP (Object-Oriented Programming) là mô hình xoay quanh các \"đối tượng\" (Objects). Mục tiêu của nó là mô phỏng thế giới thực vào trong code để dễ quản lý, thay vì chỉ viết các hàm xử lý tuyến tính (Procedural Programming).\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 2: Sự khác nhau cơ bản giữa Class (Lớp) và Object (Đối tượng) là gì?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Class là thực thể cụ thể, Object là bản thiết kế.<br>\n            B. Class và Object là hai tên gọi khác nhau của cùng một thứ.<br>\n            <strong style=\"color: #000;\">C. Class là bản thiết kế (khuôn mẫu), Object là thực thể cụ thể được tạo ra từ Class.</strong><br>\n            D. Object dùng để lưu trữ dữ liệu, Class dùng để xóa dữ liệu.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Hãy tưởng tượng <strong>Class</strong> như bản vẽ thiết kế của một ngôi nhà (Blueprint) - nó chỉ nằm trên giấy. Còn <strong>Object</strong> là ngôi nhà thực tế được xây dựng từ bản vẽ đó (Instance) - chiếm diện tích đất thực sự.\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 3: Bốn tính chất quan trọng nhất của OOP là gì?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Cộng, Trừ, Nhân, Chia.<br>\n            <strong style=\"color: #000;\">B. Đóng gói, Kế thừa, Đa hình, Trừu tượng.</strong><br>\n            C. HTML, CSS, JavaScript, SQL.<br>\n            D. Biến, Mảng, Vòng lặp, Hàm.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> 4 trụ cột bắt buộc phải nhớ:\n            <ul style=\"margin-top: 5px; margin-bottom: 0;\">\n                <li><strong>Đóng gói (Encapsulation):</strong> Bảo vệ dữ liệu.</li>\n                <li><strong>Kế thừa (Inheritance):</strong> Tái sử dụng code từ cha sang con.</li>\n                <li><strong>Đa hình (Polymorphism):</strong> Linh hoạt trong hành động.</li>\n                <li><strong>Trừu tượng (Abstraction):</strong> Ẩn đi sự phức tạp bên dưới.</li>\n            </ul>\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 4: Tại sao OOP giúp code dễ bảo trì hơn?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Vì OOP bắt buộc code phải ngắn hơn.<br>\n            B. Vì OOP không cho phép sửa lỗi sau khi viết xong.<br>\n            <strong style=\"color: #000;\">C. Vì tính chất tái sử dụng (Kế thừa) và khả năng quản lý code theo từng module (Đóng gói).</strong><br>\n            D. Vì máy tính chạy code OOP nhanh hơn gấp đôi code thường.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Nhờ tính <strong>Kế thừa</strong>, ta không phải viết lại code lặp. Nhờ tính <strong>Đóng gói</strong>, khi sửa lỗi ở một module (đối tượng) này sẽ ít ảnh hưởng đến các module khác, giúp việc nâng cấp và sửa lỗi an toàn hơn.\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 5: Đa hình (Polymorphism) được hiểu như thế nào?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            <strong style=\"color: #000;\">A. Một hành động có thể được thực hiện theo nhiều cách khác nhau tùy thuộc vào đối tượng gọi nó.</strong><br>\n            B. Khả năng che giấu dữ liệu quan trọng không cho người dùng thấy.<br>\n            C. Việc tạo ra nhiều bản sao của cùng một file code.<br>\n            D. Chỉ cho phép sử dụng một tên hàm duy nhất trong toàn bộ chương trình.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> \"Đa hình\" nghĩa là \"nhiều hình thái\". Ví dụ: Hành động \"Phát ra tiếng kêu\" (Speak). Với đối tượng Chó sẽ là \"Gâu gâu\", với Mèo là \"Meo meo\". Cùng một tên hàm nhưng cách thực hiện khác nhau tùy đối tượng.\n        </div>\n    </div>\n\n</body>\n</html>"
   },
   {
-    "_id": "692c0988e45d607d648891bd",
-    "chapter": "692ae7567fdaad24a2aec4e2",
-    "knowledge_type": "692ae7567fdaad24a2aec4dd",
-    "title": "Đáp án",
-    "slug": "dap-an-1764493704324",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Đáp án Môi trường & Cú pháp OOP</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;\">\n\n    <p style=\"color: black; font-size: 1.6em; font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 10px; text-align: left; margin-bottom: 25px;\">\n        <big><strong>ĐÁP ÁN VÀ GIẢI THÍCH CHI TIẾT (MÔI TRƯỜNG & CÚ PHÁP)</strong></big>\n    </p>\n\n    <div style=\"margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 1: Cú pháp chuẩn để khởi tạo một đối tượng (Object) từ một Lớp (Class) trong Java/C# là gì?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. <code>ClassName objectName = ClassName();</code><br>\n            <strong style=\"color: #000;\">B. <code>ClassName objectName = new ClassName();</code></strong><br>\n            C. <code>new ClassName objectName;</code><br>\n            D. <code>Object objectName = import ClassName;</code>\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Từ khóa <code>new</code> là bắt buộc để cấp phát bộ nhớ cho đối tượng mới. Cú pháp chuẩn: <code>TênLớp tênBiến = new TênLớp();</code>. Các phương án khác đều sai cú pháp trong Java/C#.\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 2: Điều nào sau đây là ĐÚNG về phương thức trừu tượng (abstract method)?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Có phần thân hàm đầy đủ và có thể chạy ngay.<br>\n            <strong style=\"color: #000;\">B. Không có phần thân hàm và bắt buộc lớp con (phi trừu tượng) phải ghi đè (override) lại.</strong><br>\n            C. Có thể khai báo là <code>private</code> để bảo mật.<br>\n            D. Không cần từ khóa <code>abstract</code> nếu nằm trong abstract class.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Phương thức trừu tượng giống như một bản cam kết: \"Tôi chỉ đặt tên hàm ở đây, con cái tôi BẮT BUỘC phải viết code thực thi cho nó\". Nó không có thân hàm (<code>{}</code>) và không thể là <code>private</code> (vì nếu private thì con không thấy để mà ghi đè).\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 3: Lỗi cú pháp phổ biến nào thường gặp khi một lớp thực thi (implements) một Interface?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            <strong style=\"color: #000;\">A. Quên không ghi đè (override) tất cả các phương thức của Interface đó.</strong><br>\n            B. Đặt tên lớp trùng với tên Interface.<br>\n            C. Thực thi quá nhiều Interface cùng lúc (Java cho phép đa thực thi).<br>\n            D. Khai báo các phương thức trong Interface là <code>public</code>.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Khi một lớp (không phải abstract) chọn <code>implements</code> một Interface, nó ký một hợp đồng bắt buộc phải hiện thực hóa (override) <strong>TOÀN BỘ</strong> các phương thức trừu tượng có trong Interface đó. Nếu bỏ sót dù chỉ 1 hàm, trình biên dịch (Compiler) sẽ báo lỗi ngay lập tức.\n        </div>\n    </div>\n\n</body>\n</html>"
-  },
-  {
-    "_id": "692edef3d34cc6910180d4c1",
-    "chapter": "692ae7567fdaad24a2aec4e4",
-    "knowledge_type": "692ae7567fdaad24a2aec4db",
-    "title": "Bài tập: SinhVien",
-    "slug": "bai-tap-sinhvien-1764679411912",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP - SinhVien</title>\n</head>\n<body>\n\n    <p><strong>Yêu cầu:</strong></p>\n    <ul>\n        <li>Tạo lớp <code>SinhVien</code> với thuộc tính: <strong>ten</strong>, <strong>tuoi</strong>, <strong>diemTrungBinh</strong>.</li>\n        <li>Viết các phương thức:\n            <ul>\n                <li>Nhập thông tin sinh viên</li>\n                <li>Hiển thị thông tin</li>\n                <li>Tính xếp loại học lực:\n                    <ul>\n                        <li>A nếu <code>diem &ge; 8</code></li>\n                        <li>B nếu <code>diem &ge; 6.5</code></li>\n                        <li>C nếu <code>diem &ge; 5</code></li>\n                        <li>D nếu <code>diem < 5</code></li>\n                    </ul>\n                </li>\n            </ul>\n        </li>\n        <li>Tạo vài đối tượng và in kết quả.</li>\n    </ul>\n</body>\n</html>"
-  },
-  {
     "_id": "692edefed34cc6910180d4c7",
     "chapter": "692ae7567fdaad24a2aec4e4",
     "knowledge_type": "692ae7567fdaad24a2aec4db",
     "title": "Bài tập: HinhChuNhat",
     "slug": "bai-tap-hinhchunhat-1764679422505",
-    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Lớp Hình Chữ Nhật</title>\n  \n</head>\n<body>\n  <div class=\"card\">\n    <h1>Bài tập thực hành OOP: Lớp Hình Chữ Nhật</h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"HinhChuNhat\" với các thuộc tính: chiều dài, chiều rộng.  \n        Viết các phương thức: tính diện tích, tính chu vi và hiển thị thông tin.</strong>\n        <div class=\"note\">\n            Công thức: \n            Diện tích = dài * rộng; \n            Chu vi = (dài + rộng) * 2.<br>\n            Yêu cầu: Tạo một vài đối tượng với kích thước khác nhau và in kết quả ra màn hình.\n        </div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Các bài tập này có thể làm bằng Java, C++, C#, Ruby, PHP hoặc Dart tùy sở thích.</p>\n  </div>\n</body>\n</html>"
-  },
-  {
-    "_id": "692edf08d34cc6910180d4cd",
-    "chapter": "692ae7567fdaad24a2aec4e4",
-    "knowledge_type": "692ae7567fdaad24a2aec4db",
-    "title": "Bài tập: NguyenLieu",
-    "slug": "bai-tap-nguyenlieu-1764679432086",
-    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Lớp và Đối tượng</title>\n \n</head>\n<body>\n  <div class=\"card\">\n    <h1>Bài tập thực hành OOP: Lớp và Đối tượng</h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"NguyenLieu\" cho món ăn với các thuộc tính: tên nguyên liệu, số lượng, đơn vị.  \n        Viết phương thức hiển thị thông tin nguyên liệu và cập nhật số lượng.</strong>\n        <div class=\"note\">Tạo một danh sách các nguyên liệu và thử thay đổi số lượng cho một vài nguyên liệu.</div>\n      </li>\n    </ol>\n    <p class=\"note\">Các bài tập này có thể làm bằng Java, C++, C#, Ruby, PHP hoặc Dart tùy sở thích.</p>\n  </div>\n</body>\n</html>\n"
-  },
-  {
-    "_id": "692edf71d34cc6910180d4e8",
-    "chapter": "692ae7567fdaad24a2aec4e4",
-    "knowledge_type": "692ae7567fdaad24a2aec4dd",
-    "title": "Lời giải: SinhVien",
-    "slug": "loi-giai-sinhvien-1764679537309",
-    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP - Lớp SinhVien</title>\n</head>\n<body>\n    <big><strong>Bài tập OOP: Lớp SinhVien</strong></big>\n\n    <p><strong>Yêu cầu:</strong></p>\n    <ul>\n        <li>Tạo lớp <code>SinhVien</code> với các thuộc tính: <strong>tên</strong>, <strong>tuổi</strong>, <strong>điểm trung bình</strong>.</li>\n        <li>Viết các phương thức:\n            <ul>\n                <li>Nhập thông tin</li>\n                <li>Hiển thị thông tin</li>\n                <li>Tính xếp loại học lực</li>\n            </ul>\n        </li>\n        <li><strong>Gợi ý xếp loại:</strong></li>\n        <ul>\n            <li>A nếu điểm ≥ 8</li>\n            <li>B nếu điểm ≥ 6.5</li>\n            <li>C nếu điểm ≥ 5</li>\n            <li>D nếu điểm &lt; 5</li>\n        </ul>\n    </ul>\n</body>\n</html>\n"
+    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Lớp Hình Chữ Nhật</title>\n  \n</head>\n<body>\n  <div class=\"card\">\n    <h1><strong>Yêu cầu:</strong></h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"HinhChuNhat\" với các thuộc tính: chiều dài, chiều rộng.  \n        Viết các phương thức: tính diện tích, tính chu vi và hiển thị thông tin.</strong>\n        <div class=\"note\">\n            Công thức: \n            Diện tích = dài * rộng; \n            Chu vi = (dài + rộng) * 2.<br>\n            Yêu cầu: Tạo một vài đối tượng với kích thước khác nhau và in kết quả ra màn hình.\n        </div>\n      </li>\n    </ol>\n  </div>\n</body>\n</html>"
   },
   {
     "_id": "692edfe7d34cc6910180d52c",
@@ -316,12 +196,52 @@ const lessons = [
     "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Kế thừa</title>\n \n</head>\n<body>\n  <div class=\"card\">\n    <h1>Bài tập thực hành OOP: Kế thừa</h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp cha \"HinhHoc\" với phương thức trừu tượng \"tinhDienTich()\".  \n        Tạo các lớp con \"HinhVuong\", \"HinhTron\" kế thừa và cài đặt phương thức tính diện tích.</strong>\n        <div class=\"note\">Nhập dữ liệu và hiển thị diện tích của từng hình.</div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Có thể thực hiện bằng Java, C++, C#, Ruby, PHP hoặc Dart.</p>\n  </div>\n</body>\n</html>\n"
   },
   {
-    "_id": "692ee22dd34cc6910180d661",
+    "_id": "692ee23fd34cc6910180d66d",
     "chapter": "692ede83d34cc6910180d487",
+    "knowledge_type": "692ae7567fdaad24a2aec4dd",
+    "title": "Lời giải: HinhHoc",
+    "slug": "loi-giai-hinhhoc-1764680255996",
+    "content": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP – Tính trừu tượng & Kế thừa</title>\n</head>\n<body>\n    <big><strong>Bài tập: Lớp HinhHoc và các lớp kế thừa</strong></big>\n\n    <h2>Yêu cầu:</h2>\n    <ul>\n        <li>Tạo lớp cha <b>HinhHoc</b> có phương thức trừu tượng <b>tinhDienTich()</b>.</li>\n        <li>Tạo các lớp con:\n            <ul>\n                <li><b>HinhVuong</b> – nhập cạnh và tính diện tích theo công thức <code>S = a × a</code>.</li>\n                <li><b>HinhTron</b> – nhập bán kính và tính diện tích theo công thức <code>S = π × r²</code>.</li>\n            </ul>\n        </li>\n        <li>Cả hai lớp con phải <b>override</b> phương thức <i>tinhDienTich()</i>.</li>\n        <li>Tạo một vài đối tượng và in ra diện tích từng hình.</li>\n    </ul>\n\n    <h2>Hướng dẫn thực hiện:</h2>\n    <ol>\n        <li>Tạo lớp trừu tượng hoặc abstract class tên <b>HinhHoc</b>.</li>\n        <li>Khai báo phương thức trừu tượng <code>tinhDienTich()</code> trong lớp cha.</li>\n        <li>Tạo lớp <b>HinhVuong</b> và <b>HinhTron</b> kế thừa lớp cha.</li>\n        <li>Ở từng lớp con, cài đặt lại phương thức tính diện tích theo công thức riêng.</li>\n        <li>Tạo đối tượng và gọi phương thức để kiểm tra.</li>\n    </ol>\n</body>\n</html>"
+  },
+  {
+    "_id": "692bb799a0a7add9d4493891",
+    "chapter": "692ae7567fdaad24a2aec4ea",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "6.2 Phương thức trừu tượng (Abstraction Method)",
+    "slug": "phuong-thuc-truu-tuong",
+    "content": "<big><strong>Khái niệm</strong></big><p>Phương thức trừu tượng (Abstract Method), hay trong C++ gọi là <em>Hàm ảo thuần túy (Pure Virtual Function)</em>, là một phương thức được khai báo trong lớp cha nhưng <strong>hoàn toàn không có phần thân (body)</strong>. Nó kết thúc bằng dấu chấm phẩy <code>;</code> thay vì cặp ngoặc nhọn <code>{}</code>.</p><big><strong>Tại sao lại sinh ra hàm &quot;rỗng&quot; này?</big></strong><p>Nó đóng vai trò như một <strong>bản hợp đồng bắt buộc</strong>. Lớp cha (Parent Class) biết rằng hành động này tồn tại, nhưng nhường quyền quyết định cách thực hiện chi tiết cho các lớp con (Child Class).</p><big><strong>Ví dụ minh họa: Hệ thống gửi thông báo</big></strong><p>Giả sử bạn có lớp cha là <code>ThongBao</code>. Ta biết mọi thông báo đều cần phải <code>guiDi()</code>, nhưng:</p><ul><li>Với <strong>SMS</strong>: Cần kết nối mạng viễn thông, giới hạn 160 ký tự.</li><li>Với <strong>Email</strong>: Cần giao thức SMTP, có tiêu đề và nội dung HTML.</li></ul><p>Lúc này, tại lớp cha, bạn chỉ khai báo: <code>abstract void guiDi();</code>. Các lớp con <code>SMS</code> và <code>Email</code> bắt buộc phải <strong>Ghi đè (Override)</strong> hàm này. Nếu không viết, chương trình sẽ báo lỗi.</p>"
+  },
+  {
+    "_id": "692bb7dba0a7add9d4493892",
+    "chapter": "692ae7567fdaad24a2aec4ea",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "6.3 Lớp trừu tượng và interface",
+    "slug": "lop-truu-tuong-va-interface",
+    "content": "<big><strong>Lớp trừu tượng (Abstract Class)</big></strong>\n<p><strong>Bản chất:</strong> Là một bản thiết kế &quot;bán hoàn thiện&quot;. Nó thường đóng vai trò là lớp cha (Base Class) cho các đối tượng có cùng huyết thống.</p>\n<ul><li><strong>Đặc điểm:</strong> Có thể chứa cả hàm đã viết xong (logic chung) và hàm chưa viết (abstract).</li>\n<li><strong>Quy tắc:</strong> Không thể tạo đối tượng trực tiếp (<code>new AbstractClass()</code> là lỗi).</li>\n<li><strong>Ví dụ:</strong> Lớp <code>DongVat</code> có hàm <code>Ngu()</code> (ai cũng ngủ giống nhau) và hàm abstract <code>Keu()</code> (mỗi con kêu một kiểu).</li>\n</ul>\n<big><strong>Giao diện (Interface)</big></strong>\n<p><strong>Bản chất:</strong> Là một bản hợp đồng hay chuẩn kết nối. Nó quy định các hành vi &quot;phải có&quot; mà không quan tâm đối tượng đó là gì.</p>\n<ul>\n<li><strong>Đặc điểm:</strong> Chỉ chứa các khai báo hàm (rỗng hoàn toàn) và hằng số (trong OOP thuần túy).</li>\n<li><strong>Sức mạnh:</strong> Hỗ trợ <strong>Đa kế thừa (Multiple Inheritance)</strong>. Một lớp có thể thực thi nhiều Interface cùng lúc.</li>\n<li><strong>Ví dụ:</strong> Interface <code>USB</code>. Chuột, Phím, Ổ cứng đều có thể cắm vào cổng USB dù chúng khác nhau hoàn toàn.</li>\n</ul>\n<big><strong>Phân biệt abstract class và interface</strong></big>\n<table style=\"border-collapse: collapse; width: 100%; text-align: center;\">\n    <thead>\n        <tr style=\"background-color: #f2f2f2;\">\n            <th style=\"border: 1px solid black; text-align: center;\">Tiêu chí</th>\n            <th style=\"border: 1px solid black; text-align: center;\">Abstract Class</th>\n            <th style=\"border: 1px solid black; text-align: center;\">Interface</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Mối quan hệ</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">\n                <strong>IS-A</strong> (Là một...)<br><em>VD: Chó là Động vật.</em>\n            </td>\n            <td style=\"border: 1px solid black; text-align: center;\">\n                <strong>CAN-DO</strong> (Có khả năng...)<br><em>VD: Chó biết Bơi.</em>\n            </td>\n        </tr>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Dữ liệu</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">Có thể lưu trạng thái (biến).</td>\n            <td style=\"border: 1px solid black; text-align: center;\">Chỉ chứa hằng số (không đổi).</td>\n        </tr>\n        <tr>\n            <td style=\"border: 1px solid black; text-align: center;\"><strong>Kế thừa</strong></td>\n            <td style=\"border: 1px solid black; text-align: center;\">Đơn kế thừa (Chỉ 1 cha).</td>\n            <td style=\"border: 1px solid black; text-align: center;\">Đa kế thừa (Nhiều interface).</td>\n        </tr>\n    </tbody>\n</table>"
+  },
+  {
+    "_id": "692c0259e45d607d6488908c",
+    "chapter": "692ae7567fdaad24a2aec4ea",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "6.4 Tổng kết",
+    "slug": "64-tong-ket-1764491865046",
+    "content": "<big><strong>Hệ thống hóa kiến thức</big></strong><p>Chúng ta đã đi qua một trong những khái niệm quan trọng nhất của OOP. Bây giờ ta hãy nhìn lại bức tranh toàn cảnh:</p>\n<ul>\n<li><strong>Abstraction (Tư duy):</strong> Là nền tảng. Mục tiêu là đơn giản hóa hệ thống bằng cách ẩn đi sự phức tạp (Hide Implementation) và chỉ hiện ra giao diện sử dụng (Show Interface).</li>\n<li><strong>Abstract Method (Công cụ nhỏ):</strong> Là những viên gạch nhỏ nhất để ép buộc các lớp con phải tuân thủ logic.</li>\n<li><strong>Abstract Class &amp; Interface (Công cụ lớn):</strong> Là các khuôn mẫu thiết kế để tổ chức code, giúp code dễ bảo trì và mở rộng.</li>\n</ul>\n<big><strong>Những sai lầm thường gặp (Common Pitfalls)</big></strong>\n<ul>\n<li><strong>Lầm tưởng:</strong> Nghĩ rằng Abstraction chỉ để cho &quot;ngầu&quot;. <br><em>Thực tế:</em> Nó giúp bảo vệ code của chúng ta khỏi bị phá vỡ khi yêu cầu thay đổi.</li>\n<li><strong>Lạm dụng:</strong> Tạo ra quá nhiều Interface/Abstract class cho những thứ đơn giản. <br><em>Lời khuyên:</em> Chỉ dùng khi thấy có khả năng mở rộng hoặc có nhiều đối tượng chia sẻ chung logic.</li>\n</ul>\n<big><strong>Từ khóa cốt lõi (Keywords)</big></strong>\n<ul>\n<li><strong>What vs How:</strong> Quan tâm cái gì, bỏ qua thế nào.</li>\n<li><strong>Blueprint:</strong> Bản thiết kế (Abstract Class).</li>\n<li><strong>Contract:</strong> Hợp đồng (Interface).</li><li><strong>Decoupling:</strong> Giảm sự phụ thuộc giữa các thành phần.</li>\n</ul>\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px; font-size = 5px;\"><p><big><strong>Tổng kết cuối cùng:</strong></big></p><p>Abstraction giống như việc ta dùng một chiếc ổ cắm điện. Ta không cần biết điện được tạo ra từ thủy điện hay nhiệt điện, đi dây như thế nào. Ta chỉ cần biết ổ cắm có 2 lỗ (Interface) và cắm phích vào là có điện. Đó chính là đỉnh cao của thiết kế phần mềm.</p></div>"
+  },
+  {
+    "_id": "692c0855e45d607d64889190",
+    "chapter": "692ae7567fdaad24a2aec4e6",
     "knowledge_type": "692ae7567fdaad24a2aec4db",
-    "title": "Bài tập: NhanVien",
-    "slug": "bai-tap-nhanvien-1764680237299",
-    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Kế thừa</title>\n \n</head>\n<body>\n  <div class=\"card\">\n    <h1>Bài tập thực hành OOP: Kế thừa</h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"NhanVien\" với các thuộc tính cơ bản (tên, lương).  \n        Tạo lớp con \"NhanVienFullTime\" và \"NhanVienPartTime\" kế thừa và thêm phương thức tính thu nhập riêng.</strong>\n        <div class=\"note\">Tạo vài đối tượng nhân viên và in ra thu nhập của từng loại.</div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Có thể thực hiện bằng Java, C++, C#, Ruby, PHP hoặc Dart.</p>\n  </div>\n</body>\n</html>\n"
+    "title": "Bài tập: Tính kế thừa",
+    "slug": "bai-tap-tinh-ke-thua-1764493397085",
+    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <style>\n    body {\n      font-family: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial;\n      line-height: 1.6;\n      padding: 24px;\n      background: #f9f9fb;\n      color: #111;\n    }\n    .card {\n      max-width: 800px;\n      margin: 0 auto 24px auto;\n      background: #fff;\n      border: 1px solid #e5e7eb;\n      border-radius: 8px;\n      padding: 20px;\n      box-shadow: 0 6px 18px rgba(18,24,31,0.04);\n    }\n    h1 {\n      font-size: 20px;\n      margin: 0 0 12px;\n    }\n    ol {\n      padding-left: 20px;\n    }\n    li {\n      margin: 16px 0;\n      font-size: 16px;\n    }\n    .note {\n      margin-top: 12px;\n      font-size: 14px;\n      color: #555;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"card\">\n<p><big><strong>Bài tập thực hành OOP: Kế thừa</strong></big></p>\n    <ol>\n      <li>\n        <strong>Tạo lớp cha \"DongVat\" với phương thức \"phatTiengKeu()\".  \n        Tạo lớp con \"Cho\" và \"Meo\" kế thừa \"DongVat\" và override phương thức \"phatTiengKeu()\".</strong>\n        <div class=\"note\">Kiểm tra tạo đối tượng và gọi phương thức từ các lớp con để thấy đa hình.</div>\n      </li>\n      <li>\n        <strong>Tạo lớp cha \"HinhHoc\" với phương thức trừu tượng \"tinhDienTich()\".  \n        Tạo các lớp con \"HinhVuong\", \"HinhTron\" kế thừa và cài đặt phương thức tính diện tích.</strong>\n        <div class=\"note\">Nhập dữ liệu và hiển thị diện tích của từng hình.</div>\n      </li>\n      <li>\n        <strong>Tạo lớp \"NhanVien\" với các thuộc tính cơ bản (tên, lương).  \n        Tạo lớp con \"NhanVienFullTime\" và \"NhanVienPartTime\" kế thừa và thêm phương thức tính thu nhập riêng.</strong>\n        <div class=\"note\">Tạo vài đối tượng nhân viên và in ra thu nhập của từng loại.</div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Có thể thực hiện bằng Java, C++, C#, Python hoặc Dart.</p>\n  </div>\n</body>\n</html>\n"
+  },
+  {
+    "_id": "692edf71d34cc6910180d4e8",
+    "chapter": "692ae7567fdaad24a2aec4e4",
+    "knowledge_type": "692ae7567fdaad24a2aec4dd",
+    "title": "Lời giải: SinhVien",
+    "slug": "loi-giai-sinhvien-1764679537309",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP - SinhVien</title>\n</head>\n<body>\n\n    <p><strong>Yêu cầu:</strong></p>\n    <ul>\n        <li>Tạo lớp <code>SinhVien</code> với thuộc tính: <strong>ten</strong>, <strong>tuoi</strong>, <strong>diemTrungBinh</strong>.</li>\n        <li>Viết các phương thức:\n            <ul>\n                <li>Nhập thông tin sinh viên</li>\n                <li>Hiển thị thông tin</li>\n                <li>Tính xếp loại học lực:\n                    <ul>\n                        <li><strong> + A</strong> nếu <code>diem &ge; 8</code></li>\n                        <li><strong> +  B</strong> nếu <code>diem &ge; 6.5</code></li>\n                        <li><strong> +  C</strong> nếu <code>diem &ge; 5</code></li>\n                        <li><strong> +  D</strong> nếu <code>diem < 5</code></li>\n                    </ul>\n                </li>\n            </ul>\n        </li>\n        <li>Tạo vài đối tượng và in kết quả.</li>\n    </ul>\n</body>\n</html>"
   },
   {
     "_id": "692ee235d34cc6910180d667",
@@ -332,12 +252,52 @@ const lessons = [
     "content": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP – Kế thừa và Đa hình</title>\n</head>\n<body>\n    <big><strong>Bài tập: Kế thừa & Đa hình với lớp <i>DongVat</i></strong></big>\n\n    <h2>Yêu cầu:</h2>\n    <ul>\n        <li>Tạo lớp cha <b>DongVat</b> có phương thức <b>phatTiengKeu()</b>.</li>\n        <li>Tạo lớp con:\n            <ul>\n                <li><b>Cho</b> kế thừa <i>DongVat</i> và override phương thức phát tiếng “Gâu gâu”.</li>\n                <li><b>Meo</b> kế thừa <i>DongVat</i> và override tiếng “Meow meow”.</li>\n            </ul>\n        </li>\n        <li>Tạo đối tượng và sử dụng tính đa hình để gọi phương thức.</li>\n    </ul>\n\n    <h2>Hướng dẫn thực hiện:</h2>\n    <ol>\n        <li>Tạo lớp cha với phương thức chung.</li>\n        <li>Dùng từ khóa <b>extends</b> (Java, PHP), <b>:</b> (C#, C++), <b>&lt;</b> (Ruby), <b>extends</b> (Dart) để kế thừa.</li>\n        <li>Override phương thức trong lớp con.</li>\n        <li>Tạo mảng hoặc danh sách động vật và duyệt để thấy đa hình.</li>\n    </ol>\n</body>\n</html>\n"
   },
   {
-    "_id": "692ee23fd34cc6910180d66d",
-    "chapter": "692ede83d34cc6910180d487",
-    "knowledge_type": "692ae7567fdaad24a2aec4dd",
-    "title": "Lời giải: HinhHoc",
-    "slug": "loi-giai-hinhhoc-1764680255996",
-    "content": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP – Tính trừu tượng & Kế thừa</title>\n</head>\n<body>\n    <big><strong>Bài tập: Lớp HinhHoc và các lớp kế thừa</strong></big>\n\n    <h2>Yêu cầu:</h2>\n    <ul>\n        <li>Tạo lớp cha <b>HinhHoc</b> có phương thức trừu tượng <b>tinhDienTich()</b>.</li>\n        <li>Tạo các lớp con:\n            <ul>\n                <li><b>HinhVuong</b> – nhập cạnh và tính diện tích theo công thức <code>S = a × a</code>.</li>\n                <li><b>HinhTron</b> – nhập bán kính và tính diện tích theo công thức <code>S = π × r²</code>.</li>\n            </ul>\n        </li>\n        <li>Cả hai lớp con phải <b>override</b> phương thức <i>tinhDienTich()</i>.</li>\n        <li>Tạo một vài đối tượng và in ra diện tích từng hình.</li>\n    </ul>\n\n    <h2>Hướng dẫn thực hiện:</h2>\n    <ol>\n        <li>Tạo lớp trừu tượng hoặc abstract class tên <b>HinhHoc</b>.</li>\n        <li>Khai báo phương thức trừu tượng <code>tinhDienTich()</code> trong lớp cha.</li>\n        <li>Tạo lớp <b>HinhVuong</b> và <b>HinhTron</b> kế thừa lớp cha.</li>\n        <li>Ở từng lớp con, cài đặt lại phương thức tính diện tích theo công thức riêng.</li>\n        <li>Tạo đối tượng và gọi phương thức để kiểm tra.</li>\n    </ol>\n</body>\n</html>"
+    "_id": "692ae7567fdaad24a2aec4ee",
+    "chapter": "692ae7567fdaad24a2aec4e0",
+    "knowledge_type": "692ae7567fdaad24a2aec4d7",
+    "title": "1.1 Khái niệm",
+    "slug": "gioi-thieu-oop",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 1: Tổng quan OOP - Khái Niệm</title>\n</head>\n<body>\n    \n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Định nghĩa</h2>\n    <p>Lập trình hướng đối tượng (Object-Oriented Programming - OOP) là một mô hình lập trình dựa trên khái niệm <strong>\"đối tượng\" (Object)</strong>. Thay vì tập trung vào các hàm và logic thực thi tuần tự như lập trình thủ tục, OOP tổ chức phần mềm thành các đối tượng chứa đựng cả dữ liệu (thuộc tính) và mã nguồn (phương thức) thao tác trên dữ liệu đó.</p>\n    <p>Mục tiêu cốt lõi của OOP là mô hình hóa các thực thể trong thế giới thực (như Sinh viên, Ô tô, Tài khoản ngân hàng) vào trong mã nguồn máy tính, giúp hệ thống trở nên gần gũi với tư duy con người.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Sự chuyển dịch tư duy</h2>\n    <p>Để hiểu OOP, cần phân biệt rõ với Lập trình thủ tục (Procedural Programming):</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li><strong>Lập trình thủ tục (Ví dụ: PHP thuần, C++ phong cách C):</strong> Tập trung vào hành động. Câu hỏi chính là: <em>\"Hệ thống cần làm gì?\"</em> (Viết hàm A, hàm B, hàm C và chạy tuần tự).</li>\n        <li><strong>Lập trình hướng đối tượng (Ví dụ: Java, C#):</strong> Tập trung vào chủ thể. Câu hỏi chính là: <em>\"Hệ thống bao gồm những cái gì?\"</em> (Đối tượng Khách hàng, Đối tượng Hóa đơn) và chúng tương tác với nhau ra sao.</li>\n    </ul>\n\n    <div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px;\">\n        <strong>Ghi nhớ:</strong> Nếu lập trình thủ tục giống như làm theo một công thức nấu ăn (Bước 1, Bước 2...), thì OOP giống như việc lắp ráp một chiếc xe hơi từ các linh kiện (Động cơ, Bánh xe, Khung xe) hoạt động phối hợp với nhau.\n    </div>\n\n</body>\n</html>"
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec50a",
+    "chapter": "692ae7567fdaad24a2aec4e8",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "5.1 Khái niệm",
+    "slug": "tinh-da-hinh",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 5: Khái niệm Đa hình</title>\n</head>\n<body>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Định nghĩa</h2>\n    <p>Thuật ngữ <strong>\"Polymorphism\"</strong> xuất phát từ tiếng Hy Lạp, là sự kết hợp của <em>\"Poly\"</em> (nhiều) và <em>\"Morphs\"</em> (hình thái). Trong khoa học máy tính, Đa hình là khả năng một đối tượng hoặc một hành động có thể giả lập nhiều hình thái khác nhau tùy thuộc vào ngữ cảnh sử dụng.</p>\n    <p>Nói một cách ngắn gọn theo tư duy lập trình: <strong>\"Một giao diện (interface), nhiều cách thực thi (implementation).\"</strong></p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Ví dụ thực tế</h2>\n    <p>Hãy xem xét hành động <strong>\"Phát âm thanh\"</strong>:</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li>Khi ngữ cảnh là một con <strong>Người</strong>, âm thanh là tiếng nói.</li>\n        <li>Khi ngữ cảnh là một con <strong>Chó</strong>, âm thanh là tiếng sủa.</li>\n        <li>Khi ngữ cảnh là một con <strong>Mèo</strong>, âm thanh là tiếng kêu meo meo.</li>\n    </ul>\n    <p>Hệ thống chỉ cần gửi đi một thông điệp duy nhất là \"Phát âm thanh\", nhưng mỗi đối tượng sẽ tự biết cách phản hồi theo bản chất riêng của nó mà không cần hệ thống phải kiểm tra từng loại đối tượng thủ công.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Phân loại</h2>\n    <p>Đa hình thường được chia thành hai loại chính dựa trên thời điểm liên kết (Binding):</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li><strong>Đa hình tĩnh (Compile-time Polymorphism):</strong> Xử lý thông qua Nạp chồng (Overloading).</li>\n        <li><strong>Đa hình động (Runtime Polymorphism):</strong> Xử lý thông qua Ghi đè (Overriding).</li>\n    </ul>\n\n</body>\n</html>"
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec50c",
+    "chapter": "692ae7567fdaad24a2aec4ea",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "6.1 Tính Trừu tượng (Abstraction)",
+    "slug": "tinh-truu-tuong",
+    "content": "<big><strong>Định nghĩa</strong></big><p>Trong Lập trình hướng đối tượng (OOP), <strong>Abstraction (Tính trừu tượng)</strong> là quá trình chọn lọc các đặc điểm chung, thiết yếu của một đối tượng để xây dựng mô hình, đồng thời <strong>ẩn đi các chi tiết thực thi phức tạp</strong> không cần thiết đối với người sử dụng.</p>\n<p>Tư duy cốt lõi của Abstraction là tập trung vào câu hỏi: <strong>&quot;Hệ thống này làm được cái gì?&quot; (WHAT)</strong> thay vì đi sâu vào việc <strong>&quot;Nó hoạt động chi tiết ra sao?&quot; (HOW)</strong>.</p><big><strong>Ví dụ thực tế: Chiếc xe hơi (Car)</big></strong><p>Để lái được xe, bạn không cần phải là một kỹ sư cơ khí. Đây là cách Abstraction hoạt động:</p>\n<ul>\n<li><strong>- Phần Trừu tượng (Giao diện):</strong> Vô lăng, Chân ga, Chân phanh. Đây là những thứ bạn tương tác. Bạn biết rằng đạp phanh thì xe sẽ dừng.</li>\n<li><strong>- Phần Ẩn (Triển khai):</strong> Hệ thống piston, trục khuỷu, cơ chế bơm xăng, hay hệ thống phanh ABS điện tử. Những thứ này cực kỳ phức tạp nhưng được giấu kín dưới nắp ca-pô.</li></ul>\n<big><strong>Tại sao Abstraction lại quan trọng?</big></strong><ul>\n<li><strong>- Giảm độ phức tạp (Complexity Management):</strong> Giúp lập trình viên không bị choáng ngợp bởi hàng nghìn dòng code chi tiết. Họ chỉ cần gọi hàm và tin tưởng nó chạy đúng.</li>\n<li><strong>- Tăng tính bảo mật (Security):</strong> Giấu đi các dữ liệu hoặc thuật toán nhạy cảm, chỉ lộ ra những gì an toàn cho người dùng cuối.</li>\n<li><strong>- Dễ dàng nâng cấp:</strong> Bạn có thể thay đổi hoàn toàn động cơ từ &quot;Xăng&quot; sang &quot;Điện&quot; (thay đổi Implementation) mà người lái xe không cần học lái lại từ đầu (Giao diện giữ nguyên).</li>\n</ul>\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px; font-size = 5px;\">\n<p><strong>Ghi nhớ: Nguyên tắc &quot;Tảng băng trôi&quot;</strong></p>\n<ul>\n<li><strong>● Phần nổi (Abstraction):</strong> Là những gì người dùng thấy và sử dụng (Giao diện, Tên hàm).</li>\n<li><strong>● Phần chìm (Implementation):</strong> Là logic phức tạp bên dưới (Code xử lý).</li>\n<li><strong>● Khẩu quyết:</strong> &quot;Quan tâm <strong>WHAT</strong> (Làm gì), bỏ qua <strong>HOW</strong> (Làm thế nào).&quot;</li>\n</ul>\n</div>"
+  },
+  {
+    "_id": "692b1bf0c5044e5f5eff746d",
+    "chapter": "692ae7567fdaad24a2aec4ec",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "7.3 Data Hiding",
+    "slug": "tinh-dong-goi-hd",
+    "content": "<h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Tại sao biến không nên để public?</h2>\n<p>Khi bạn để một biến là <code>public</code>, bạn mất hoàn toàn quyền kiểm soát nó. Bất kỳ ai cũng có thể gán giá trị sai, gây lỗi logic nghiêm trọng cho chương trình.</p>\n\n<h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Nguyên tắc ẩn dữ liệu (Data Hiding)</h2>\n<p>Nguyên tắc vàng trong OOP: <strong>Thuộc tính nên là <code>private</code>, phương thức giao tiếp nên là <code>public</code>.</strong></p>\n<p>Điều này giúp:</p>\n<ul style=\"list-style-type: disc; margin-left: 20px;\">\n    <li><strong>Kiểm soát dữ liệu đầu vào:</strong> Chỉ chấp nhận giá trị hợp lệ.</li>\n    <li><strong>Bảo vệ toàn vẹn dữ liệu:</strong> Ngăn chặn truy cập trái phép.</li>\n    <li><strong>Dễ bảo trì:</strong> Thay đổi logic bên trong không ảnh hưởng bên ngoài.</li>\n</ul>\n\n<div style=\"background-color: #e8f4fd; border-left: 4px solid #3498db; padding: 10px; margin-top: 15px;\">\n    <strong>Ghi nhớ:</strong> Đóng gói biến đối tượng thành một chiếc \"hộp đen\". Người dùng chỉ cần biết các nút bấm (hàm public) mà không cần quan tâm đến dây điện bên trong (biến private).\n</div>"
+  },
+  {
+    "_id": "692b1c28c5044e5f5eff746f",
+    "chapter": "692ae7567fdaad24a2aec4ec",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "7.5 Tổng kết",
+    "slug": "tinh-dong-goi-tk",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 3: Tính Đóng Gói - Tổng Kết</title>\n</head>\n<body>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Điểm cốt lõi cần nhớ</h2>\n    <p>Tính đóng gói không phải là cấm đoán truy cập, mà là <strong>quản lý truy cập</strong>. Nó giúp mã nguồn của bạn trở nên chuyên nghiệp, an toàn và dễ sửa lỗi hơn.</p>\n    <blockquote>\n        <p><strong>Công thức Đóng gói = Dữ liệu Private + Phương thức Public (Getter/Setter).</strong></p>\n    </blockquote>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Vai trò của đóng gói trong 4 tính chất OOP</h2>\n    <p>Đóng gói là nền tảng đầu tiên để xây dựng một đối tượng hoàn chỉnh:</p>\n    <ul>\n        <li>Nó tạo ra ranh giới rõ ràng cho đối tượng.</li>\n        <li>Nó chuẩn bị cơ sở dữ liệu an toàn để các tính chất khác như Kế thừa và Đa hình có thể hoạt động chính xác mà không lo ngại dữ liệu bị hỏng hóc từ bên trong.</li>\n    </ul>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em;\">Đóng gói và Trừu tượng: Khác nhau thế nào?</h2>\n    <p>Sinh viên thường hay nhầm lẫn hai khái niệm này. Cách đơn giản nhất để phân biệt:</p>\n    <ul>\n        <li><strong>Tính trừu tượng (Abstraction):</strong> Là về mặt <em>thiết kế</em>. Giúp người dùng chỉ nhìn thấy những gì họ CẦN thấy (đơn giản hóa).</li>\n        <li><strong>Tính đóng gói (Encapsulation):</strong> Là về mặt <em>thực thi</em>. Giúp bảo vệ những gì người dùng KHÔNG CẦN (và không nên) thấy (an toàn dữ liệu).</li>\n    </ul>\n\n</body>\n</html>"
+  },
+  {
+    "_id": "692edef3d34cc6910180d4c1",
+    "chapter": "692ae7567fdaad24a2aec4e4",
+    "knowledge_type": "692ae7567fdaad24a2aec4db",
+    "title": "Bài tập: SinhVien",
+    "slug": "bai-tap-sinhvien-1764679411912",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP - SinhVien</title>\n</head>\n<body>\n\n    <p><strong>Yêu cầu:</strong></p>\n    <ul>\n        <li>Tạo lớp <code>SinhVien</code> với thuộc tính: <strong>ten</strong>, <strong>tuoi</strong>, <strong>diemTrungBinh</strong>.</li>\n        <li>Viết các phương thức:\n            <ul>\n                <li>Nhập thông tin sinh viên</li>\n                <li>Hiển thị thông tin</li>\n                <li>Tính xếp loại học lực:\n                    <ul>\n                        <li><strong> + A</strong> nếu <code>diem &ge; 8</code></li>\n                        <li><strong> +  B</strong> nếu <code>diem &ge; 6.5</code></li>\n                        <li><strong> +  C</strong> nếu <code>diem &ge; 5</code></li>\n                        <li><strong> +  D</strong> nếu <code>diem < 5</code></li>\n                    </ul>\n                </li>\n            </ul>\n        </li>\n        <li>Tạo vài đối tượng và in kết quả.</li>\n    </ul>\n</body>\n</html>"
   },
   {
     "_id": "692ee24bd34cc6910180d673",
@@ -346,6 +306,46 @@ const lessons = [
     "title": "Lời giải: NhanVien",
     "slug": "loi-giai-nhanvien-1764680267906",
     "content": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Bài tập OOP – Nhân viên</title>\n</head>\n<body>\n    <big><strong>Bài tập: Lớp NhanVien và các lớp kế thừa</strong></big>\n\n    <h2>Yêu cầu:</h2>\n    <ul>\n        <li>Tạo lớp cha <b>NhanVien</b> với các thuộc tính: Tên nhân viên, lương cơ bản.\n        <li>Tạo các lớp con:\n            <ul>\n                <li><b>NhanVienFullTime</b> – thêm phương thức tính thu nhập theo lương cơ bản + thưởng.</li>\n                <li><b>NhanVienPartTime</b> – tính thu nhập theo số giờ làm việc × lương giờ.</li>\n            </ul>\n        </li>\n        <li>Tạo vài đối tượng và in ra thu nhập của từng nhân viên.</li>\n    </ul>\n\n    <h2>Hướng dẫn thực hiện:</h2>\n    <ol>\n        <li>Tạo lớp cha <b>NhanVien</b> với các thuộc tính chung.</li>\n        <li>Trong lớp cha, khai báo phương thức <code>tinhThuNhap()</code> (có thể là abstract hoặc virtual).</li>\n        <li>Tạo lớp con <b>NhanVienFullTime</b> và <b>NhanVienPartTime</b> kế thừa lớp cha.</li>\n        <li>Override phương thức <code>tinhThuNhap()</code> theo cách tính riêng của từng loại nhân viên.</li>\n        <li>Tạo đối tượng, gọi phương thức <code>tinhThuNhap()</code> và in kết quả.</li>\n    </ol>\n</body>\n</html>\n"
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec4fe",
+    "chapter": "692ae7567fdaad24a2aec4e4",
+    "knowledge_type": "692ae7567fdaad24a2aec4d7",
+    "title": "3.1 Khái niệm",
+    "slug": "class-object",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Chương 3: Class và Object</title>\n</head>\n<body>\n\n    <p>Đây là hai khái niệm nền tảng không thể tách rời trong OOP. Hiểu đúng mối quan hệ giữa chúng là bước đầu tiên để làm chủ mô hình này.</p>\n    \n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Lớp (Class) - Bản thiết kế</h2>\n    <p>Lớp là một khuôn mẫu (template) hoặc bản vẽ kỹ thuật dùng để tạo ra các đối tượng. Nó định nghĩa các đặc tính và hành vi chung mà mọi đối tượng thuộc loại đó sẽ có.</p>\n    <p>Ví dụ: Class <code>Car</code> (Ô tô) sẽ quy định rằng mọi chiếc xe đều phải có thuộc tính <code>color</code> (màu sắc) và phương thức <code>drive()</code> (lái), nhưng nó không chứa dữ liệu cụ thể của chiếc xe nào.</p>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Đối tượng (Object) - Thực thể cụ thể</h2>\n    <p>Đối tượng là một <strong>thể hiện (instance)</strong> cụ thể được tạo ra từ Lớp. Nó tồn tại thực sự trong bộ nhớ khi chương trình chạy và chứa các giá trị dữ liệu riêng biệt.</p>\n    <p>Ví dụ: Từ Class <code>Car</code>, ta tạo ra:</p>\n    <ul style=\"list-style-type: disc; margin-left: 20px;\">\n        <li>Object A: Chiếc Ferrari màu đỏ.</li>\n        <li>Object B: Chiếc Toyota màu trắng.</li>\n    </ul>\n\n    <h2 style=\"font-weight: bold; font-size: 1.5em; margin-top: 20px; color: #2c3e50;\">Sự khác nhau giữa các ngôn ngữ</h2>\n    <p>Mặc dù khái niệm là nhất quán, cú pháp để định nghĩa Lớp và khởi tạo Đối tượng có sự khác biệt nhất định giữa các ngôn ngữ lập trình:</p>\n\n    <div style=\"overflow-x: auto;\">\n        <table style=\"border-collapse: collapse; width: 100%; border: 1px solid black; margin-top: 15px; font-size: 0.8em;\">\n            <thead>\n                <tr style=\"background-color: #f2f2f2;\">\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left; min-width: 100px;\">Đặc trưng</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">C++</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Java</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">C#</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Dart</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">Ruby</th>\n                    <th style=\"border: 1px solid black; padding: 5px; text-align: left;\">PHP</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr>\n                    <td style=\"border: 1px solid black; padding: 5px; font-weight: bold;\">Kết thúc Class</td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn + chấm phẩy<br><code>};</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Từ khóa<br><code>end</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dấu ngoặc nhọn<br><code>}</code></td>\n                </tr>\n                <tr>\n                    <td style=\"border: 1px solid black; padding: 5px; font-weight: bold;\">Khởi tạo Object (Instantiation)</td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Stack: <code>Car c;</code><br>Heap: <code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Bắt buộc dùng<br><code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Bắt buộc dùng<br><code>new Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Có thể bỏ <code>new</code><br><code>Car();</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dùng phương thức<br><code>Car.new</code></td>\n                    <td style=\"border: 1px solid black; padding: 5px;\">Dùng<br><code>new Car();</code></td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n</body>\n</html>"
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec504",
+    "chapter": "692ae7567fdaad24a2aec4e6",
+    "knowledge_type": "692ae7567fdaad24a2aec4d9",
+    "title": "4.1 Khái niệm Kế thừa (Inheritance)",
+    "slug": "tinh-ke-thua",
+    "content": "<p>Kế thừa cho phép tạo lớp mới dựa trên lớp đã có.</p>"
+  },
+  {
+    "_id": "692c0988e45d607d648891bd",
+    "chapter": "692ae7567fdaad24a2aec4e2",
+    "knowledge_type": "692ae7567fdaad24a2aec4dd",
+    "title": "Đáp án",
+    "slug": "dap-an-1764493704324",
+    "content": "<!DOCTYPE html>\n<html lang=\"vi\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Đáp án Môi trường & Cú pháp OOP</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; line-height: 1.6; padding: 20px;\">\n\n    <p style=\"color: black; font-size: 1.6em; font-weight: bold; border-bottom: 2px solid #eee; padding-bottom: 10px; text-align: left; margin-bottom: 25px;\">\n        <big><strong>ĐÁP ÁN VÀ GIẢI THÍCH CHI TIẾT (MÔI TRƯỜNG & CÚ PHÁP)</strong></big>\n    </p>\n\n    <div style=\"margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 1: Cú pháp chuẩn để khởi tạo một đối tượng (Object) từ một Lớp (Class) trong Java/C# là gì?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. <code>ClassName objectName = ClassName();</code><br>\n            <strong style=\"color: #000;\">B. <code>ClassName objectName = new ClassName();</code></strong><br>\n            C. <code>new ClassName objectName;</code><br>\n            D. <code>Object objectName = import ClassName;</code>\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Từ khóa <code>new</code> là bắt buộc để cấp phát bộ nhớ cho đối tượng mới. Cú pháp chuẩn: <code>TênLớp tênBiến = new TênLớp();</code>. Các phương án khác đều sai cú pháp trong Java/C#.\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 2: Điều nào sau đây là ĐÚNG về phương thức trừu tượng (abstract method)?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            A. Có phần thân hàm đầy đủ và có thể chạy ngay.<br>\n            <strong style=\"color: #000;\">B. Không có phần thân hàm và bắt buộc lớp con (phi trừu tượng) phải ghi đè (override) lại.</strong><br>\n            C. Có thể khai báo là <code>private</code> để bảo mật.<br>\n            D. Không cần từ khóa <code>abstract</code> nếu nằm trong abstract class.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Phương thức trừu tượng giống như một bản cam kết: \"Tôi chỉ đặt tên hàm ở đây, con cái tôi BẮT BUỘC phải viết code thực thi cho nó\". Nó không có thân hàm (<code>{}</code>) và không thể là <code>private</code> (vì nếu private thì con không thấy để mà ghi đè).\n        </div>\n    </div>\n\n    <div style=\"border-top: 2px solid #ddd; padding-top: 20px; margin-bottom: 30px;\">\n        <h3 style=\"color: #000; font-size: 1.1em; margin-bottom: 5px;\">\n            <big><strong>Câu 3: Lỗi cú pháp phổ biến nào thường gặp khi một lớp thực thi (implements) một Interface?</strong></big>\n        </h3>\n        <div style=\"margin-bottom: 10px; color: #555;\">\n            <strong style=\"color: #000;\">A. Quên không ghi đè (override) tất cả các phương thức của Interface đó.</strong><br>\n            B. Đặt tên lớp trùng với tên Interface.<br>\n            C. Thực thi quá nhiều Interface cùng lúc (Java cho phép đa thực thi).<br>\n            D. Khai báo các phương thức trong Interface là <code>public</code>.\n        </div>\n        \n        <div style=\"border: 1px solid #333; background-color: #f9f9f9; padding: 15px;\">\n            <strong>Giải thích:</strong> Khi một lớp (không phải abstract) chọn <code>implements</code> một Interface, nó ký một hợp đồng bắt buộc phải hiện thực hóa (override) <strong>TOÀN BỘ</strong> các phương thức trừu tượng có trong Interface đó. Nếu bỏ sót dù chỉ 1 hàm, trình biên dịch (Compiler) sẽ báo lỗi ngay lập tức.\n        </div>\n    </div>\n\n</body>\n</html>"
+  },
+  {
+    "_id": "692edf08d34cc6910180d4cd",
+    "chapter": "692ae7567fdaad24a2aec4e4",
+    "knowledge_type": "692ae7567fdaad24a2aec4db",
+    "title": "Bài tập: NguyenLieu",
+    "slug": "bai-tap-nguyenlieu-1764679432086",
+    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Lớp và Đối tượng</title>\n \n</head>\n<body>\n  <div class=\"card\">\n    <h1><strong>Yêu cầu:</strong></h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"NguyenLieu\" cho món ăn với các thuộc tính: tên nguyên liệu, số lượng, đơn vị.  \n        Viết phương thức hiển thị thông tin nguyên liệu và cập nhật số lượng.</strong>\n        <div class=\"note\">Tạo một danh sách các nguyên liệu và thử thay đổi số lượng cho một vài nguyên liệu.</div>\n      </li>\n    </ol>\n  </div>\n</body>\n</html>\n"
+  },
+  {
+    "_id": "692ee22dd34cc6910180d661",
+    "chapter": "692ede83d34cc6910180d487",
+    "knowledge_type": "692ae7567fdaad24a2aec4db",
+    "title": "Bài tập: NhanVien",
+    "slug": "bai-tap-nhanvien-1764680237299",
+    "content": "<!doctype html>\n<html lang=\"vi\">\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <title>Bài tập thực hành OOP: Kế thừa</title>\n \n</head>\n<body>\n  <div class=\"card\">\n    <h1>Bài tập thực hành OOP: Kế thừa</h1>\n    <ol>\n      <li>\n        <strong>Tạo lớp \"NhanVien\" với các thuộc tính cơ bản (tên, lương).  \n        Tạo lớp con \"NhanVienFullTime\" và \"NhanVienPartTime\" kế thừa và thêm phương thức tính thu nhập riêng.</strong>\n        <div class=\"note\">Tạo vài đối tượng nhân viên và in ra thu nhập của từng loại.</div>\n      </li>\n    </ol>\n\n    <p class=\"note\">Có thể thực hiện bằng Java, C++, C#, Ruby, PHP hoặc Dart.</p>\n  </div>\n</body>\n</html>\n"
   },
   {
     "_id": "69391bbd69385c5a72167b4c",
@@ -599,60 +599,6 @@ const lessons = [
 
 const examples = [
   {
-    "_id": "692ae7577fdaad24a2aec502",
-    "lesson": "692ae7577fdaad24a2aec4fe",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "public class Car {\n  String brand;\n}",
-    "explanation": "Khai báo Class trong Java"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec506",
-    "lesson": "692ae7577fdaad24a2aec504",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class Dog : public Animal { ... };",
-    "explanation": "C++ dùng dấu hai chấm :"
-  },
-  {
-    "_id": "692ae7577fdaad24a2aec508",
-    "lesson": "692ae7577fdaad24a2aec504",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class Dog extends Animal { ... }",
-    "explanation": "Java dùng từ khóa extends"
-  },
-  {
-    "_id": "692b0707eaa2f83d2b96657f",
-    "lesson": "692ae7577fdaad24a2aec50c",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "using System;\n\n// Giao diện trừu tượng\npublic interface IShape {\n    double CalculateArea();  // Phương thức trừu tượng\n}\n\n// Lớp triển khai cụ thể\npublic class Circle : IShape {\n    private double radius;\n\n    public Circle(double radius) {\n        this.radius = radius;\n    }\n\n    public double CalculateArea() {\n        return Math.PI * radius * radius;  // Triển khai cụ thể\n    }\n}\n\n// Sử dụng\nclass Program {\n    static void Main(string[] args) {\n        IShape circle = new Circle(5);  // Trừu tượng: Chỉ biết là IShape\n        Console.WriteLine(\"Diện tích: \" + circle.CalculateArea());  // Kết quả: ~78.54\n    }\n}",
-    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
-  },
-  {
-    "_id": "692b0712eaa2f83d2b966580",
-    "lesson": "692ae7577fdaad24a2aec50c",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "# Module trừu tượng (tương tự interface)\nmodule Shape\n  def calculate_area\n    raise NotImplementedError, \"Phương thức calculate_area phải được triển khai\"\n  end\nend\n\n// Lớp triển khai cụ thể\nclass Circle\n  include Shape\n\n  def initialize(radius)\n    @radius = radius\n  end\n\n  def calculate_area\n    Math::PI * @radius * @radius  # Triển khai cụ thể\n  end\nend\n\n// Sử dụng\ncircle = Circle.new(5)  # Trừu tượng: Sử dụng qua module Shape\nputs \"Diện tích: #{circle.calculate_area}\"  # Kết quả: ~78.54",
-    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
-  },
-  {
-    "_id": "692b071deaa2f83d2b966581",
-    "lesson": "692ae7577fdaad24a2aec50c",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\n\n// Interface trừu tượng\ninterface Shape {\n    public function calculateArea();  // Phương thức trừu tượng\n}\n\n// Lớp triển khai cụ thể\nclass Circle implements Shape {\n    private $radius;\n\n    public function __construct($radius) {\n        $this->radius = $radius;\n    }\n\n    public function calculateArea() {\n        return pi() * $this->radius * $this->radius;  // Triển khai cụ thể\n    }\n}\n\n// Sử dụng\n$circle = new Circle(5);  // Trừu tượng: Sử dụng qua interface Shape\necho \"Diện tích: \" . $circle->calculateArea();  // Kết quả: ~78.54\n?>",
-    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
-  },
-  {
     "_id": "692b072eeaa2f83d2b966582",
     "lesson": "692ae7577fdaad24a2aec50c",
     "language": "dart",
@@ -662,24 +608,6 @@ const examples = [
     "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
   },
   {
-    "_id": "692b32adeaa2f83d2b966590",
-    "lesson": "692b1c06c5044e5f5eff746e",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "// Ví dụ Getter Setter trong Java\npublic class Person {\n    private String name;\n    // Getter\n    public String getName() {\n        return name;\n    }\n    // Setter\n    public void setName(String newName) {\n        this.name = newName;\n    }\n}",
-    "explanation": "Ví dụ cơ bản về Getter Setter"
-  },
-  {
-    "_id": "692b33b6eaa2f83d2b966591",
-    "lesson": "692b1b8ec5044e5f5eff746c",
-    "language": "dart",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "// Trong Dart, thuộc tính bắt đầu bằng _ là private\nclass BankAccount {\n  double _balance = 0.0;\n}",
-    "explanation": "Ví dụ về Access Modifier trong Dart"
-  },
-  {
     "_id": "692b3591eaa2f83d2b966593",
     "lesson": "692ae7577fdaad24a2aec50a",
     "language": "cpp",
@@ -687,15 +615,6 @@ const examples = [
     "syntax_note": "",
     "code_content": "",
     "explanation": "Ví dụ về tính đa hình"
-  },
-  {
-    "_id": "692b3ea6eaa2f83d2b966594",
-    "lesson": "692b1bf0c5044e5f5eff746d",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "#include <iostream>\nusing namespace std;\n\n// 1. CÁCH LÀM SAI: Dùng public\nclass TaiKhoanSai {\npublic:\n    double soDu; // Nguy hiểm! Ai cũng sửa được\n};\n\n// 2. CÁCH LÀM ĐÚNG: Dùng private + Encapsulation\nclass TaiKhoanDung {\nprivate:\n    double soDu; // Chỉ nội bộ class mới thấy\n\npublic:\n    // Constructor: Khởi tạo giá trị ban đầu\n    TaiKhoanDung() {\n        soDu = 0.0;\n    }\n\n    // Setter: Kiểm soát việc thay đổi dữ liệu\n    void NapTien(double tien) {\n        if (tien > 0) {\n            soDu += tien;\n            cout << \"Da nap: \" << tien << endl;\n        } else {\n            cout << \"Loi: So tien nap phai duong!\" << endl;\n        }\n    }\n\n    // Getter: Chỉ cho phép xem, không cho sửa trực tiếp\n    double laySoDu() {\n        return soDu;\n    }\n};\n\nint main() {\n    // --- Test Class Sai ---\n    TaiKhoanSai tk1;\n    tk1.soDu = -1000000; // LỖI: Gán số âm vô lý nhưng chương trình vẫn chạy!\n    \n    // --- Test Class Đúng ---\n    TaiKhoanDung tk2;\n    // tk2.soDu = 100; // Lỗi biên dịch ngay lập tức (vì là private)\n    \n    tk2.NapTien(500000);   // Hợp lệ\n    tk2.NapTien(-200000);  // Bị chặn bởi logic trong Setter\n    \n    cout << \"So du hien tai: \" << tk2.laySoDu() << endl;\n    return 0;\n}",
-    "explanation": ""
   },
   {
     "_id": "692b412eeaa2f83d2b966595",
@@ -734,174 +653,12 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692b4178eaa2f83d2b966599",
-    "lesson": "692b1bf0c5044e5f5eff746d",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "# 1. CÁCH LÀM SAI: Mở quyền truy cập thoải mái\nclass TaiKhoanSai\n  attr_accessor :so_du # Tự động tạo Getter & Setter public\nend\n\n# 2. CÁCH LÀM ĐÚNG\nclass TaiKhoanDung\n  def initialize\n    @so_du = 0.0 # Biến instance mặc định là private\n  end\n\n  def nap_tien(tien)\n    if tien > 0\n      @so_du += tien\n      puts \"Da nap: #{tien}\"\n    else\n      puts \"Loi: So tien nap phai duong!\"\n    end\n  end\n\n  # Getter thủ công (chỉ cho xem)\n  def so_du\n    @so_du\n  end\nend\n\n# --- Test ---\ntk1 = TaiKhoanSai.new\ntk1.so_du = -1000000 # Gán vô tư -> Lỗi logic\n\ntk2 = TaiKhoanDung.new\n# tk2.so_du = 100 # Lỗi NoMethodError vì không có setter\n\ntk2.nap_tien(500000)\nputs \"So du hien tai: #{tk2.so_du}\"",
-    "explanation": ""
-  },
-  {
-    "_id": "692c000ceaa2f83d2b96659b",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class ThongBao {\n    abstract void guiDi();\n}\n\nclass SMS extends ThongBao {\n    private String noiDung;\n\n    public SMS(String noiDung) {\n        this.noiDung = noiDung;\n    }\n\n    @Override\n    void guiDi() {\n        if (noiDung.length() > 160) {\n            System.out.println(\"SMS vượt quá 160 ký tự!\");\n        } else {\n            System.out.println(\"Gửi SMS: \" + noiDung);\n        }\n    }\n}\n\nclass Email extends ThongBao {\n    private String tieuDe;\n    private String html;\n\n    public Email(String tieuDe, String html) {\n        this.tieuDe = tieuDe;\n        this.html = html;\n    }\n\n    @Override\n    void guiDi() {\n        System.out.println(\"Gửi Email\");\n        System.out.println(\"Tiêu đề: \" + tieuDe);\n        System.out.println(\"HTML: \" + html);\n    }\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c002aeaa2f83d2b96659c",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class ThongBao\n{\n    public abstract void GuiDi();\n}\n\nclass SMS : ThongBao\n{\n    private string noiDung;\n\n    public SMS(string nd)\n    {\n        noiDung = nd;\n    }\n\n    public override void GuiDi()\n    {\n        if (noiDung.Length > 160)\n            Console.WriteLine(\"SMS vượt 160 ký tự!\");\n        else\n            Console.WriteLine(\"Gửi SMS: \" + noiDung);\n    }\n}\n\nclass Email : ThongBao\n{\n    private string tieuDe;\n    private string html;\n\n    public Email(string td, string h)\n    {\n        tieuDe = td;\n        html = h;\n    }\n\n    public override void GuiDi()\n    {\n        Console.WriteLine(\"Gửi Email\");\n        Console.WriteLine(\"Tiêu đề: \" + tieuDe);\n        Console.WriteLine(\"HTML: \" + html);\n    }\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0032eaa2f83d2b96659d",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class ThongBao\n  def gui_di\n    raise NotImplementedError, \"Phải override gui_di\"\n  end\nend\n\nclass SMS < ThongBao\n  def initialize(noi_dung)\n    @noi_dung = noi_dung\n  end\n\n  def gui_di\n    if @noi_dung.length > 160\n      puts \"SMS vượt 160 ký tự!\"\n    else\n      puts \"Gửi SMS: #{@noi_dung}\"\n    end\n  end\nend\n\nclass Email < ThongBao\n  def initialize(tieu_de, html)\n    @tieu_de = tieu_de\n    @html = html\n  end\n\n  def gui_di\n    puts \"Gửi Email\"\n    puts \"Tiêu đề: #{@tieu_de}\"\n    puts \"HTML: #{@html}\"\n  end\nend\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c003beaa2f83d2b96659e",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "dart",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class ThongBao {\n  void guiDi();\n}\n\nclass SMS extends ThongBao {\n  String noiDung;\n\n  SMS(this.noiDung);\n\n  @override\n  void guiDi() {\n    if (noiDung.length > 160) {\n      print(\"SMS vượt 160 ký tự!\");\n    } else {\n      print(\"Gửi SMS: $noiDung\");\n    }\n  }\n}\n\nclass Email extends ThongBao {\n  String tieuDe;\n  String html;\n\n  Email(this.tieuDe, this.html);\n\n  @override\n  void guiDi() {\n    print(\"Gửi Email\");\n    print(\"Tiêu đề: $tieuDe\");\n    print(\"HTML: $html\");\n  }\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c006feaa2f83d2b96659f",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\n\nabstract class ThongBao {\n    abstract public function guiDi();\n}\n\nclass SMS extends ThongBao {\n    private $noiDung;\n\n    public function __construct($nd) {\n        $this->noiDung = $nd;\n    }\n\n    public function guiDi() {\n        if (strlen($this->noiDung) > 160)\n            echo \"SMS vượt 160 ký tự!\\n\";\n        else\n            echo \"Gửi SMS: {$this->noiDung}\\n\";\n    }\n}\n\nclass Email extends ThongBao {\n    private $tieuDe;\n    private $html;\n\n    public function __construct($td, $h) {\n        $this->tieuDe = $td;\n        $this->html = $h;\n    }\n\n    public function guiDi() {\n        echo \"Gửi Email\\n\";\n        echo \"Tiêu đề: {$this->tieuDe}\\n\";\n        echo \"HTML: {$this->html}\\n\";\n    }\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0093eaa2f83d2b9665a0",
-    "lesson": "692bb799a0a7add9d4493891",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "#include <iostream>\n#include <string>\nusing namespace std;\nclass ThongBao {\npublic:\n    virtual void guiDi() = 0;\n};\n\nclass SMS : public ThongBao {\nprivate:\n    string noiDung;\npublic:\n    SMS(const string& nd) : noiDung(nd) {}\n\n    void guiDi() override {\n        if (noiDung.size() > 160)\n            cout << \"SMS vượt 160 ký tự!\\n\";\n        else\n            cout << \"Gửi SMS: \" << noiDung << \"\\n\";\n    }\n};\n\nclass Email : public ThongBao {\nprivate:\n    string tieuDe;\n    string html;\npublic:\n    Email(const string& td, const string& h) : tieuDe(td), html(h) {}\n\n    void guiDi() override {\n        cout << \"Gửi Email\\nTiêu đề: \" << tieuDe << \"\\nHTML: \" << html << \"\\n\";\n    }\n};\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0405eaa2f83d2b9665a1",
-    "lesson": "692bb7dba0a7add9d4493892",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "// Abstract Class\nclass DongVat {\npublic:\n    virtual void an() = 0;\n    int tuoi; // Có dữ liệu được\n};\n\n// Interface (Pure abstract)\nclass BoiDuoc {\npublic:\n    virtual void boi() = 0;\n};\n\n// Implement\nclass Cho : public DongVat, public BoiDuoc {\npublic:\n    void an() override {}\n    void boi() override {}\n};\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0437eaa2f83d2b9665a2",
-    "lesson": "692bb7dba0a7add9d4493892",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "// Abstract Class\nabstract class DongVat {\n    public int tuoi; // Có biến\n    public abstract void An();\n}\n\n// Interface\ninterface IBoiDuoc {\n    void Boi();\n}\n\nclass Cho : DongVat, IBoiDuoc {\n    public override void An() {}\n    public void Boi() {}\n}\n",
-    "explanation": ""
-  },
-  {
     "_id": "692c0451eaa2f83d2b9665a3",
     "lesson": "692bb7dba0a7add9d4493892",
     "language": "ruby",
     "is_supported": true,
     "syntax_note": "",
     "code_content": "# Abstract Class\nclass DongVat\n  def an\n    raise NotImplementedError\n  end\nend\n\n# Interface → Module\nmodule BoiDuoc\n  def boi\n    raise NotImplementedError\n  end\nend\n\nclass Cho < DongVat\n  include BoiDuoc\n\n  def an; end\n  def boi; end\nend\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0461eaa2f83d2b9665a4",
-    "lesson": "692bb7dba0a7add9d4493892",
-    "language": "dart",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "// Abstract Class\nabstract class DongVat {\n  int tuoi = 0; // Có biến\n  void an();\n}\n\n// Interface (Dart: mọi class đều là interface)\nabstract class BoiDuoc {\n  void boi();\n}\n\nclass Cho implements DongVat, BoiDuoc {\n  int tuoi = 0;\n\n  @override\n  void an() {}\n\n  @override\n  void boi() {}\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c0475eaa2f83d2b9665a5",
-    "lesson": "692bb7dba0a7add9d4493892",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\n\n// Abstract Class\nabstract class DongVat {\n    public $tuoi; // Có biến\n    abstract public function an();\n}\n\n// Interface\ninterface BoiDuoc {\n    public function boi();\n}\n\nclass Cho extends DongVat implements BoiDuoc {\n    public function an() {}\n    public function boi() {}\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692c047feaa2f83d2b9665a6",
-    "lesson": "692bb7dba0a7add9d4493892",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class DongVat {\n    int tuoi; // Có dữ liệu\n    abstract void an();\n}\n\ninterface BoiDuoc {\n    void boi();\n}\n\nclass Cho extends DongVat implements BoiDuoc {\n    @Override void an() {}\n    @Override public void boi() {}\n}\n",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee036eaa2f83d2b966642",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "#include <iostream>\nusing namespace std;\n\nclass SinhVien {\nprivate:\n    string ten;\n    int tuoi;\n    float diemTB;\n\npublic:\n    void nhap() {\n        cout << \"Nhap ten: \";\n        getline(cin, ten);\n        cout << \"Nhap tuoi: \";\n        cin >> tuoi;\n        cout << \"Nhap diem trung binh: \";\n        cin >> diemTB;\n    }\n\n    string xepLoai() {\n        if (diemTB >= 8) return \"A\";\n        if (diemTB >= 6.5) return \"B\";\n        if (diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    void hienThi() {\n        cout << \"Ten: \" << ten << endl;\n        cout << \"Tuoi: \" << tuoi << endl;\n        cout << \"Diem TB: \" << diemTB << endl;\n        cout << \"Xep loai: \" << xepLoai() << endl;\n    }\n};",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee040eaa2f83d2b966643",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "import java.util.Scanner;\n\nclass SinhVien {\n    String ten;\n    int tuoi;\n    double diemTB;\n\n    void nhap() {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"Nhap ten: \");\n        ten = sc.nextLine();\n        System.out.print(\"Nhap tuoi: \");\n        tuoi = sc.nextInt();\n        System.out.print(\"Nhap diem trung binh: \");\n        diemTB = sc.nextDouble();\n    }\n\n    void hienThi() {\n        System.out.println(\"Ten: \" + ten);\n        System.out.println(\"Tuoi: \" + tuoi);\n        System.out.println(\"Diem TB: \" + diemTB);\n        System.out.println(\"Xep loai: \" + xepLoai());\n    }\n\n    String xepLoai() {\n        if (diemTB >= 8) return \"A\";\n        if (diemTB >= 6.5) return \"B\";\n        if (diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee05aeaa2f83d2b966644",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "using System;\n\nclass SinhVien {\n    public string Ten;\n    public int Tuoi;\n    public double DiemTB;\n\n    public void Nhap() {\n        Console.Write(\"Nhap ten: \");\n        Ten = Console.ReadLine();\n        Console.Write(\"Nhap tuoi: \");\n        Tuoi = int.Parse(Console.ReadLine());\n        Console.Write(\"Nhap diem trung binh: \");\n        DiemTB = double.Parse(Console.ReadLine());\n    }\n\n    public string XepLoai() {\n        if (DiemTB >= 8) return \"A\";\n        if (DiemTB >= 6.5) return \"B\";\n        if (DiemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    public void HienThi() {\n        Console.WriteLine($\"Ten: {Ten}\");\n        Console.WriteLine($\"Tuoi: {Tuoi}\");\n        Console.WriteLine($\"Diem TB: {DiemTB}\");\n        Console.WriteLine($\"Xep loai: {XepLoai()}\");\n    }\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee064eaa2f83d2b966645",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\nclass SinhVien {\n    public $ten;\n    public $tuoi;\n    public $diemTB;\n\n    function nhap($ten, $tuoi, $diem) {\n        $this->ten = $ten;\n        $this->tuoi = $tuoi;\n        $this->diemTB = $diem;\n    }\n\n    function xepLoai() {\n        if ($this->diemTB >= 8) return \"A\";\n        if ($this->diemTB >= 6.5) return \"B\";\n        if ($this->diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    function hienThi() {\n        echo \"Ten: $this->ten<br>\";\n        echo \"Tuoi: $this->tuoi<br>\";\n        echo \"Diem TB: $this->diemTB<br>\";\n        echo \"Xep loai: \" . $this->xepLoai();\n    }\n}\n?>",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee06deaa2f83d2b966646",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class SinhVien\n  attr_accessor :ten, :tuoi, :diemTB\n\n  def nhap\n    print \"Nhap ten: \"\n    @ten = gets.chomp\n    print \"Nhap tuoi: \"\n    @tuoi = gets.to_i\n    print \"Nhap diem trung binh: \"\n    @diemTB = gets.to_f\n  end\n\n  def xep_loai\n    return \"A\" if @diemTB >= 8\n    return \"B\" if @diemTB >= 6.5\n    return \"C\" if @diemTB >= 5\n    \"D\"\n  end\n\n  def hien_thi\n    puts \"Ten: #{@ten}\"\n    puts \"Tuoi: #{@tuoi}\"\n    puts \"Diem TB: #{@diemTB}\"\n    puts \"Xep loai: #{xep_loai}\"\n  end\nend",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee076eaa2f83d2b966647",
-    "lesson": "692edf71d34cc6910180d4e8",
-    "language": "dart",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class SinhVien {\n  String ten = \"\";\n  int tuoi = 0;\n  double diemTB = 0;\n\n  void nhap(String t, int age, double diem) {\n    ten = t;\n    tuoi = age;\n    diemTB = diem;\n  }\n\n  String xepLoai() {\n    if (diemTB >= 8) return \"A\";\n    if (diemTB >= 6.5) return \"B\";\n    if (diemTB >= 5) return \"C\";\n    return \"D\";\n  }\n\n  void hienThi() {\n    print(\"Ten: $ten\");\n    print(\"Tuoi: $tuoi\");\n    print(\"Diem TB: $diemTB\");\n    print(\"Xep loai: ${xepLoai()}\");\n  }\n}",
     "explanation": ""
   },
   {
@@ -914,30 +671,12 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692ee0caeaa2f83d2b966649",
-    "lesson": "692edfe7d34cc6910180d52c",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class HinhChuNhat\n    def initialize(dai, rong)\n        @dai = dai\n        @rong = rong\n    end\n\n    def dien_tich\n        @dai * @rong\n    end\n\n    def chu_vi\n        (@dai + @rong) * 2\n    end\n\n    def hien_thi\n        puts \"Dài: #{@dai}\"\n        puts \"Rộng: #{@rong}\"\n        puts \"Diện tích: #{dien_tich}\"\n        puts \"Chu vi: #{chu_vi}\\n\\n\"\n    end\nend\n\nh1 = HinhChuNhat.new(5, 3)\nh2 = HinhChuNhat.new(10, 4)\nh1.hien_thi\nh2.hien_thi",
-    "explanation": ""
-  },
-  {
     "_id": "692ee0d3eaa2f83d2b96664a",
     "lesson": "692edfe7d34cc6910180d52c",
     "language": "php",
     "is_supported": true,
     "syntax_note": "",
     "code_content": "class HinhChuNhat {\n    private $dai, $rong;\n\n    function __construct($dai, $rong) {\n        $this->dai = $dai;\n        $this->rong = $rong;\n    }\n\n    function dienTich() { return $this->dai * $this->rong; }\n    function chuVi() { return ($this->dai + $this->rong) * 2; }\n\n    function hienThi() {\n        echo \"Dài: $this->dai<br>\";\n        echo \"Rộng: $this->rong<br>\";\n        echo \"Diện tích: \" . $this->dienTich() . \"<br>\";\n        echo \"Chu vi: \" . $this->chuVi() . \"<br><br>\";\n    }\n}\n\n$h1 = new HinhChuNhat(5, 3);\n$h2 = new HinhChuNhat(7, 2);\n$h1->hienThi();\n$h2->hienThi();",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee0dbeaa2f83d2b96664b",
-    "lesson": "692edfe7d34cc6910180d52c",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class HinhChuNhat {\n    public double Dai, Rong;\n\n    public HinhChuNhat(double dai, double rong) {\n        Dai = dai;\n        Rong = rong;\n    }\n\n    public double DienTich() => Dai * Rong;\n    public double ChuVi() => (Dai + Rong) * 2;\n\n    public void HienThi() {\n        Console.WriteLine($\"Dài: {Dai}\");\n        Console.WriteLine($\"Rộng: {Rong}\");\n        Console.WriteLine($\"Diện tích: {DienTich()}\");\n        Console.WriteLine($\"Chu vi: {ChuVi()}\\n\");\n    }\n}\n\nclass Program {\n    static void Main() {\n        HinhChuNhat h1 = new HinhChuNhat(5, 3);\n        HinhChuNhat h2 = new HinhChuNhat(9, 4);\n        h1.HienThi();\n        h2.HienThi();\n    }\n}",
     "explanation": ""
   },
   {
@@ -968,33 +707,6 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692ee1ddeaa2f83d2b96664f",
-    "lesson": "692edff1d34cc6910180d532",
-    "language": "cpp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "#include <iostream>\nusing namespace std;\n\nclass NguyenLieu {\nprivate:\n    string ten;\n    double soLuong;\n    string donVi;\n\npublic:\n    NguyenLieu(string t, double sl, string dv)\n        : ten(t), soLuong(sl), donVi(dv) {}\n\n    void hienThi() {\n        cout << ten << \": \" << soLuong << \" \" << donVi << endl;\n    }\n\n    void capNhat(double slMoi) {\n        soLuong = slMoi;\n    }\n};\n\nint main() {\n    NguyenLieu nl1(\"Muối\", 1, \"muỗng\");\n    NguyenLieu nl2(\"Đường\", 200, \"gram\");\n\n    nl1.hienThi();\n    nl2.hienThi();\n\n    nl1.capNhat(2);\n    nl2.capNhat(150);\n\n    cout << \"Sau khi cập nhật:\" << endl;\n    nl1.hienThi();\n    nl2.hienThi();\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee1e9eaa2f83d2b966650",
-    "lesson": "692edff1d34cc6910180d532",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class NguyenLieu {\n    public string Ten;\n    public double SoLuong;\n    public string DonVi;\n\n    public NguyenLieu(string ten, double sl, string dv) {\n        Ten = ten;\n        SoLuong = sl;\n        DonVi = dv;\n    }\n\n    public void HienThi() {\n        Console.WriteLine($\"{Ten}: {SoLuong} {DonVi}\");\n    }\n\n    public void CapNhat(double slMoi) {\n        SoLuong = slMoi;\n    }\n}\n\nclass Program {\n    static void Main() {\n        var nl1 = new NguyenLieu(\"Sữa\", 1, \"lít\");\n        var nl2 = new NguyenLieu(\"Bơ\", 200, \"gram\");\n\n        nl1.HienThi();\n        nl2.HienThi();\n\n        nl1.CapNhat(2);\n        nl2.CapNhat(180);\n\n        Console.WriteLine(\"Sau khi cập nhật:\");\n        nl1.HienThi();\n        nl2.HienThi();\n    }\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee1fdeaa2f83d2b966651",
-    "lesson": "692edff1d34cc6910180d532",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class NguyenLieu\n  def initialize(ten, so_luong, don_vi)\n    @ten = ten\n    @so_luong = so_luong\n    @don_vi = don_vi\n  end\n\n  def hien_thi\n    puts \"#{@ten}: #{@so_luong} #{@don_vi}\"\n  end\n\n  def cap_nhat(sl_moi)\n    @so_luong = sl_moi\n  end\nend\n\nnl1 = NguyenLieu.new(\"Trứng\", 4, \"quả\")\nnl2 = NguyenLieu.new(\"Bột mì\", 500, \"gram\")\n\nnl1.hien_thi\nnl2.hien_thi\n\nnl1.cap_nhat(6)\nnl2.cap_nhat(450)\n\nputs \"Sau khi cập nhật:\"\nnl1.hien_thi\nnl2.hien_thi",
-    "explanation": ""
-  },
-  {
     "_id": "692ee208eaa2f83d2b966652",
     "lesson": "692edff1d34cc6910180d532",
     "language": "dart",
@@ -1013,21 +725,147 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692ee31beaa2f83d2b966654",
-    "lesson": "692ee235d34cc6910180d667",
-    "language": "java",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class DongVat {\n    void phatTiengKeu() {\n        System.out.println(\"Động vật phát ra tiếng kêu...\");\n    }\n}\n\nclass Cho extends DongVat {\n    @Override\n    void phatTiengKeu() {\n        System.out.println(\"Gâu gâu!\");\n    }\n}\n\nclass Meo extends DongVat {\n    @Override\n    void phatTiengKeu() {\n        System.out.println(\"Meow meow!\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        DongVat dv1 = new Cho();\n        DongVat dv2 = new Meo();\n\n        dv1.phatTiengKeu();\n        dv2.phatTiengKeu();\n    }\n}",
-    "explanation": ""
-  },
-  {
     "_id": "692ee324eaa2f83d2b966655",
     "lesson": "692ee235d34cc6910180d667",
     "language": "cpp",
     "is_supported": true,
     "syntax_note": "",
     "code_content": "#include <iostream>\nusing namespace std;\n\nclass DongVat {\npublic:\n    virtual void phatTiengKeu() {\n        cout << \"Động vật phát tiếng kêu...\" << endl;\n    }\n};\n\nclass Cho : public DongVat {\npublic:\n    void phatTiengKeu() override {\n        cout << \"Gâu gâu!\" << endl;\n    }\n};\n\nclass Meo : public DongVat {\npublic:\n    void phatTiengKeu() override {\n        cout << \"Meow meow!\" << endl;\n    }\n};\n\nint main() {\n    DongVat* dv1 = new Cho();\n    DongVat* dv2 = new Meo();\n\n    dv1->phatTiengKeu();\n    dv2->phatTiengKeu();\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee3bbeaa2f83d2b96665f",
+    "lesson": "692ee23fd34cc6910180d66d",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\nabstract class HinhHoc {\n    abstract function tinhDienTich();\n}\n\nclass HinhVuong extends HinhHoc {\n    private $canh;\n\n    function __construct($c) {\n        $this->canh = $c;\n    }\n\n    function tinhDienTich() {\n        return $this->canh * $this->canh;\n    }\n}\n\nclass HinhTron extends HinhHoc {\n    private $r;\n\n    function __construct($r) {\n        $this->r = $r;\n    }\n\n    function tinhDienTich() {\n        return pi() * $this->r * $this->r;\n    }\n}\n\n$hv = new HinhVuong(5);\n$ht = new HinhTron(3);\n\necho \"Diện tích hình vuông: \" . $hv->tinhDienTich() . \"<br>\";\necho \"Diện tích hình tròn: \" . $ht->tinhDienTich();",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee492eaa2f83d2b966664",
+    "lesson": "692ee24bd34cc6910180d673",
+    "language": "dart",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class NhanVien {\n  String ten;\n  double luong;\n  NhanVien(this.ten, this.luong);\n  double tinhThuNhap();\n}\n\nclass NhanVienFullTime extends NhanVien {\n  double thuong;\n  NhanVienFullTime(String ten, double luong, this.thuong) : super(ten, luong);\n  @override\n  double tinhThuNhap() => luong + thuong;\n}\n\nclass NhanVienPartTime extends NhanVien {\n  double soGio, luongGio;\n  NhanVienPartTime(String ten, this.soGio, this.luongGio) : super(ten,0);\n  @override\n  double tinhThuNhap() => soGio * luongGio;\n}\n\nvoid main() {\n  var nv1 = NhanVienFullTime(\"An\", 1000, 200);\n  var nv2 = NhanVienPartTime(\"Binh\", 30, 50);\n\n  print(\"${nv1.ten} thu nhập: ${nv1.tinhThuNhap()}\");\n  print(\"${nv2.ten} thu nhập: ${nv2.tinhThuNhap()}\");\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee49aeaa2f83d2b966665",
+    "lesson": "692ee24bd34cc6910180d673",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\nabstract class NhanVien {\n    public $ten;\n    public $luong;\n    function __construct($ten, $luong) {\n        $this->ten = $ten;\n        $this->luong = $luong;\n    }\n    abstract function tinhThuNhap();\n}\n\nclass NhanVienFullTime extends NhanVien {\n    private $thuong;\n    function __construct($ten, $luong, $thuong) {\n        parent::__construct($ten,$luong);\n        $this->thuong = $thuong;\n    }\n    function tinhThuNhap() {\n        return $this->luong + $this->thuong;\n    }\n}\n\nclass NhanVienPartTime extends NhanVien {\n    private $soGio;\n    private $luongGio;\n    function __construct($ten, $soGio, $luongGio) {\n        parent::__construct($ten,0);\n        $this->soGio = $soGio;\n        $this->luongGio = $luongGio;\n    }\n    function tinhThuNhap() {\n        return $this->soGio * $this->luongGio;\n    }\n}\n\n$nv1 = new NhanVienFullTime(\"An\", 1000, 200);\n$nv2 = new NhanVienPartTime(\"Binh\", 30, 50);\n\necho $nv1->ten . \" thu nhập: \" . $nv1->tinhThuNhap() . \"<br>\";\necho $nv2->ten . \" thu nhập: \" . $nv2->tinhThuNhap();\n?>",
+    "explanation": ""
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec502",
+    "lesson": "692ae7577fdaad24a2aec4fe",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "public class Car {\n  String brand;\n}",
+    "explanation": "Khai báo Class trong Java"
+  },
+  {
+    "_id": "692b0707eaa2f83d2b96657f",
+    "lesson": "692ae7577fdaad24a2aec50c",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "using System;\n\n// Giao diện trừu tượng\npublic interface IShape {\n    double CalculateArea();  // Phương thức trừu tượng\n}\n\n// Lớp triển khai cụ thể\npublic class Circle : IShape {\n    private double radius;\n\n    public Circle(double radius) {\n        this.radius = radius;\n    }\n\n    public double CalculateArea() {\n        return Math.PI * radius * radius;  // Triển khai cụ thể\n    }\n}\n\n// Sử dụng\nclass Program {\n    static void Main(string[] args) {\n        IShape circle = new Circle(5);  // Trừu tượng: Chỉ biết là IShape\n        Console.WriteLine(\"Diện tích: \" + circle.CalculateArea());  // Kết quả: ~78.54\n    }\n}",
+    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
+  },
+  {
+    "_id": "692b32adeaa2f83d2b966590",
+    "lesson": "692b1c06c5044e5f5eff746e",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "// Ví dụ Getter Setter trong Java\npublic class Person {\n    private String name;\n    // Getter\n    public String getName() {\n        return name;\n    }\n    // Setter\n    public void setName(String newName) {\n        this.name = newName;\n    }\n}",
+    "explanation": "Ví dụ cơ bản về Getter Setter"
+  },
+  {
+    "_id": "692b33b6eaa2f83d2b966591",
+    "lesson": "692b1b8ec5044e5f5eff746c",
+    "language": "dart",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "// Trong Dart, thuộc tính bắt đầu bằng _ là private\nclass BankAccount {\n  double _balance = 0.0;\n}",
+    "explanation": "Ví dụ về Access Modifier trong Dart"
+  },
+  {
+    "_id": "692b3ea6eaa2f83d2b966594",
+    "lesson": "692b1bf0c5044e5f5eff746d",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "#include <iostream>\nusing namespace std;\n\n// 1. CÁCH LÀM SAI: Dùng public\nclass TaiKhoanSai {\npublic:\n    double soDu; // Nguy hiểm! Ai cũng sửa được\n};\n\n// 2. CÁCH LÀM ĐÚNG: Dùng private + Encapsulation\nclass TaiKhoanDung {\nprivate:\n    double soDu; // Chỉ nội bộ class mới thấy\n\npublic:\n    // Constructor: Khởi tạo giá trị ban đầu\n    TaiKhoanDung() {\n        soDu = 0.0;\n    }\n\n    // Setter: Kiểm soát việc thay đổi dữ liệu\n    void NapTien(double tien) {\n        if (tien > 0) {\n            soDu += tien;\n            cout << \"Da nap: \" << tien << endl;\n        } else {\n            cout << \"Loi: So tien nap phai duong!\" << endl;\n        }\n    }\n\n    // Getter: Chỉ cho phép xem, không cho sửa trực tiếp\n    double laySoDu() {\n        return soDu;\n    }\n};\n\nint main() {\n    // --- Test Class Sai ---\n    TaiKhoanSai tk1;\n    tk1.soDu = -1000000; // LỖI: Gán số âm vô lý nhưng chương trình vẫn chạy!\n    \n    // --- Test Class Đúng ---\n    TaiKhoanDung tk2;\n    // tk2.soDu = 100; // Lỗi biên dịch ngay lập tức (vì là private)\n    \n    tk2.NapTien(500000);   // Hợp lệ\n    tk2.NapTien(-200000);  // Bị chặn bởi logic trong Setter\n    \n    cout << \"So du hien tai: \" << tk2.laySoDu() << endl;\n    return 0;\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692b4178eaa2f83d2b966599",
+    "lesson": "692b1bf0c5044e5f5eff746d",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "# 1. CÁCH LÀM SAI: Mở quyền truy cập thoải mái\nclass TaiKhoanSai\n  attr_accessor :so_du # Tự động tạo Getter & Setter public\nend\n\n# 2. CÁCH LÀM ĐÚNG\nclass TaiKhoanDung\n  def initialize\n    @so_du = 0.0 # Biến instance mặc định là private\n  end\n\n  def nap_tien(tien)\n    if tien > 0\n      @so_du += tien\n      puts \"Da nap: #{tien}\"\n    else\n      puts \"Loi: So tien nap phai duong!\"\n    end\n  end\n\n  # Getter thủ công (chỉ cho xem)\n  def so_du\n    @so_du\n  end\nend\n\n# --- Test ---\ntk1 = TaiKhoanSai.new\ntk1.so_du = -1000000 # Gán vô tư -> Lỗi logic\n\ntk2 = TaiKhoanDung.new\n# tk2.so_du = 100 # Lỗi NoMethodError vì không có setter\n\ntk2.nap_tien(500000)\nputs \"So du hien tai: #{tk2.so_du}\"",
+    "explanation": ""
+  },
+  {
+    "_id": "692c000ceaa2f83d2b96659b",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class ThongBao {\n    abstract void guiDi();\n}\n\nclass SMS extends ThongBao {\n    private String noiDung;\n\n    public SMS(String noiDung) {\n        this.noiDung = noiDung;\n    }\n\n    @Override\n    void guiDi() {\n        if (noiDung.length() > 160) {\n            System.out.println(\"SMS vượt quá 160 ký tự!\");\n        } else {\n            System.out.println(\"Gửi SMS: \" + noiDung);\n        }\n    }\n}\n\nclass Email extends ThongBao {\n    private String tieuDe;\n    private String html;\n\n    public Email(String tieuDe, String html) {\n        this.tieuDe = tieuDe;\n        this.html = html;\n    }\n\n    @Override\n    void guiDi() {\n        System.out.println(\"Gửi Email\");\n        System.out.println(\"Tiêu đề: \" + tieuDe);\n        System.out.println(\"HTML: \" + html);\n    }\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c0405eaa2f83d2b9665a1",
+    "lesson": "692bb7dba0a7add9d4493892",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "// Abstract Class\nclass DongVat {\npublic:\n    virtual void an() = 0;\n    int tuoi; // Có dữ liệu được\n};\n\n// Interface (Pure abstract)\nclass BoiDuoc {\npublic:\n    virtual void boi() = 0;\n};\n\n// Implement\nclass Cho : public DongVat, public BoiDuoc {\npublic:\n    void an() override {}\n    void boi() override {}\n};\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c0475eaa2f83d2b9665a5",
+    "lesson": "692bb7dba0a7add9d4493892",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\n\n// Abstract Class\nabstract class DongVat {\n    public $tuoi; // Có biến\n    abstract public function an();\n}\n\n// Interface\ninterface BoiDuoc {\n    public function boi();\n}\n\nclass Cho extends DongVat implements BoiDuoc {\n    public function an() {}\n    public function boi() {}\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee036eaa2f83d2b966642",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "#include <iostream>\nusing namespace std;\n\nclass SinhVien {\nprivate:\n    string ten;\n    int tuoi;\n    float diemTB;\n\npublic:\n    void nhap() {\n        cout << \"Nhap ten: \";\n        getline(cin, ten);\n        cout << \"Nhap tuoi: \";\n        cin >> tuoi;\n        cout << \"Nhap diem trung binh: \";\n        cin >> diemTB;\n    }\n\n    string xepLoai() {\n        if (diemTB >= 8) return \"A\";\n        if (diemTB >= 6.5) return \"B\";\n        if (diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    void hienThi() {\n        cout << \"Ten: \" << ten << endl;\n        cout << \"Tuoi: \" << tuoi << endl;\n        cout << \"Diem TB: \" << diemTB << endl;\n        cout << \"Xep loai: \" << xepLoai() << endl;\n    }\n};",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee05aeaa2f83d2b966644",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "using System;\n\nclass SinhVien {\n    public string Ten;\n    public int Tuoi;\n    public double DiemTB;\n\n    public void Nhap() {\n        Console.Write(\"Nhap ten: \");\n        Ten = Console.ReadLine();\n        Console.Write(\"Nhap tuoi: \");\n        Tuoi = int.Parse(Console.ReadLine());\n        Console.Write(\"Nhap diem trung binh: \");\n        DiemTB = double.Parse(Console.ReadLine());\n    }\n\n    public string XepLoai() {\n        if (DiemTB >= 8) return \"A\";\n        if (DiemTB >= 6.5) return \"B\";\n        if (DiemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    public void HienThi() {\n        Console.WriteLine($\"Ten: {Ten}\");\n        Console.WriteLine($\"Tuoi: {Tuoi}\");\n        Console.WriteLine($\"Diem TB: {DiemTB}\");\n        Console.WriteLine($\"Xep loai: {XepLoai()}\");\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee06deaa2f83d2b966646",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class SinhVien\n  attr_accessor :ten, :tuoi, :diemTB\n\n  def nhap\n    print \"Nhap ten: \"\n    @ten = gets.chomp\n    print \"Nhap tuoi: \"\n    @tuoi = gets.to_i\n    print \"Nhap diem trung binh: \"\n    @diemTB = gets.to_f\n  end\n\n  def xep_loai\n    return \"A\" if @diemTB >= 8\n    return \"B\" if @diemTB >= 6.5\n    return \"C\" if @diemTB >= 5\n    \"D\"\n  end\n\n  def hien_thi\n    puts \"Ten: #{@ten}\"\n    puts \"Tuoi: #{@tuoi}\"\n    puts \"Diem TB: #{@diemTB}\"\n    puts \"Xep loai: #{xep_loai}\"\n  end\nend",
     "explanation": ""
   },
   {
@@ -1040,30 +878,12 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692ee34beaa2f83d2b966657",
-    "lesson": "692ee235d34cc6910180d667",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class DongVat\n  def phat_tieng_keu\n    puts \"Động vật phát tiếng kêu...\"\n  end\nend\n\nclass Cho < DongVat\n  def phat_tieng_keu\n    puts \"Gâu gâu!\"\n  end\nend\n\nclass Meo < DongVat\n  def phat_tieng_keu\n    puts \"Meow meow!\"\n  end\nend\n\ndv1 = Cho.new\ndv2 = Meo.new\n\ndv1.phat_tieng_keu\ndv2.phat_tieng_keu",
-    "explanation": ""
-  },
-  {
     "_id": "692ee375eaa2f83d2b966658",
     "lesson": "692ee235d34cc6910180d667",
     "language": "dart",
     "is_supported": true,
     "syntax_note": "",
     "code_content": "class DongVat {\n  void phatTiengKeu() {\n    print(\"Động vật phát tiếng kêu...\");\n  }\n}\n\nclass Cho extends DongVat {\n  @override\n  void phatTiengKeu() {\n    print(\"Gâu gâu!\");\n  }\n}\n\nclass Meo extends DongVat {\n  @override\n  void phatTiengKeu() {\n    print(\"Meow meow!\");\n  }\n}\n\nvoid main() {\n  DongVat dv1 = Cho();\n  DongVat dv2 = Meo();\n\n  dv1.phatTiengKeu();\n  dv2.phatTiengKeu();\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee37deaa2f83d2b966659",
-    "lesson": "692ee235d34cc6910180d667",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\nclass DongVat {\n    function phatTiengKeu() {\n        echo \"Động vật phát tiếng kêu...<br>\";\n    }\n}\n\nclass Cho extends DongVat {\n    function phatTiengKeu() {\n        echo \"Gâu gâu!<br>\";\n    }\n}\n\nclass Meo extends DongVat {\n    function phatTiengKeu() {\n        echo \"Meow meow!<br>\";\n    }\n}\n\n$dv1 = new Cho();\n$dv2 = new Meo();\n\n$dv1->phatTiengKeu();\n$dv2->phatTiengKeu();",
     "explanation": ""
   },
   {
@@ -1103,6 +923,141 @@ const examples = [
     "explanation": ""
   },
   {
+    "_id": "692ee48aeaa2f83d2b966663",
+    "lesson": "692ee24bd34cc6910180d673",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class NhanVien\n  attr_accessor :ten, :luong\n  def initialize(ten, luong)\n    @ten = ten\n    @luong = luong\n  end\n  def tinh_thu_nhap\n    raise \"Phải override phương thức này!\"\n  end\nend\n\nclass NhanVienFullTime < NhanVien\n  def initialize(ten, luong, thuong)\n    super(ten, luong)\n    @thuong = thuong\n  end\n  def tinh_thu_nhap\n    @luong + @thuong\n  end\nend\n\nclass NhanVienPartTime < NhanVien\n  def initialize(ten, so_gio, luong_gio)\n    super(ten,0)\n    @so_gio = so_gio\n    @luong_gio = luong_gio\n  end\n  def tinh_thu_nhap\n    @so_gio * @luong_gio\n  end\nend\n\nnv1 = NhanVienFullTime.new(\"An\", 1000, 200)\nnv2 = NhanVienPartTime.new(\"Binh\", 30, 50)\n\nputs \"#{nv1.ten} thu nhập: #{nv1.tinh_thu_nhap}\"\nputs \"#{nv2.ten} thu nhập: #{nv2.tinh_thu_nhap}\"",
+    "explanation": ""
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec506",
+    "lesson": "692ae7577fdaad24a2aec504",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class Dog : public Animal { ... };",
+    "explanation": "C++ dùng dấu hai chấm :"
+  },
+  {
+    "_id": "692ae7577fdaad24a2aec508",
+    "lesson": "692ae7577fdaad24a2aec504",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class Dog extends Animal { ... }",
+    "explanation": "Java dùng từ khóa extends"
+  },
+  {
+    "_id": "692b071deaa2f83d2b966581",
+    "lesson": "692ae7577fdaad24a2aec50c",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\n\n// Interface trừu tượng\ninterface Shape {\n    public function calculateArea();  // Phương thức trừu tượng\n}\n\n// Lớp triển khai cụ thể\nclass Circle implements Shape {\n    private $radius;\n\n    public function __construct($radius) {\n        $this->radius = $radius;\n    }\n\n    public function calculateArea() {\n        return pi() * $this->radius * $this->radius;  // Triển khai cụ thể\n    }\n}\n\n// Sử dụng\n$circle = new Circle(5);  // Trừu tượng: Sử dụng qua interface Shape\necho \"Diện tích: \" . $circle->calculateArea();  // Kết quả: ~78.54\n?>",
+    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
+  },
+  {
+    "_id": "692c0032eaa2f83d2b96659d",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class ThongBao\n  def gui_di\n    raise NotImplementedError, \"Phải override gui_di\"\n  end\nend\n\nclass SMS < ThongBao\n  def initialize(noi_dung)\n    @noi_dung = noi_dung\n  end\n\n  def gui_di\n    if @noi_dung.length > 160\n      puts \"SMS vượt 160 ký tự!\"\n    else\n      puts \"Gửi SMS: #{@noi_dung}\"\n    end\n  end\nend\n\nclass Email < ThongBao\n  def initialize(tieu_de, html)\n    @tieu_de = tieu_de\n    @html = html\n  end\n\n  def gui_di\n    puts \"Gửi Email\"\n    puts \"Tiêu đề: #{@tieu_de}\"\n    puts \"HTML: #{@html}\"\n  end\nend\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c006feaa2f83d2b96659f",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\n\nabstract class ThongBao {\n    abstract public function guiDi();\n}\n\nclass SMS extends ThongBao {\n    private $noiDung;\n\n    public function __construct($nd) {\n        $this->noiDung = $nd;\n    }\n\n    public function guiDi() {\n        if (strlen($this->noiDung) > 160)\n            echo \"SMS vượt 160 ký tự!\\n\";\n        else\n            echo \"Gửi SMS: {$this->noiDung}\\n\";\n    }\n}\n\nclass Email extends ThongBao {\n    private $tieuDe;\n    private $html;\n\n    public function __construct($td, $h) {\n        $this->tieuDe = $td;\n        $this->html = $h;\n    }\n\n    public function guiDi() {\n        echo \"Gửi Email\\n\";\n        echo \"Tiêu đề: {$this->tieuDe}\\n\";\n        echo \"HTML: {$this->html}\\n\";\n    }\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c0437eaa2f83d2b9665a2",
+    "lesson": "692bb7dba0a7add9d4493892",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "// Abstract Class\nabstract class DongVat {\n    public int tuoi; // Có biến\n    public abstract void An();\n}\n\n// Interface\ninterface IBoiDuoc {\n    void Boi();\n}\n\nclass Cho : DongVat, IBoiDuoc {\n    public override void An() {}\n    public void Boi() {}\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c0461eaa2f83d2b9665a4",
+    "lesson": "692bb7dba0a7add9d4493892",
+    "language": "dart",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "// Abstract Class\nabstract class DongVat {\n  int tuoi = 0; // Có biến\n  void an();\n}\n\n// Interface (Dart: mọi class đều là interface)\nabstract class BoiDuoc {\n  void boi();\n}\n\nclass Cho implements DongVat, BoiDuoc {\n  int tuoi = 0;\n\n  @override\n  void an() {}\n\n  @override\n  void boi() {}\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee040eaa2f83d2b966643",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "import java.util.Scanner;\n\nclass SinhVien {\n    String ten;\n    int tuoi;\n    double diemTB;\n\n    void nhap() {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"Nhap ten: \");\n        ten = sc.nextLine();\n        System.out.print(\"Nhap tuoi: \");\n        tuoi = sc.nextInt();\n        System.out.print(\"Nhap diem trung binh: \");\n        diemTB = sc.nextDouble();\n    }\n\n    void hienThi() {\n        System.out.println(\"Ten: \" + ten);\n        System.out.println(\"Tuoi: \" + tuoi);\n        System.out.println(\"Diem TB: \" + diemTB);\n        System.out.println(\"Xep loai: \" + xepLoai());\n    }\n\n    String xepLoai() {\n        if (diemTB >= 8) return \"A\";\n        if (diemTB >= 6.5) return \"B\";\n        if (diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee064eaa2f83d2b966645",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "php",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "<?php\nclass SinhVien {\n    public $ten;\n    public $tuoi;\n    public $diemTB;\n\n    function nhap($ten, $tuoi, $diem) {\n        $this->ten = $ten;\n        $this->tuoi = $tuoi;\n        $this->diemTB = $diem;\n    }\n\n    function xepLoai() {\n        if ($this->diemTB >= 8) return \"A\";\n        if ($this->diemTB >= 6.5) return \"B\";\n        if ($this->diemTB >= 5) return \"C\";\n        return \"D\";\n    }\n\n    function hienThi() {\n        echo \"Ten: $this->ten<br>\";\n        echo \"Tuoi: $this->tuoi<br>\";\n        echo \"Diem TB: $this->diemTB<br>\";\n        echo \"Xep loai: \" . $this->xepLoai();\n    }\n}\n?>",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee0dbeaa2f83d2b96664b",
+    "lesson": "692edfe7d34cc6910180d52c",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class HinhChuNhat {\n    public double Dai, Rong;\n\n    public HinhChuNhat(double dai, double rong) {\n        Dai = dai;\n        Rong = rong;\n    }\n\n    public double DienTich() => Dai * Rong;\n    public double ChuVi() => (Dai + Rong) * 2;\n\n    public void HienThi() {\n        Console.WriteLine($\"Dài: {Dai}\");\n        Console.WriteLine($\"Rộng: {Rong}\");\n        Console.WriteLine($\"Diện tích: {DienTich()}\");\n        Console.WriteLine($\"Chu vi: {ChuVi()}\\n\");\n    }\n}\n\nclass Program {\n    static void Main() {\n        HinhChuNhat h1 = new HinhChuNhat(5, 3);\n        HinhChuNhat h2 = new HinhChuNhat(9, 4);\n        h1.HienThi();\n        h2.HienThi();\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee1e9eaa2f83d2b966650",
+    "lesson": "692edff1d34cc6910180d532",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class NguyenLieu {\n    public string Ten;\n    public double SoLuong;\n    public string DonVi;\n\n    public NguyenLieu(string ten, double sl, string dv) {\n        Ten = ten;\n        SoLuong = sl;\n        DonVi = dv;\n    }\n\n    public void HienThi() {\n        Console.WriteLine($\"{Ten}: {SoLuong} {DonVi}\");\n    }\n\n    public void CapNhat(double slMoi) {\n        SoLuong = slMoi;\n    }\n}\n\nclass Program {\n    static void Main() {\n        var nl1 = new NguyenLieu(\"Sữa\", 1, \"lít\");\n        var nl2 = new NguyenLieu(\"Bơ\", 200, \"gram\");\n\n        nl1.HienThi();\n        nl2.HienThi();\n\n        nl1.CapNhat(2);\n        nl2.CapNhat(180);\n\n        Console.WriteLine(\"Sau khi cập nhật:\");\n        nl1.HienThi();\n        nl2.HienThi();\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee1fdeaa2f83d2b966651",
+    "lesson": "692edff1d34cc6910180d532",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class NguyenLieu\n  def initialize(ten, so_luong, don_vi)\n    @ten = ten\n    @so_luong = so_luong\n    @don_vi = don_vi\n  end\n\n  def hien_thi\n    puts \"#{@ten}: #{@so_luong} #{@don_vi}\"\n  end\n\n  def cap_nhat(sl_moi)\n    @so_luong = sl_moi\n  end\nend\n\nnl1 = NguyenLieu.new(\"Trứng\", 4, \"quả\")\nnl2 = NguyenLieu.new(\"Bột mì\", 500, \"gram\")\n\nnl1.hien_thi\nnl2.hien_thi\n\nnl1.cap_nhat(6)\nnl2.cap_nhat(450)\n\nputs \"Sau khi cập nhật:\"\nnl1.hien_thi\nnl2.hien_thi",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee31beaa2f83d2b966654",
+    "lesson": "692ee235d34cc6910180d667",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class DongVat {\n    void phatTiengKeu() {\n        System.out.println(\"Động vật phát ra tiếng kêu...\");\n    }\n}\n\nclass Cho extends DongVat {\n    @Override\n    void phatTiengKeu() {\n        System.out.println(\"Gâu gâu!\");\n    }\n}\n\nclass Meo extends DongVat {\n    @Override\n    void phatTiengKeu() {\n        System.out.println(\"Meow meow!\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        DongVat dv1 = new Cho();\n        DongVat dv2 = new Meo();\n\n        dv1.phatTiengKeu();\n        dv2.phatTiengKeu();\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee34beaa2f83d2b966657",
+    "lesson": "692ee235d34cc6910180d667",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class DongVat\n  def phat_tieng_keu\n    puts \"Động vật phát tiếng kêu...\"\n  end\nend\n\nclass Cho < DongVat\n  def phat_tieng_keu\n    puts \"Gâu gâu!\"\n  end\nend\n\nclass Meo < DongVat\n  def phat_tieng_keu\n    puts \"Meow meow!\"\n  end\nend\n\ndv1 = Cho.new\ndv2 = Meo.new\n\ndv1.phat_tieng_keu\ndv2.phat_tieng_keu",
+    "explanation": ""
+  },
+  {
     "_id": "692ee3b3eaa2f83d2b96665e",
     "lesson": "692ee23fd34cc6910180d66d",
     "language": "dart",
@@ -1112,12 +1067,93 @@ const examples = [
     "explanation": ""
   },
   {
-    "_id": "692ee3bbeaa2f83d2b96665f",
-    "lesson": "692ee23fd34cc6910180d66d",
+    "_id": "692ee481eaa2f83d2b966662",
+    "lesson": "692ee24bd34cc6910180d673",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class NhanVien {\n    public string Ten;\n    public double Luong;\n    public NhanVien(string ten, double luong) {\n        Ten = ten; Luong = luong;\n    }\n    public abstract double TinhThuNhap();\n}\n\nclass NhanVienFullTime : NhanVien {\n    public double Thuong;\n    public NhanVienFullTime(string ten, double luong, double thuong) : base(ten, luong) {\n        Thuong = thuong;\n    }\n    public override double TinhThuNhap() => Luong + Thuong;\n}\n\nclass NhanVienPartTime : NhanVien {\n    public double SoGio, LuongGio;\n    public NhanVienPartTime(string ten, double soGio, double luongGio) : base(ten,0) {\n        SoGio = soGio; LuongGio = luongGio;\n    }\n    public override double TinhThuNhap() => SoGio * LuongGio;\n}\n\nclass Program {\n    static void Main() {\n        NhanVien nv1 = new NhanVienFullTime(\"An\", 1000, 200);\n        NhanVien nv2 = new NhanVienPartTime(\"Binh\", 30, 50);\n\n        Console.WriteLine($\"{nv1.Ten} thu nhập: {nv1.TinhThuNhap()}\");\n        Console.WriteLine($\"{nv2.Ten} thu nhập: {nv2.TinhThuNhap()}\");\n    }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692b0712eaa2f83d2b966580",
+    "lesson": "692ae7577fdaad24a2aec50c",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "# Module trừu tượng (tương tự interface)\nmodule Shape\n  def calculate_area\n    raise NotImplementedError, \"Phương thức calculate_area phải được triển khai\"\n  end\nend\n\n// Lớp triển khai cụ thể\nclass Circle\n  include Shape\n\n  def initialize(radius)\n    @radius = radius\n  end\n\n  def calculate_area\n    Math::PI * @radius * @radius  # Triển khai cụ thể\n  end\nend\n\n// Sử dụng\ncircle = Circle.new(5)  # Trừu tượng: Sử dụng qua module Shape\nputs \"Diện tích: #{circle.calculate_area}\"  # Kết quả: ~78.54",
+    "explanation": "Shape định nghĩa \"tính diện tích\" nhưng không chỉ rõ cách tính. Circle triển khai cụ thể nhưng người dùng chỉ tượng tác qua Shape bỏ qua chi tiết."
+  },
+  {
+    "_id": "692c002aeaa2f83d2b96659c",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "csharp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class ThongBao\n{\n    public abstract void GuiDi();\n}\n\nclass SMS : ThongBao\n{\n    private string noiDung;\n\n    public SMS(string nd)\n    {\n        noiDung = nd;\n    }\n\n    public override void GuiDi()\n    {\n        if (noiDung.Length > 160)\n            Console.WriteLine(\"SMS vượt 160 ký tự!\");\n        else\n            Console.WriteLine(\"Gửi SMS: \" + noiDung);\n    }\n}\n\nclass Email : ThongBao\n{\n    private string tieuDe;\n    private string html;\n\n    public Email(string td, string h)\n    {\n        tieuDe = td;\n        html = h;\n    }\n\n    public override void GuiDi()\n    {\n        Console.WriteLine(\"Gửi Email\");\n        Console.WriteLine(\"Tiêu đề: \" + tieuDe);\n        Console.WriteLine(\"HTML: \" + html);\n    }\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c003beaa2f83d2b96659e",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "dart",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class ThongBao {\n  void guiDi();\n}\n\nclass SMS extends ThongBao {\n  String noiDung;\n\n  SMS(this.noiDung);\n\n  @override\n  void guiDi() {\n    if (noiDung.length > 160) {\n      print(\"SMS vượt 160 ký tự!\");\n    } else {\n      print(\"Gửi SMS: $noiDung\");\n    }\n  }\n}\n\nclass Email extends ThongBao {\n  String tieuDe;\n  String html;\n\n  Email(this.tieuDe, this.html);\n\n  @override\n  void guiDi() {\n    print(\"Gửi Email\");\n    print(\"Tiêu đề: $tieuDe\");\n    print(\"HTML: $html\");\n  }\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c0093eaa2f83d2b9665a0",
+    "lesson": "692bb799a0a7add9d4493891",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "#include <iostream>\n#include <string>\nusing namespace std;\nclass ThongBao {\npublic:\n    virtual void guiDi() = 0;\n};\n\nclass SMS : public ThongBao {\nprivate:\n    string noiDung;\npublic:\n    SMS(const string& nd) : noiDung(nd) {}\n\n    void guiDi() override {\n        if (noiDung.size() > 160)\n            cout << \"SMS vượt 160 ký tự!\\n\";\n        else\n            cout << \"Gửi SMS: \" << noiDung << \"\\n\";\n    }\n};\n\nclass Email : public ThongBao {\nprivate:\n    string tieuDe;\n    string html;\npublic:\n    Email(const string& td, const string& h) : tieuDe(td), html(h) {}\n\n    void guiDi() override {\n        cout << \"Gửi Email\\nTiêu đề: \" << tieuDe << \"\\nHTML: \" << html << \"\\n\";\n    }\n};\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692c047feaa2f83d2b9665a6",
+    "lesson": "692bb7dba0a7add9d4493892",
+    "language": "java",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "abstract class DongVat {\n    int tuoi; // Có dữ liệu\n    abstract void an();\n}\n\ninterface BoiDuoc {\n    void boi();\n}\n\nclass Cho extends DongVat implements BoiDuoc {\n    @Override void an() {}\n    @Override public void boi() {}\n}\n",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee076eaa2f83d2b966647",
+    "lesson": "692edf71d34cc6910180d4e8",
+    "language": "dart",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class SinhVien {\n  String ten = \"\";\n  int tuoi = 0;\n  double diemTB = 0;\n\n  void nhap(String t, int age, double diem) {\n    ten = t;\n    tuoi = age;\n    diemTB = diem;\n  }\n\n  String xepLoai() {\n    if (diemTB >= 8) return \"A\";\n    if (diemTB >= 6.5) return \"B\";\n    if (diemTB >= 5) return \"C\";\n    return \"D\";\n  }\n\n  void hienThi() {\n    print(\"Ten: $ten\");\n    print(\"Tuoi: $tuoi\");\n    print(\"Diem TB: $diemTB\");\n    print(\"Xep loai: ${xepLoai()}\");\n  }\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee0caeaa2f83d2b966649",
+    "lesson": "692edfe7d34cc6910180d52c",
+    "language": "ruby",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "class HinhChuNhat\n    def initialize(dai, rong)\n        @dai = dai\n        @rong = rong\n    end\n\n    def dien_tich\n        @dai * @rong\n    end\n\n    def chu_vi\n        (@dai + @rong) * 2\n    end\n\n    def hien_thi\n        puts \"Dài: #{@dai}\"\n        puts \"Rộng: #{@rong}\"\n        puts \"Diện tích: #{dien_tich}\"\n        puts \"Chu vi: #{chu_vi}\\n\\n\"\n    end\nend\n\nh1 = HinhChuNhat.new(5, 3)\nh2 = HinhChuNhat.new(10, 4)\nh1.hien_thi\nh2.hien_thi",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee1ddeaa2f83d2b96664f",
+    "lesson": "692edff1d34cc6910180d532",
+    "language": "cpp",
+    "is_supported": true,
+    "syntax_note": "",
+    "code_content": "#include <iostream>\nusing namespace std;\n\nclass NguyenLieu {\nprivate:\n    string ten;\n    double soLuong;\n    string donVi;\n\npublic:\n    NguyenLieu(string t, double sl, string dv)\n        : ten(t), soLuong(sl), donVi(dv) {}\n\n    void hienThi() {\n        cout << ten << \": \" << soLuong << \" \" << donVi << endl;\n    }\n\n    void capNhat(double slMoi) {\n        soLuong = slMoi;\n    }\n};\n\nint main() {\n    NguyenLieu nl1(\"Muối\", 1, \"muỗng\");\n    NguyenLieu nl2(\"Đường\", 200, \"gram\");\n\n    nl1.hienThi();\n    nl2.hienThi();\n\n    nl1.capNhat(2);\n    nl2.capNhat(150);\n\n    cout << \"Sau khi cập nhật:\" << endl;\n    nl1.hienThi();\n    nl2.hienThi();\n}",
+    "explanation": ""
+  },
+  {
+    "_id": "692ee37deaa2f83d2b966659",
+    "lesson": "692ee235d34cc6910180d667",
     "language": "php",
     "is_supported": true,
     "syntax_note": "",
-    "code_content": "<?php\nabstract class HinhHoc {\n    abstract function tinhDienTich();\n}\n\nclass HinhVuong extends HinhHoc {\n    private $canh;\n\n    function __construct($c) {\n        $this->canh = $c;\n    }\n\n    function tinhDienTich() {\n        return $this->canh * $this->canh;\n    }\n}\n\nclass HinhTron extends HinhHoc {\n    private $r;\n\n    function __construct($r) {\n        $this->r = $r;\n    }\n\n    function tinhDienTich() {\n        return pi() * $this->r * $this->r;\n    }\n}\n\n$hv = new HinhVuong(5);\n$ht = new HinhTron(3);\n\necho \"Diện tích hình vuông: \" . $hv->tinhDienTich() . \"<br>\";\necho \"Diện tích hình tròn: \" . $ht->tinhDienTich();",
+    "code_content": "<?php\nclass DongVat {\n    function phatTiengKeu() {\n        echo \"Động vật phát tiếng kêu...<br>\";\n    }\n}\n\nclass Cho extends DongVat {\n    function phatTiengKeu() {\n        echo \"Gâu gâu!<br>\";\n    }\n}\n\nclass Meo extends DongVat {\n    function phatTiengKeu() {\n        echo \"Meow meow!<br>\";\n    }\n}\n\n$dv1 = new Cho();\n$dv2 = new Meo();\n\n$dv1->phatTiengKeu();\n$dv2->phatTiengKeu();",
     "explanation": ""
   },
   {
@@ -1136,42 +1172,6 @@ const examples = [
     "is_supported": true,
     "syntax_note": "",
     "code_content": "#include <iostream>\nusing namespace std;\n\nclass NhanVien {\npublic:\n    string ten;\n    double luong;\n    NhanVien(string t, double l) : ten(t), luong(l) {}\n    virtual double tinhThuNhap() = 0;\n};\n\nclass NhanVienFullTime : public NhanVien {\n    double thuong;\npublic:\n    NhanVienFullTime(string t, double l, double th) : NhanVien(t,l), thuong(th) {}\n    double tinhThuNhap() override { return luong + thuong; }\n};\n\nclass NhanVienPartTime : public NhanVien {\n    double soGio;\n    double luongGio;\npublic:\n    NhanVienPartTime(string t, double sg, double lg) : NhanVien(t,0), soGio(sg), luongGio(lg) {}\n    double tinhThuNhap() override { return soGio * luongGio; }\n};\n\nint main() {\n    NhanVien* nv1 = new NhanVienFullTime(\"An\", 1000, 200);\n    NhanVien* nv2 = new NhanVienPartTime(\"Binh\", 30, 50);\n\n    cout << nv1->ten << \" thu nhập: \" << nv1->tinhThuNhap() << endl;\n    cout << nv2->ten << \" thu nhập: \" << nv2->tinhThuNhap() << endl;\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee481eaa2f83d2b966662",
-    "lesson": "692ee24bd34cc6910180d673",
-    "language": "csharp",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class NhanVien {\n    public string Ten;\n    public double Luong;\n    public NhanVien(string ten, double luong) {\n        Ten = ten; Luong = luong;\n    }\n    public abstract double TinhThuNhap();\n}\n\nclass NhanVienFullTime : NhanVien {\n    public double Thuong;\n    public NhanVienFullTime(string ten, double luong, double thuong) : base(ten, luong) {\n        Thuong = thuong;\n    }\n    public override double TinhThuNhap() => Luong + Thuong;\n}\n\nclass NhanVienPartTime : NhanVien {\n    public double SoGio, LuongGio;\n    public NhanVienPartTime(string ten, double soGio, double luongGio) : base(ten,0) {\n        SoGio = soGio; LuongGio = luongGio;\n    }\n    public override double TinhThuNhap() => SoGio * LuongGio;\n}\n\nclass Program {\n    static void Main() {\n        NhanVien nv1 = new NhanVienFullTime(\"An\", 1000, 200);\n        NhanVien nv2 = new NhanVienPartTime(\"Binh\", 30, 50);\n\n        Console.WriteLine($\"{nv1.Ten} thu nhập: {nv1.TinhThuNhap()}\");\n        Console.WriteLine($\"{nv2.Ten} thu nhập: {nv2.TinhThuNhap()}\");\n    }\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee48aeaa2f83d2b966663",
-    "lesson": "692ee24bd34cc6910180d673",
-    "language": "ruby",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "class NhanVien\n  attr_accessor :ten, :luong\n  def initialize(ten, luong)\n    @ten = ten\n    @luong = luong\n  end\n  def tinh_thu_nhap\n    raise \"Phải override phương thức này!\"\n  end\nend\n\nclass NhanVienFullTime < NhanVien\n  def initialize(ten, luong, thuong)\n    super(ten, luong)\n    @thuong = thuong\n  end\n  def tinh_thu_nhap\n    @luong + @thuong\n  end\nend\n\nclass NhanVienPartTime < NhanVien\n  def initialize(ten, so_gio, luong_gio)\n    super(ten,0)\n    @so_gio = so_gio\n    @luong_gio = luong_gio\n  end\n  def tinh_thu_nhap\n    @so_gio * @luong_gio\n  end\nend\n\nnv1 = NhanVienFullTime.new(\"An\", 1000, 200)\nnv2 = NhanVienPartTime.new(\"Binh\", 30, 50)\n\nputs \"#{nv1.ten} thu nhập: #{nv1.tinh_thu_nhap}\"\nputs \"#{nv2.ten} thu nhập: #{nv2.tinh_thu_nhap}\"",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee492eaa2f83d2b966664",
-    "lesson": "692ee24bd34cc6910180d673",
-    "language": "dart",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "abstract class NhanVien {\n  String ten;\n  double luong;\n  NhanVien(this.ten, this.luong);\n  double tinhThuNhap();\n}\n\nclass NhanVienFullTime extends NhanVien {\n  double thuong;\n  NhanVienFullTime(String ten, double luong, this.thuong) : super(ten, luong);\n  @override\n  double tinhThuNhap() => luong + thuong;\n}\n\nclass NhanVienPartTime extends NhanVien {\n  double soGio, luongGio;\n  NhanVienPartTime(String ten, this.soGio, this.luongGio) : super(ten,0);\n  @override\n  double tinhThuNhap() => soGio * luongGio;\n}\n\nvoid main() {\n  var nv1 = NhanVienFullTime(\"An\", 1000, 200);\n  var nv2 = NhanVienPartTime(\"Binh\", 30, 50);\n\n  print(\"${nv1.ten} thu nhập: ${nv1.tinhThuNhap()}\");\n  print(\"${nv2.ten} thu nhập: ${nv2.tinhThuNhap()}\");\n}",
-    "explanation": ""
-  },
-  {
-    "_id": "692ee49aeaa2f83d2b966665",
-    "lesson": "692ee24bd34cc6910180d673",
-    "language": "php",
-    "is_supported": true,
-    "syntax_note": "",
-    "code_content": "<?php\nabstract class NhanVien {\n    public $ten;\n    public $luong;\n    function __construct($ten, $luong) {\n        $this->ten = $ten;\n        $this->luong = $luong;\n    }\n    abstract function tinhThuNhap();\n}\n\nclass NhanVienFullTime extends NhanVien {\n    private $thuong;\n    function __construct($ten, $luong, $thuong) {\n        parent::__construct($ten,$luong);\n        $this->thuong = $thuong;\n    }\n    function tinhThuNhap() {\n        return $this->luong + $this->thuong;\n    }\n}\n\nclass NhanVienPartTime extends NhanVien {\n    private $soGio;\n    private $luongGio;\n    function __construct($ten, $soGio, $luongGio) {\n        parent::__construct($ten,0);\n        $this->soGio = $soGio;\n        $this->luongGio = $luongGio;\n    }\n    function tinhThuNhap() {\n        return $this->soGio * $this->luongGio;\n    }\n}\n\n$nv1 = new NhanVienFullTime(\"An\", 1000, 200);\n$nv2 = new NhanVienPartTime(\"Binh\", 30, 50);\n\necho $nv1->ten . \" thu nhập: \" . $nv1->tinhThuNhap() . \"<br>\";\necho $nv2->ten . \" thu nhập: \" . $nv2->tinhThuNhap();\n?>",
     "explanation": ""
   },
   {
@@ -1557,6 +1557,87 @@ const examples = [
     "lesson": "6939986fcb8bff399ebd72c8",
     "language": "csharp",
     "code_content": "using System;\n\nclass Animal {\n  \n    // Base class\n    public virtual void Move()\n    {\n        Console.WriteLine(\"Animal is moving.\");\n    }\n\n    public void Eat()\n    {\n        Console.WriteLine(\"Animal is eating.\");\n    }\n}\n\nclass Dog : Animal {\n  \n    // Overriding the Move method from the base class\n    public override void Move()\n    {\n        Console.WriteLine(\"Dog is running.\");\n    }\n\n    public void Bark()\n    {\n        Console.WriteLine(\"Dog is barking.\");\n    }\n}\n\nclass Geeks {\n    static void Main()\n    {\n        Dog d = new Dog();\n        d.Move();\n        d.Eat();\n        d.Bark();\n    }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": ""
+  },
+  {
+    "_id": "694136668c131588eaec6792",
+    "language": "cpp",
+    "lesson": "69399722cb8bff399ebd7278",
+    "code_content": "#include <iostream>\n#include <string>\n\nusing namespace std;\n\n// 1. Lớp Cha (Base Class)\nclass Animal {\npublic:\n    // Từ khóa 'virtual' cho phép các lớp con ghi đè phương thức này\n    virtual void makeSound() {\n        cout << \"Animal makes a sound\" << endl;\n    }\n};\n\n// 2. Lớp Con (Derived Class) - Chó\nclass Dog : public Animal {\npublic:\n    // Ghi đè phương thức của lớp cha\n    void makeSound() override {\n        cout << \"Gâu Gâu! (Dog barks)\" << endl;\n    }\n};\n\n// 3. Lớp Con (Derived Class) - Mèo\nclass Cat : public Animal {\npublic:\n    // Ghi đè phương thức của lớp cha\n    void makeSound() override {\n        cout << \"Meo Meo! (Cat meows)\" << endl;\n    }\n};\n\nint main() {\n    // Tạo con trỏ kiểu Animal (Lớp cha)\n    Animal* myAnimal;\n\n    Dog myDog;\n    Cat myCat;\n\n    // Trỏ đến Dog và gọi hàm\n    myAnimal = &myDog;\n    cout << \"Dog says: \";\n    myAnimal->makeSound(); // Kết quả: Gâu Gâu!\n\n    // Trỏ đến Cat và gọi hàm\n    myAnimal = &myCat;\n    cout << \"Cat says: \";\n    myAnimal->makeSound(); // Kết quả: Meo Meo!\n\n    return 0;\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": ""
+  },
+  {
+    "_id": "694136828c131588eaec6793",
+    "lesson": "69399722cb8bff399ebd7278",
+    "language": "java",
+    "code_content": "class Animal {\n    // Trong Java, mặc định các hàm đều có thể bị ghi đè\n    void makeSound() {\n        System.out.println(\"Animal makes a sound\");\n    }\n}\n\nclass Dog extends Animal {\n    @Override // Chỉ dẫn cho trình biên dịch rằng đây là hàm ghi đè\n    void makeSound() {\n        System.out.println(\"Gâu Gâu! (Dog barks)\");\n    }\n}\n\nclass Cat extends Animal {\n    @Override\n    void makeSound() {\n        System.out.println(\"Meo Meo! (Cat meows)\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // Tính đa hình: Khai báo kiểu Cha, khởi tạo kiểu Con\n        Animal myDog = new Dog();\n        Animal myCat = new Cat();\n\n        myDog.makeSound(); // In ra: Gâu Gâu!\n        myCat.makeSound(); // In ra: Meo Meo!\n    }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": ""
+  },
+  {
+    "_id": "694136998c131588eaec6794",
+    "language": "csharp",
+    "lesson": "69399722cb8bff399ebd7278",
+    "code_content": "using System;\n\n// Lớp Cha\nclass Animal {\n    // Phải có từ khóa virtual thì lớp con mới ghi đè được\n    public virtual void MakeSound() {\n        Console.WriteLine(\"Animal makes a sound\");\n    }\n}\n\n// Lớp Con\nclass Dog : Animal {\n    // Phải có từ khóa override\n    public override void MakeSound() {\n        Console.WriteLine(\"Gâu Gâu! (Dog barks)\");\n    }\n}\n\nclass Cat : Animal {\n    public override void MakeSound() {\n        Console.WriteLine(\"Meo Meo! (Cat meows)\");\n    }\n}\n\nclass Program {\n    static void Main() {\n        // Tính đa hình\n        Animal myAnimal;\n\n        myAnimal = new Dog();\n        myAnimal.MakeSound(); // In ra: Gâu Gâu!\n\n        myAnimal = new Cat();\n        myAnimal.MakeSound(); // In ra: Meo Meo!\n    }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": ""
+  },
+  {
+    "_id": "694136e38c131588eaec6795",
+    "lesson": "69399754cb8bff399ebd7285",
+    "language": "cpp",
+    "code_content": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\n// 1. Lớp Cha\nclass Animal {\npublic:\n    virtual void introduce() {\n        cout << \"I am a generic animal.\" << endl;\n    }\n};\n\n// 2. Lớp Con\nclass Dog : public Animal {\npublic:\n    void introduce() override {\n        cout << \"I am a Dog (Woof Woof)!\" << endl;\n    }\n    \n    void bark() {\n        cout << \"Only dogs can bark!\" << endl;\n    }\n};\n\n// 3. Lớp Con khác\nclass Cat : public Animal {\npublic:\n    void introduce() override {\n        cout << \"I am a Cat (Meow Meow)!\" << endl;\n    }\n};\n\nint main() {\n    Dog myDog;\n    \n    // Upcasting: Chuyển từ Dog* sang Animal*\n    // Việc này luôn AN TOÀN và tự động trong C++\n    Animal* animalPtr = &myDog; \n    \n    cout << \"Calling via Upcasted pointer:\" << endl;\n    \n    // Nhờ tính Đa hình, dù là con trỏ Animal nhưng nó vẫn gọi đúng hàm của Dog\n    animalPtr->introduce(); \n    \n    // LƯU Ý: Sau khi upcast, bạn không thể gọi các hàm riêng biệt của lớp con\n    // animalPtr->bark(); // LỖI: Animal không có hàm bark()\n\n    cout << \"\\n--- UPCASTING TRONG MẢNG (Ứng dụng thực tế) ---\" << endl;\n\n    // Chúng ta có thể quản lý một danh sách gồm cả Chó và Mèo bằng một mảng Animal\n    Animal* zoo[2];\n    zoo[0] = new Dog(); // Upcasting tự động\n    zoo[1] = new Cat(); // Upcasting tự động\n\n    for(int i = 0; i < 2; i++) {\n        zoo[i]->introduce(); // Mỗi con tự giới thiệu theo cách của mình\n    }\n\n    // Giải phóng bộ nhớ\n    delete zoo[0];\n    delete zoo[1];\n\n    return 0;\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": ""
+  },
+  {
+    "_id": "694137048c131588eaec6796",
+    "lesson": "69399754cb8bff399ebd7285",
+    "language": "java",
+    "code_content": "class Shape {\n    void draw() {\n        System.out.println(\"Drawing a generic shape\");\n    }\n}\n\nclass Circle extends Shape {\n    @Override\n    void draw() {\n        System.out.println(\"Drawing a Circle\");\n    }\n\n    void roll() {\n        System.out.println(\"Circle is rolling\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // 1. Tạo đối tượng lớp con\n        Circle myCircle = new Circle();\n\n        // 2. Upcasting: Gán đối tượng Circle cho tham chiếu kiểu Shape\n        // Diễn ra tự động, không cần ép kiểu\n        Shape myShape = myCircle; \n\n        System.out.println(\"Calling via Upcasted reference:\");\n        myShape.draw(); // Kết quả: Drawing a Circle (Tính đa hình)\n\n        // myShape.roll(); // LỖI: Kiểu Shape không có phương thức roll()\n        \n        // 3. Ứng dụng: Mảng các hình dạng\n        Shape[] shapes = { new Circle(), new Shape() };\n        for (Shape s : shapes) {\n            s.draw();\n        }\n    }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": "Trong Java, Upcasting thường được dùng khi ta muốn lưu trữ các đối tượng khác nhau vào một danh sách (ArrayList) hoặc truyền chúng vào các phương thức dùng chung."
+  },
+  {
+    "_id": "694137248c131588eaec6797",
+    "lesson": "69399754cb8bff399ebd7285",
+    "language": "csharp",
+    "code_content": "using System;\nusing System.Collections.Generic;\n\nclass Vehicle {\n    public virtual void Run() {\n        Console.WriteLine(\"Vehicle is running\");\n    }\n}\n\nclass Car : Vehicle {\n    public override void Run() {\n        Console.WriteLine(\"Car is running on 4 wheels\");\n    }\n\n    public void OpenTrunk() {\n        Console.WriteLine(\"Trunk opened\");\n    }\n}\n\nclass Program {\n    static void Main() {\n        // 1. Upcasting: Đối tượng Car được coi như một Vehicle\n        // Đây là chuyển đổi ngầm định (Implicit conversion)\n        Vehicle myVehicle = new Car();\n\n        Console.WriteLine(\"Upcasting in C#:\");\n        myVehicle.Run(); // Kết quả: Car is running on 4 wheels\n\n        // myVehicle.OpenTrunk(); // LỖI: Vehicle không biết 'OpenTrunk' là gì\n\n        // 2. Ứng dụng thực tế: List chứa nhiều loại xe\n        List<Vehicle> garage = new List<Vehicle>();\n        garage.Add(new Car());\n        garage.Add(new Vehicle());\n\n        foreach (var v in garage) {\n            v.Run();\n        }\n    }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": "C# xử lý Upcasting tương tự Java. Điểm khác biệt duy nhất là cú pháp khai báo phương thức virtual và override để đảm bảo tính đa hình hoạt động chính xác sau khi upcast."
+  },
+  {
+    "_id": "694137478c131588eaec6798",
+    "language": "dart",
+    "lesson": "69399754cb8bff399ebd7285",
+    "code_content": "// 1. Lớp Cha\nclass Printer {\n  void printContent() {\n    print(\"Printing generic content...\");\n  }\n}\n\n// 2. Lớp Con\nclass LaserPrinter extends Printer {\n  @override\n  void printContent() {\n    print(\"Printing with high-quality Laser technology.\");\n  }\n\n  void checkToner() {\n    print(\"Checking toner levels...\");\n  }\n}\n\nvoid main() {\n  // Đối tượng con (LaserPrinter) được gán cho kiểu cha (Printer)\n  // Đây là Upcasting tự động (implicit)\n  Printer myPrinter = LaserPrinter();\n\n  print(\"--- Dart Upcasting & Overriding ---\");\n  \n  // Tính đa hình: Gọi hàm lớp cha nhưng thực thi logic lớp con\n  myPrinter.printContent(); \n\n  // myPrinter.checkToner(); // LỖI: Kiểu Printer không có hàm checkToner()\n  \n  // Ứng dụng: Danh sách các máy in\n  List<Printer> officePrinters = [\n    Printer(),\n    LaserPrinter(),\n  ];\n\n  for (var p in officePrinters) {\n    p.printContent();\n  }\n}",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": "Dart là một ngôn ngữ \"strongly typed\" (kiểu dữ liệu mạnh), nên khái niệm Upcasting rất rõ ràng. Nó sử dụng từ khóa extends để kế thừa và @override để ghi đè."
+  },
+  {
+    "_id": "694137678c131588eaec6799",
+    "language": "ruby",
+    "lesson": "69399754cb8bff399ebd7285",
+    "code_content": "# 1. Lớp Cha\nclass Bird\n  def speak\n    puts \"Bird is making a sound\"\n  end\nend\n\n# 2. Lớp Con\nclass Duck < Bird\n  # Method Overriding\n  def speak\n    puts \"Quack! Quack!\"\n  end\n\n  def swim\n    puts \"Duck is swimming\"\n  end\nend\n\n# 3. Lớp Con khác\nclass Owl < Bird\n  def speak\n    puts \"Hoot! Hoot!\"\n  end\nend\n\n# Trong Ruby, một biến có thể giữ bất kỳ đối tượng nào.\n# Tính đa hình thể hiện qua việc gửi cùng một thông điệp (message)\ndef animal_concert(bird)\n  # Đây chính là lúc ta coi 'bird' là một đối tượng lớp Bird (tương đương Upcasting)\n  bird.speak\nend\n\nputs \"--- Ruby Polymorphism ---\"\n\nmy_duck = Duck.new\nmy_owl = Owl.new\n\nanimal_concert(my_duck) # Kết quả: Quack! Quack!\nanimal_concert(my_owl)  # Kết quả: Hoot! Hoot!\n\n# Lưu ý: Ruby không ngăn cản bạn gọi hàm riêng của lớp con \n# trừ khi bạn kiểm tra kiểu dữ liệu một cách thủ công.",
+    "explanation": "",
+    "is_supported": true,
+    "syntax_note": "Ruby là một ngôn ngữ Duck Typing (\"Nếu nó đi như vịt và kêu như vịt, thì nó là vịt\"). Trong Ruby, biến không có kiểu dữ liệu cố định nên khái niệm \"Upcasting\" về mặt cú pháp không rõ rệt như Java hay C++, nhưng về mặt tư duy hướng đối tượng thì nó vẫn tồn tại."
+  },
+  {
+    "_id": "694137908c131588eaec679a",
+    "language": "php",
+    "lesson": "69399754cb8bff399ebd7285",
+    "code_content": "<?php\n\n// 1. Lớp Cha\nclass Employee {\n    public $name;\n\n    public function __construct($name) {\n        $this->name = $name;\n    }\n\n    // Phương thức sẽ được ghi đè\n    public function getJobDescription() {\n        return \"Generic employee task\";\n    }\n}\n\n// 2. Lớp Con\nclass Developer extends Employee {\n    // Method Overriding: Ghi đè phương thức của lớp cha\n    public function getJobDescription() {\n        return \"Writing code and fixing bugs\";\n    }\n\n    // Phương thức riêng chỉ lớp con mới có\n    public function getMainLanguage() {\n        return \"PHP\";\n    }\n}\n\n// 3. Lớp Con khác\nclass Designer extends Employee {\n    public function getJobDescription() {\n        return \"Creating UI/UX designs\";\n    }\n}\n\n// --- MINH HỌA ---\n\n// Khởi tạo đối tượng lớp con\n$dev = new Developer(\"Alice\");\n\n/**\n * TRONG PHP: Upcasting diễn ra tự động khi ta truyền đối tượng \n * vào một hàm yêu cầu kiểu dữ liệu của lớp Cha (Type Hinting).\n */\nfunction printJob(Employee $emp) {\n    // Tại đây, $emp được coi là một Employee (Upcasting)\n    // Nhưng nhờ Đa hình, nó vẫn gọi đúng hàm của lớp con tương ứng\n    echo \"Name: \" . $emp->name . \" | Task: \" . $emp->getJobDescription() . \"\\n\";\n    \n    // Lưu ý: $emp->getMainLanguage(); // Sẽ gây lỗi vì kiểu Employee không có hàm này\n}\n\necho \"--- Upcasting & Overriding in PHP ---\\n\";\n\nprintJob($dev);               // Truyền Developer vào hàm nhận Employee\nprintJob(new Designer(\"Bob\")); // Truyền Designer vào hàm nhận Employee\n\n?>",
     "explanation": "",
     "is_supported": true,
     "syntax_note": ""

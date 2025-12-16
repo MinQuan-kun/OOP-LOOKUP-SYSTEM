@@ -22,7 +22,7 @@ app.use(
   cors({
     origin: process.env.NODE_ENV === "production" 
       ? "*"
-      : "http://localhost:5173", // URL của Frontend Vite
+      : "http://localhost:5173", 
     credentials: true
   })
 );

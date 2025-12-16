@@ -48,8 +48,8 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         login,
         logout,
-        isLoggedIn, // Cung cấp trạng thái đăng nhập
-        isAdmin,    // Cung cấp trạng thái quản trị viên
+        isLoggedIn, 
+        isAdmin,    
     };
 
     if (isLoading) {

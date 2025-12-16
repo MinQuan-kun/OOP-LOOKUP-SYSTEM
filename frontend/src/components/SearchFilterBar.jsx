@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 const SearchFilterBar = ({ selectedFilters, setSelectedFilters }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // ID này phải khớp với ID trong KNOWLEDGE_ROOTS ở KnowledgeTree.jsx
   const filters = [
     { id: 'khai-niem', label: 'Khái niệm' },
     { id: 'tinh-chat', label: 'Tính chất' },

@@ -10,7 +10,7 @@ const knowledgeTypeSchema = new mongoose.Schema({
     type: String, 
     required: true, 
     unique: true 
-  }, // Ví dụ: "khai-niem" (Dùng để code frontend map vào)
+  }, // Ví dụ: "khai-niem"
   order: {
     type: Number,
     default: 0
