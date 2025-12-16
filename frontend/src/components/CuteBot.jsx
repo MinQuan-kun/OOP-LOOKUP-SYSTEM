@@ -1,7 +1,13 @@
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import API from '@/lib/axios';
+import { usePathname } from 'next/navigation'
 
 const CuteBot = () => {
+  const pathname = usePathname();
+  if (pathname === '/login' || pathname === '/about') {
+    return null;
+  }
   const [isOpen, setIsOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   

@@ -1,13 +1,11 @@
+'use client';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from "@/context/AuthContext"; // 1. Import useAuth
+import { useRouter } from 'next/navigation';
+import { useAuth } from "@/context/AuthContext";
 
 const LoginButton = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   
-  // 2. Thay thế logic cũ (localStorage thủ công) bằng Hook từ Context
-  // user: thông tin người dùng hiện tại (null nếu chưa đăng nhập)
-  // logout: hàm đăng xuất đã viết sẵn trong Context
   const { user, logout } = useAuth(); 
 
   const handleLogout = () => {
@@ -48,7 +46,7 @@ const LoginButton = () => {
       ) : (
         // --- TRƯỜNG HỢP CHƯA LOGIN ---
         <button
-          onClick={() => navigate('/login')}
+          onClick={() => router.push('/login')}
           className="pointer-events-auto bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white text-base font-bold py-2 px-6 rounded-full shadow-lg transform transition hover:scale-105 border border-white/20 backdrop-blur-sm"
         >
           Login

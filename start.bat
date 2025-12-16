@@ -19,7 +19,7 @@ docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 echo.
 echo --------------------------------------------------------
 echo   SUCCESS! He thong da san sang:
-echo   - Frontend:    http://localhost:5173
+echo   - Frontend:    http://localhost:3000
 echo   - Backend API: http://localhost:5001
 echo --------------------------------------------------------
 echo.

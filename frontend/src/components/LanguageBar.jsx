@@ -1,6 +1,6 @@
+'use client';
 import React from 'react';
 
-// Nhận props từ HomePage
 const LanguageBar = ({ activeLang, setActiveLang }) => {
   const languages = [
     { id: 'cpp', label: 'C++' },

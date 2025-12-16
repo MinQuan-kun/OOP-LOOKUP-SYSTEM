@@ -1,4 +1,4 @@
-// src/components/Header.jsx
+'use client';
 import React from 'react';
 
 export const Header = () => {

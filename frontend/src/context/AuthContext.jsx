@@ -1,13 +1,14 @@
+'use client';
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const navigate = useNavigate();
+    const router = useRouter();
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -35,8 +36,8 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem("user");
-        toast.info("Đã đăng xuất.");
-        navigate("/login");
+        router.push("/");
+        toast.success("Đã đăng xuất");
     };
     
     const isLoggedIn = !!user;

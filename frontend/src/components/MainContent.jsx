@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import API from '@/lib/axios';
 import { useAuth } from '@/context/AuthContext';
