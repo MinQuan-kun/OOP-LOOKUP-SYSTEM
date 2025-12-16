@@ -74,29 +74,116 @@ export const getLessonDetail = async (req, res) => {
   }
 };
 
-// 3. Tìm kiếm bài học
+// 3. Tìm kiếm bài học (Cải thiện với ranking và relevance scoring)
 export const searchLessons = async (req, res) => {
   try {
-    const { q } = req.query;
+    const { q, limit = 20 } = req.query;
 
-    if (!q) {
-      return res.status(400).json({ message: "Vui lòng nhập từ khóa" });
+    if (!q || q.trim().length === 0) {
+      return res.status(200).json({ results: [], total: 0 });
     }
 
-    // Tìm kiếm theo tiêu đề hoặc nội dung
-    const results = await Lesson.find({
+    const searchQuery = q.trim();
+    const searchRegex = new RegExp(searchQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+    
+    // Tách từ khóa thành mảng để tìm kiếm tốt hơn
+    const keywords = searchQuery.split(/\s+/).filter(k => k.length > 0);
+    const keywordRegexes = keywords.map(k => new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+
+    // Tìm kiếm với nhiều điều kiện
+    const lessons = await Lesson.find({
       $or: [
-        { title: { $regex: q, $options: "i" } },
-        { content: { $regex: q, $options: "i" } },
+        { title: { $regex: searchRegex } },
+        { content: { $regex: searchRegex } },
+        { slug: { $regex: searchRegex } },
       ],
     })
-      .select("title slug views")
-      .limit(10);
+      .select("title slug content chapter knowledge_type")
+      .populate("chapter", "title")
+      .populate("knowledge_type", "name slug")
+      .lean();
 
-    res.status(200).json(results);
+    // Tính điểm relevance cho mỗi kết quả
+    const scoredResults = lessons.map(lesson => {
+      let score = 0;
+      const titleLower = lesson.title.toLowerCase();
+      const contentLower = (lesson.content || '').toLowerCase();
+      const searchLower = searchQuery.toLowerCase();
+
+      // Điểm cho title match (quan trọng nhất)
+      if (titleLower === searchLower) {
+        score += 100; // Exact match
+      } else if (titleLower.startsWith(searchLower)) {
+        score += 80; // Starts with
+      } else if (titleLower.includes(searchLower)) {
+        score += 60; // Contains
+      }
+
+      // Điểm cho từng keyword trong title
+      keywords.forEach(keyword => {
+        if (titleLower.includes(keyword.toLowerCase())) {
+          score += 30;
+        }
+      });
+
+      // Điểm cho content match (ít quan trọng hơn)
+      if (contentLower.includes(searchLower)) {
+        score += 20;
+      }
+      keywords.forEach(keyword => {
+        if (contentLower.includes(keyword.toLowerCase())) {
+          score += 10;
+        }
+      });
+
+      // Điểm cho slug match
+      if (lesson.slug && lesson.slug.includes(searchQuery.toLowerCase().replace(/\s+/g, '-'))) {
+        score += 15;
+      }
+
+      // Trích xuất snippet từ content
+      const contentText = lesson.content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      let snippet = '';
+      const searchIndex = contentText.toLowerCase().indexOf(searchLower);
+      if (searchIndex !== -1) {
+        const start = Math.max(0, searchIndex - 100);
+        const end = Math.min(contentText.length, searchIndex + searchQuery.length + 100);
+        snippet = contentText.substring(start, end);
+        if (start > 0) snippet = '...' + snippet;
+        if (end < contentText.length) snippet = snippet + '...';
+      } else if (contentText.length > 0) {
+        snippet = contentText.substring(0, 200) + '...';
+      }
+
+      return {
+        ...lesson,
+        score,
+        snippet: snippet || lesson.title
+      };
+    });
+
+    // Sắp xếp theo điểm số và giới hạn kết quả
+    const sortedResults = scoredResults
+      .sort((a, b) => b.score - a.score)
+      .slice(0, parseInt(limit))
+      .map(({ score, snippet, ...lesson }) => ({
+        id: lesson._id,
+        title: lesson.title,
+        slug: lesson.slug,
+        chapter: lesson.chapter?.title || '',
+        knowledge_type: lesson.knowledge_type?.name || '',
+        knowledge_type_slug: lesson.knowledge_type?.slug || '',
+        snippet
+      }));
+
+    res.status(200).json({
+      results: sortedResults,
+      total: sortedResults.length,
+      query: searchQuery
+    });
   } catch (error) {
     console.error("Error searching lessons:", error);
-    res.status(500).json({ message: "Lỗi Server khi tìm kiếm" });
+    res.status(500).json({ message: "Lỗi Server khi tìm kiếm", error: error.message });
   }
 };
 
