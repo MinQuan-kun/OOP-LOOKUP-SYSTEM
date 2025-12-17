@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import API from "@/lib/axios";
 
-// Nhận selectedFilters và setSelectedFilters từ HomePage truyền vào
+// Nhận 2 prop callback: onMainResults (cho A*) và onRelatedResults (cho AI)
 const SearchFilterBar = ({
   selectedFilters,
   setSelectedFilters,
-  onSearchResults,
+  onMainResults, // Callback trả kết quả A* vào khung giữa
+  onRelatedResults, // Callback trả kết quả AI vào khung phải
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -17,36 +18,46 @@ const SearchFilterBar = ({
     { id: "phuong-phap", label: "Phương pháp" },
   ];
 
-  // Logic Debounce: Chỉ gọi API sau khi người dùng ngừng gõ 600ms
+  // Logic Debounce: Gọi API sau khi ngừng gõ 600ms
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchQuery.trim()) {
         setIsSearching(true);
         try {
-          // Gọi API tìm kiếm AI mới
-          const res = await API.get(
+          // GỌI SONG SONG CẢ 2 API
+          // 1. Gọi A* cho Main Content
+          const aStarPromise = API.get(
+            `/lesson/search-astar?q=${encodeURIComponent(searchQuery)}`
+          );
+
+          // 2. Gọi AI Vector cho Related Content (Sidebar phải)
+          const aiPromise = API.get(
             `/lesson/search?q=${encodeURIComponent(searchQuery)}`
           );
 
-          // Trả kết quả về component cha để hiển thị
-          if (onSearchResults) {
-            onSearchResults(res.data);
-          }
+          const [aStarRes, aiRes] = await Promise.all([
+            aStarPromise,
+            aiPromise,
+          ]);
+
+          // Trả kết quả về cho component cha (Page)
+          if (onMainResults) onMainResults(aStarRes.data);
+          if (onRelatedResults) onRelatedResults(aiRes.data);
         } catch (error) {
           console.error("Lỗi tìm kiếm:", error);
         } finally {
           setIsSearching(false);
         }
       } else {
-        // Nếu ô tìm kiếm rỗng, trả về null để cha biết mà reset về cây kiến thức
-        if (onSearchResults) onSearchResults(null);
+        // Nếu ô tìm kiếm rỗng -> Reset
+        if (onMainResults) onMainResults(null);
+        if (onRelatedResults) onRelatedResults(null);
       }
-    }, 600); // Delay 600ms
+    }, 600);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
 
-  // Hàm xử lý khi click checkbox
   const toggleFilter = (id) => {
     if (selectedFilters.includes(id)) {
       setSelectedFilters(selectedFilters.filter((item) => item !== id));
@@ -55,7 +66,6 @@ const SearchFilterBar = ({
     }
   };
 
-  // Hàm làm mới: Chọn lại tất cả
   const handleReset = () => {
     setSelectedFilters([
       "khai-niem",
@@ -64,7 +74,8 @@ const SearchFilterBar = ({
       "phuong-phap",
     ]);
     setSearchQuery("");
-    if (onSearchResults) onSearchResults(null);
+    if (onMainResults) onMainResults(null);
+    if (onRelatedResults) onRelatedResults(null);
   };
 
   return (
@@ -127,7 +138,7 @@ const SearchFilterBar = ({
         })}
       </div>
 
-      {/* 2. THANH TÌM KIẾM AI */}
+      {/* 2. THANH TÌM KIẾM */}
       <div className="relative w-full lg:flex-1 group">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors">
           {isSearching ? (
@@ -171,7 +182,7 @@ const SearchFilterBar = ({
 
         <input
           type="text"
-          placeholder="Hỏi AI: 'Làm sao tạo hàm hủy ảo?'..."
+          placeholder="Nhập từ khóa (Hệ thống sẽ tìm bằng cả A* và AI Vector)..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-12 pr-10 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white focus:bg-white shadow-sm font-medium"

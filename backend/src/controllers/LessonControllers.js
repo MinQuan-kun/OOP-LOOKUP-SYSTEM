@@ -24,14 +24,47 @@ async function getEmbedding(text) {
   }
 }
 
-// 1. Lấy Cây kiến thức (GIỮ NGUYÊN)
+// --- HÀM PHỤ TRỢ: TÍNH KHOẢNG CÁCH LEVENSHTEIN (Cho thuật toán A*) ---
+const levenshteinDistance = (a, b) => {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+
+  const matrix = [];
+
+  // Khởi tạo dòng đầu tiên và cột đầu tiên
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  // Điền ma trận
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // Thay thế
+          Math.min(
+            matrix[i][j - 1] + 1, // Chèn
+            matrix[i - 1][j] + 1 // Xóa
+          )
+        );
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+};
+
+// 1. Lấy Cây kiến thức
 export const getKnowledgeTree = async (req, res) => {
-  // ... (Giữ nguyên code cũ của bạn) ...
   try {
     const chapters = await Chapter.find().sort({ order: 1 }).lean();
     const lessons = await Lesson.find()
       .select("title slug chapter knowledge_type")
-      .lean() // Đã tối ưu select
+      .lean()
       .populate("knowledge_type", "slug")
       .lean();
 
@@ -57,9 +90,8 @@ export const getKnowledgeTree = async (req, res) => {
   }
 };
 
-// 2. Lấy chi tiết bài học (GIỮ NGUYÊN)
+// 2. Lấy chi tiết bài học
 export const getLessonDetail = async (req, res) => {
-  // ... (Giữ nguyên code cũ của bạn) ...
   try {
     const { slug } = req.params;
     const lang = req.query.lang || "cpp";
@@ -70,10 +102,6 @@ export const getLessonDetail = async (req, res) => {
 
     if (!lesson)
       return res.status(404).json({ message: "Không tìm thấy bài học" });
-
-    // Tăng view (nếu muốn)
-    // lesson.views += 1;
-    // await lesson.save();
 
     const codeExample = await CodeExample.findOne({
       lesson: lesson._id,
@@ -89,7 +117,7 @@ export const getLessonDetail = async (req, res) => {
   }
 };
 
-// --- 3. TÌM KIẾM AI (VECTOR SEARCH) ---
+// --- 3. TÌM KIẾM AI (VECTOR SEARCH) - Dùng cho Sidebar phải ---
 export const searchLessons = async (req, res) => {
   try {
     const { q } = req.query;
@@ -120,7 +148,7 @@ export const searchLessons = async (req, res) => {
           path: "embedding",
           queryVector: queryVector,
           numCandidates: 100,
-          limit: 10,
+          limit: 5, // Chỉ lấy 5 kết quả liên quan nhất cho sidebar
         },
       },
       {
@@ -128,16 +156,15 @@ export const searchLessons = async (req, res) => {
           _id: 1,
           title: 1,
           slug: 1,
-          content: 1, // Lấy content để cắt snippet
-          score: { $meta: "vectorSearchScore" }, // Điểm tương đồng
+          content: 1,
+          score: { $meta: "vectorSearchScore" },
         },
       },
     ]);
 
-    // Bước 3: Làm sạch kết quả trả về (cắt ngắn nội dung)
     const formattedResults = results.map((item) => {
       const cleanContent =
-        item.content.replace(/<[^>]*>?/gm, " ").substring(0, 150) + "...";
+        item.content.replace(/<[^>]*>?/gm, " ").substring(0, 100) + "...";
       return {
         _id: item._id,
         title: item.title,
@@ -154,7 +181,68 @@ export const searchLessons = async (req, res) => {
   }
 };
 
-// 4. Cập nhật bài học (CÓ TỰ ĐỘNG CẬP NHẬT VECTOR)
+// --- 3.5. TÌM KIẾM HEURISTIC (A*) - Dùng cho Main Content ---
+export const searchLessonsAStar = async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q) return res.status(400).json({ message: "Vui lòng nhập từ khóa" });
+
+    const keyword = q.toLowerCase();
+
+    // Lấy dữ liệu thô (có thể lọc sơ bộ bằng regex để tối ưu hiệu năng nếu DB lớn)
+    const candidates = await Lesson.find({
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { content: { $regex: keyword, $options: "i" } },
+      ],
+    })
+      .select("title slug content chapter")
+      .lean();
+
+    // Tính toán f(n) = g(n) + h(n)
+    const rankedResults = candidates.map((lesson) => {
+      const titleLower = lesson.title.toLowerCase();
+
+      // g(n): Chi phí thực tế (Khoảng cách Levenshtein giữa keyword và title)
+      const g_score = levenshteinDistance(keyword, titleLower);
+
+      // h(n): Heuristic (Ước lượng độ phù hợp)
+      let h_score = 0;
+
+      const contentLower = lesson.content.toLowerCase();
+      // Đếm số lần xuất hiện trong content
+      const frequency = contentLower.split(keyword).length - 1;
+
+      if (frequency > 0) h_score -= Math.min(frequency, 5) * 2; // Thưởng điểm xuất hiện
+      if (Math.abs(titleLower.length - keyword.length) < 3) h_score -= 3; // Thưởng điểm độ dài gần khớp
+
+      // f(n) cuối cùng
+      const f_score = g_score + h_score;
+
+      // Tạo snippet
+      const cleanContent =
+        lesson.content.replace(/<[^>]*>?/gm, " ").substring(0, 200) + "...";
+
+      return {
+        _id: lesson._id,
+        title: lesson.title,
+        slug: lesson.slug,
+        snippet: cleanContent,
+        score: f_score, // Score càng THẤP càng tốt
+      };
+    });
+
+    // Sắp xếp theo f(n) tăng dần (Cost thấp nhất lên đầu)
+    rankedResults.sort((a, b) => a.score - b.score);
+
+    res.status(200).json(rankedResults.slice(0, 15)); // Lấy top 15 cho Main Content
+  } catch (error) {
+    console.error("Error A* searching:", error);
+    res.status(500).json({ message: "Lỗi Server khi tìm kiếm A*" });
+  }
+};
+
+// 4. Cập nhật bài học
 export const updateLesson = async (req, res) => {
   try {
     const { id } = req.params;
@@ -169,18 +257,16 @@ export const updateLesson = async (req, res) => {
       is_supported,
     } = req.body;
 
-    // --- LOGIC AI MỚI ---
-    // Tạo embedding mới dựa trên Title + Content mới
+    // Tạo embedding mới
     const cleanText = `${title}. ${content.replace(
       /<[^>]*>?/gm,
       " "
     )}`.substring(0, 8000);
     const newEmbedding = await getEmbedding(cleanText);
 
-    // Cập nhật Lesson kèm Embedding
     const updateData = { title, content };
     if (newEmbedding) {
-      updateData.embedding = newEmbedding; // Lưu vector vào DB
+      updateData.embedding = newEmbedding;
     }
 
     const updatedLesson = await Lesson.findByIdAndUpdate(id, updateData, {
@@ -190,7 +276,6 @@ export const updateLesson = async (req, res) => {
     if (!updatedLesson)
       return res.status(404).json({ message: "Không tìm thấy bài học" });
 
-    // Xử lý Code Example (Giữ nguyên logic của bạn)
     if (has_code === true) {
       await CodeExample.findOneAndUpdate(
         { lesson: id, language: lang },
@@ -215,7 +300,7 @@ export const updateLesson = async (req, res) => {
   }
 };
 
-// 5. Tạo bài học mới (CÓ TỰ ĐỘNG TẠO VECTOR)
+// 5. Tạo bài học mới
 export const createLesson = async (req, res) => {
   try {
     const { title, chapter_id, knowledge_type_slug } = req.body;
@@ -239,7 +324,6 @@ export const createLesson = async (req, res) => {
     const slug = generateSlug(title) + "-" + Date.now();
     const defaultContent = "<p>Nội dung đang cập nhật...</p>";
 
-    // --- LOGIC AI MỚI ---
     const textToEmbed = `${title}. Nội dung đang cập nhật`;
     const embedding = await getEmbedding(textToEmbed);
 
@@ -249,7 +333,7 @@ export const createLesson = async (req, res) => {
       chapter: chapter_id,
       knowledge_type: kType._id,
       content: defaultContent,
-      embedding: embedding || [], // Lưu vector ngay khi tạo
+      embedding: embedding || [],
     });
 
     res.status(201).json(newLesson);
@@ -259,7 +343,7 @@ export const createLesson = async (req, res) => {
   }
 };
 
-// 6. Xóa bài học (Giữ nguyên)
+// 6. Xóa bài học
 export const deleteLesson = async (req, res) => {
   try {
     const { id } = req.params;
