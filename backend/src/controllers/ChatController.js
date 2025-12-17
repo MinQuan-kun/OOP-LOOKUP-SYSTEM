@@ -5,102 +5,139 @@ import CodeExample from "../models/CodeExample.js";
 
 dotenv.config();
 
-// Kiểm tra API Key
-if (!process.env.GEMINI_API_KEY) {
-  console.error("Lỗi: Chưa cấu hình GEMINI_API_KEY trong file .env");
-}
-
+// Khởi tạo AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const embeddingModel = genAI.getGenerativeModel({
+  model: "text-embedding-004",
+});
 
 export const chatWithBot = async (req, res) => {
   try {
     const { message, history } = req.body;
-    
-    // Lấy tên user
     const userName = req.user ? req.user.username : "Bạn học";
 
-    if (!message) return res.status(400).json({ reply: "Hỏi gì về OOP đi bạn ơi! 😿" });
+    if (!message)
+      return res.status(400).json({ reply: "Hỏi gì về OOP đi bạn ơi! 😿" });
 
-    // 1. XỬ LÝ LỊCH SỬ CHAT (QUAN TRỌNG)
-    let cleanHistory = [];
-    if (Array.isArray(history)) {
-        // Lọc bỏ tin nhắn lỗi
-        cleanHistory = history.filter(h => h && h.role && h.parts && h.parts[0] && h.parts[0].text);
-        
-        // Loại bỏ tin nhắn cuối nếu trùng với message hiện tại (để tránh lặp lại câu hỏi)
-        const lastMsg = cleanHistory[cleanHistory.length - 1];
-        if (lastMsg && lastMsg.role === 'user' && lastMsg.parts[0].text === message) {
-            cleanHistory.pop();
-        }
-
-        while (cleanHistory.length > 0 && cleanHistory[0].role !== 'user') {
-            cleanHistory.shift();
-        }
+    // --- BƯỚC 1: TẠO VECTOR CHO CÂU HỎI CỦA NGƯỜI DÙNG ---
+    let userQueryVector;
+    try {
+      const result = await embeddingModel.embedContent(message);
+      userQueryVector = result.embedding.values;
+    } catch (e) {
+      console.error("❌ Lỗi tạo Embedding câu hỏi:", e.message);
     }
 
-    // 2. TÌM KIẾM DỮ LIỆU (RAG)
+    // --- BƯỚC 2: TÌM KIẾM VECTOR (SEMANTIC SEARCH) ---
     let knowledgeContext = "";
-    try {
-        const lessons = await Lesson.find({
-            $or: [
-                { title: { $regex: message, $options: 'i' } },
-                { slug: { $regex: message, $options: 'i' } },
-                { content: { $regex: message, $options: 'i' } }
-            ]
-        })
-        .select('_id title slug content') 
-        .limit(3); 
+
+    if (userQueryVector) {
+      try {
+        const lessons = await Lesson.aggregate([
+          {
+            $vectorSearch: {
+              index: "vector_index",
+              path: "embedding",
+              queryVector: userQueryVector,
+              numCandidates: 100,
+              limit: 3,
+            },
+          },
+          {
+            $project: {
+              _id: 1,
+              title: 1,
+              content: 1,
+              slug: 1,
+              score: { $meta: "vectorSearchScore" },
+            },
+          },
+        ]);
 
         if (lessons.length > 0) {
-            const lessonsWithCode = await Promise.all(lessons.map(async (l) => {
-                const codeEx = await CodeExample.findOne({ lesson: l._id });
-                const cleanContent = l.content ? l.content.replace(/<[^>]*>?/gm, ' ').substring(0, 300) : "";
+          const lessonsWithCode = await Promise.all(
+            lessons.map(async (l) => {
+              if (l.score < 0.6) return null;
 
-                return `
-                📚 **Kiến thức tìm thấy:** "${l.title}"
-                - **Tóm tắt:** ${cleanContent}...
-                - **Code ví dụ (${codeEx ? codeEx.language : 'N/A'}):** \`\`\`${codeEx ? codeEx.language : ''}
-                ${codeEx ? codeEx.code_content : '(Không có code mẫu)'}
-                \`\`\`
-                `;
-            }));
+              const codeEx = await CodeExample.findOne({ lesson: l._id });
 
-            knowledgeContext = `\n--- DỮ LIỆU TỪ HỆ THỐNG TRA CỨU ---\n${lessonsWithCode.join("\n\n")}\n-----------------------------------\n`;
-        } else {
-            knowledgeContext = `\n--- HỆ THỐNG ---\n(Không tìm thấy bài học khớp chính xác. Hãy trả lời bằng kiến thức OOP chuẩn của bạn.)\n----------------\n`;
+              // Làm sạch nội dung
+              const cleanContent = l.content
+                ? l.content.replace(/<[^>]*>?/gm, " ").substring(0, 600)
+                : "";
+
+              return `
+            📖 **Nguồn tham khảo:** "${l.title}" (Độ khớp: ${(
+                l.score * 100
+              ).toFixed(0)}%)
+            - **Tóm tắt:** ${cleanContent}...
+            - **Code minh họa (${codeEx ? codeEx.language : "Không có"}):**
+            \`\`\`${codeEx ? codeEx.language : ""}
+            ${codeEx ? codeEx.code_content : "// Không có code mẫu"}
+            \`\`\`
+            `;
+            })
+          );
+
+          const validDocs = lessonsWithCode.filter((d) => d !== null);
+
+          if (validDocs.length > 0) {
+            knowledgeContext = `\n=== DỮ LIỆU TRA CỨU ĐƯỢC ===\n${validDocs.join(
+              "\n\n"
+            )}\n==============================\n`;
+          }
         }
-    } catch (dbError) {
-        console.error("⚠️ Lỗi truy vấn DB:", dbError);
-        knowledgeContext = "";
+      } catch (dbError) {
+        console.error("⚠️ Lỗi Vector Search:", dbError.message);
+      }
     }
 
-    // 3. CẤU HÌNH AI
-    const model = genAI.getGenerativeModel({ 
-        model: "gemini-2.5-flash", 
-        systemInstruction: {
-            role: "system",
-            parts: [{ text: `
-                Bạn là Hatsune Miku 🎵, trợ giảng ảo môn OOP dễ thương.
-                Người dùng tên là: "${userName}".
-                
-                NHIỆM VỤ:
-                1. Dựa vào "DỮ LIỆU TỪ HỆ THỐNG TRA CỨU" để trả lời (nếu có).
-                2. Nếu không có dữ liệu, hãy tự giải thích ngắn gọn, dễ hiểu, kèm emoji 📘✨.
-                3. Luôn trả lời bằng định dạng Markdown.
-                
-                ${knowledgeContext}
-            `}]
-        }
+    // --- BƯỚC 3: XỬ LÝ LỊCH SỬ CHAT ---
+    let cleanHistory = Array.isArray(history) ? history.slice(-10) : [];
+
+    cleanHistory = cleanHistory
+      .map((msg) => ({
+        role: msg.role === "ai" ? "model" : "user",
+        parts: [{ text: msg.parts?.[0]?.text || "" }],
+      }))
+      .filter((msg) => msg.parts[0].text !== "");
+
+    // --- BƯỚC 4: GỬI PROMPT CHO AI ---
+    const systemInstruction = `
+    Bạn là Hatsune Miku 🎵, trợ giảng OOP đáng yêu.
+    Người dùng: "${userName}".
+    
+    CHỈ DẪN QUAN TRỌNG:
+    1. Đọc kỹ phần "DỮ LIỆU TRA CỨU ĐƯỢC" bên dưới (nếu có) để trả lời.
+       - Nếu dữ liệu có chứa Code, hãy hiển thị nó ra.
+       - Nếu dữ liệu khớp với câu hỏi, hãy ưu tiên dùng nó.
+    2. Nếu không có dữ liệu tra cứu hoặc câu hỏi là chào hỏi xã giao:
+       - Tự trả lời bằng kiến thức của bạn một cách ngắn gọn, dễ hiểu.
+    3. Phong cách: Vui vẻ, dùng emoji (📘, ✨, 🎵), luôn dùng Markdown.
+    
+    ${knowledgeContext}
+    `;
+
+    const chat = chatModel.startChat({
+      history: cleanHistory,
+      systemInstruction: {
+        role: "system",
+        parts: [{ text: systemInstruction }],
+      },
     });
 
-    const chat = model.startChat({ history: cleanHistory });
     const result = await chat.sendMessage(message);
     const response = await result.response;
-    
-    res.status(200).json({ reply: response.text() });
 
+    res.status(200).json({ reply: response.text() });
   } catch (error) {
-    console.error("❌ Chat Error:", error);
-    res.status(500).json({ reply: "Miku đang bị lỗi kết nối... 🎤😿", detail: error.message });
+    console.error("❌ Chat Controller Error:", error);
+    res
+      .status(500)
+      .json({
+        reply: "Miku đang bị lỗi server rồi... Xin lỗi nha! 😿",
+        detail: error.message,
+      });
   }
 };
