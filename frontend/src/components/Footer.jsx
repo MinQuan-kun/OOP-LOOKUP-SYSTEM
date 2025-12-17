@@ -50,11 +50,20 @@ const Footer = () => {
                                 <a href="https://www.w3schools.com/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-green-700 text-[11px] font-semibold transition-all">
                                     W3Schools
                                 </a>
+                                <a href="https://www.geeksforgeeks.org/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-emerald-600 text-[11px] font-semibold transition-all">
+                                    GeeksforGeeks
+                                </a>
                                 <a href="https://stackoverflow.com/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-orange-600 text-[11px] font-semibold transition-all">
                                     StackOverflow
                                 </a>
+                                <a href="https://www.programiz.com/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-indigo-600 text-[11px] font-semibold transition-all">
+                                    Programiz
+                                </a>
                                 <a href="https://gemini.google.com/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-blue-600 text-[11px] font-semibold transition-all">
                                     Gemini
+                                </a>
+                                <a href="https://www.codecademy.com/" target="_blank" rel="noreferrer" className="px-2.5 py-1 rounded-lg bg-white/30 hover:bg-white/80 border border-white/40 text-slate-800 text-[11px] font-semibold transition-all">
+                                    Codecademy
                                 </a>
                             </div>
                         </div>

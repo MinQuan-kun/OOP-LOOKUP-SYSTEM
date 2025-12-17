@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "@/lib/axios";
 
-// Nhận 2 prop callback: onMainResults (cho A*) và onRelatedResults (cho AI)
 const SearchFilterBar = ({
   selectedFilters,
   setSelectedFilters,
@@ -18,19 +17,17 @@ const SearchFilterBar = ({
     { id: "phuong-phap", label: "Phương pháp" },
   ];
 
-  // Logic Debounce: Gọi API sau khi ngừng gõ 600ms
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
       if (searchQuery.trim()) {
         setIsSearching(true);
         try {
-          // GỌI SONG SONG CẢ 2 API
           // 1. Gọi A* cho Main Content
           const aStarPromise = API.get(
             `/lesson/search-astar?q=${encodeURIComponent(searchQuery)}`
           );
 
-          // 2. Gọi AI Vector cho Related Content (Sidebar phải)
+          // 2. Gọi AI Vector cho Related Content
           const aiPromise = API.get(
             `/lesson/search?q=${encodeURIComponent(searchQuery)}`
           );
@@ -40,7 +37,7 @@ const SearchFilterBar = ({
             aiPromise,
           ]);
 
-          // Trả kết quả về cho component cha (Page)
+          // Trả kết quả về cho component Page
           if (onMainResults) onMainResults(aStarRes.data);
           if (onRelatedResults) onRelatedResults(aiRes.data);
         } catch (error) {
@@ -182,7 +179,7 @@ const SearchFilterBar = ({
 
         <input
           type="text"
-          placeholder="Nhập từ khóa (Hệ thống sẽ tìm bằng cả A* và AI Vector)..."
+          placeholder="Nhập từ khóa..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full pl-12 pr-10 py-2.5 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all bg-gray-50 hover:bg-white focus:bg-white shadow-sm font-medium"

@@ -7,7 +7,7 @@ import Link from 'next/link';
 const teamMembers = [
   {
     id: 1,
-    name: "Nguyễn Hữu Minh Quân (Người nghẹo)",
+    name: "Nguyễn Hữu Minh Quân",
     code: "49.01.104.120",
     role: "Trưởng nhóm",
     avatar: "/img/MinQuan.jpg",
@@ -15,15 +15,15 @@ const teamMembers = [
   },
   {
     id: 2,
-    name: "Bùi Minh Tín (Bộ trưởng Hitler)",
+    name: "Bùi Minh Tín",
     code: "49.01.104.152",
     role: "Thành viên",
-    avatar: "/img/MrTin.jpg",
+    avatar: "/img/MrTinn.jpg",
     task: "Xử lý Backend, Xử lý tìm kiếm và lọc nội dung"
   },
   {
     id: 3,
-    name: "Nguyễn Thái Bình (Anh Gymer)",
+    name: "Nguyễn Thái Bình",
     code: "49.01.104.011",
     role: "Thành viên",
     avatar: "/img/TB.jpg",
@@ -31,7 +31,7 @@ const teamMembers = [
   },
   {
     id: 4,
-    name: "Võ Nguyễn Minh Hoàng (Tội đồ tham lam)",
+    name: "Võ Nguyễn Minh Hoàng",
     code: "49.01.104.048",
     role: "Thành viên",
     avatar: "/img/HoangLon.jpg",
@@ -39,7 +39,7 @@ const teamMembers = [
   },
   {
     id: 5,
-    name: "Nguyễn Uyên Vy (Kẻ nghiện mèo)",
+    name: "Nguyễn Uyên Vy",
     code: "49.01.104.180",
     role: "Thành viên",
     avatar: "/img/UyenVy.jpg",
@@ -63,7 +63,7 @@ const AboutPage = () => {
 
       <Header />
       
-      <div className="container mx-auto px-4 mt-8">
+      <div className="w-full max-w-[1400px] mx-auto px-2 mt-8">
         
         <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <h1 className="text-3xl font-bold text-gray-900 mb-3">Thành viên thực hiện</h1>
