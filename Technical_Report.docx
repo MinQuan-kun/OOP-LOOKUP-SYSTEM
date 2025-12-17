@@ -1,0 +1,36 @@
+1. Backend (Node.js & Express)
+Thư mục: /backend/src/controllers
+1.1. Module Quản lý Bài học (LessonControllers.js)
+Đây là module cốt lõi xử lý việc truy xuất và tìm kiếm kiến thức.Hàm getKnowledgeTree(req, res):
+Chức năng: Lấy toàn bộ danh sách Chương và Bài học từ MongoDB, sau đó xử lý logic để lồng ghép (nesting) Bài học vào đúng Chương tương ứng.
+Input: Không có.
+Output: Cấu trúc JSON dạng cây (Tree) để Frontend hiển thị Sidebar.
+Hàm searchLessons(req, res) (Vector Search):
+Chức năng: Tìm kiếm bài học dựa trên ngữ nghĩa (Semantic Search).
+Thuật toán: Sử dụng text-embedding-004 để chuyển từ khóa thành vector, sau đó dùng MongoDB $vectorSearch để tìm các vector bài học có độ tương đồng Cosine cao nhất (> 0.75).
+Hàm searchLessonsAStar(req, res) (Heuristic Search):
+Chức năng: Tìm kiếm và xếp hạng kết quả dựa trên từ khóa chính xác.Thuật toán: Áp dụng tư duy *A :
+    g(n): Khoảng cách Levenshtein giữa từ khóa và tiêu đề (Độ sai lệch).
+    h(n): Tần suất xuất hiện của từ khóa trong nội dung (Độ phổ biến).
+    Hàm chi phí $f(n) = g(n) + h(n) sắp xếp kết quả tốt nhất lên đầu.
+1.2. Module Chatbot AI (ChatController.js)
+Hàm chatWithBot(req, res):
+Chức năng: Xử lý hội thoại giữa sinh viên và AI.
+Quy trình:Nhận tin nhắn và lịch sử chat từ Client.(Tùy chọn) Tìm kiếm bài học liên quan (RAG) để làm Context.Gửi toàn bộ Prompt sang Google Gemini API (model gemini-2.5-flash).Nhận phản hồi và trả về cho người dùng. Có tích hợp cơ chế Retry (thử lại) nếu API bị quá tải (Lỗi 503).
+1.3. Module Xác thực (AuthController.js)
+Hàm register(req, res):
+Chức năng: Đăng ký thành viên mới, tự động mã hóa mật khẩu bằng bcryptjs trước khi lưu.
+Hàm login(req, res):
+Chức năng: Xác thực người dùng. So sánh mật khẩu nhập vào với mật khẩu mã hóa trong DB.
+2. Frontend (Next.js & React)
+Thư mục: /frontend/src/components
+2.1. Component KnowledgeTree.jsx
+Chức năng: Hiển thị cây kiến thức bên trái màn hình.
+Xử lý chính:
+    + fetchAndTransformData: Gọi API lấy dữ liệu cây, sau đó gom nhóm các bài học theo loại (Khái niệm, Tính chất, Bài tập) để tạo giao diện phân cấp trực quan.
+    + toggleNode: Quản lý trạng thái đóng/mở của các thư mục mẹ.
+2.2. Component CuteBot.jsx
+Chức năng: Giao diện Chatbot nổi (Floating Widget).
+Xử lý chính:
+    + handleSend: Gửi tin nhắn người dùng, hiển thị trạng thái "Đang soạn tin..." (Typing indicator) và cập nhật tin nhắn trả về từ Server vào khung chat.
+    + Tự động cuộn xuống tin nhắn mới nhất (scrollToBottom).

@@ -1,0 +1,47 @@
+1. Hướng dẫn Cài đặt & Chạy chương trình
+Yêu cầu môi trường:
+
+Node.js (v18 trở lên).
+
+MongoDB Atlas (hoặc Local).
+
+Bước 1: Cấu hình Backend
+
+Di chuyển vào thư mục backend.
+
+Chạy lệnh npm install để cài thư viện.
+
+Tạo file .env và điền: MONGODB_URI, GEMINI_API_KEY.
+
+Chạy lệnh npm start (Server chạy tại port 5001).
+
+Bước 2: Cấu hình Frontend
+
+Di chuyển vào thư mục frontend.
+
+Chạy lệnh npm install.
+
+Tạo file .env.local điền: NEXT_PUBLIC_API_URL=http://localhost:5001/api.
+
+Chạy lệnh npm run dev (Web chạy tại http://localhost:3000).
+
+2. Hướng dẫn Chức năng
+2.1. Tra cứu kiến thức
+
+Cách 1: Duyệt cây kiến thức ở thanh bên trái. Nhấn vào các mục "Khái niệm", "Tính chất" để mở bài học.
+
+Cách 2: Nhập từ khóa vào ô tìm kiếm ở giữa màn hình (Ví dụ: "Tính đa hình"). Hệ thống sẽ gợi ý các bài học liên quan nhất.
+
+2.2. Sử dụng Chatbot trợ giảng
+
+Nhấn vào biểu tượng Robot ở góc dưới bên phải màn hình.
+
+Nhập câu hỏi (Ví dụ: "Giải thích giúp mình tính đóng gói là gì?").
+
+Đợi khoảng 2-3 giây để AI phản hồi.
+
+2.3. Xem code ví dụ
+
+Trong trang chi tiết bài học, cuộn xuống phần "Ví dụ minh họa".
+
+Nhấn vào các tab C++, Java, C# để xem code tương ứng với ngôn ngữ bạn muốn học.
