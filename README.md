@@ -1,157 +1,140 @@
-# 🔍 **OOP Lookup System**
+# OOP Lookup System - Hệ Thống Tra Cứu Lập Trình Hướng Đối Tượng
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white)]()
-[![React](https://img.shields.io/badge/React-19-blue?logo=react&logoColor=white)]()
-[![Node.js](https://img.shields.io/badge/Node.js-20-green?logo=node.js&logoColor=white)]()
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-darkgreen?logo=mongodb&logoColor=white)]()
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-teal?logo=tailwindcss&logoColor=white)]()
-[![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange?logo=google&logoColor=white)]()
-[![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker&logoColor=white)]()
+<div align="center">
+  <img src="frontend/public/Logo.png" alt="Project Banner" width="200" />
+  <br/>
+  </div>
 
----
+> **OOP Lookup System** là đồ án môn học Trí tuệ nhân tạo ,hệ tra cứu kiến thức Lập trình hướng đối tượng (OOP) , tích hợp **Trí tuệ nhân tạo (AI)**.
 
-## 📌 **Giới thiệu**
-
-**OOP Lookup System** là đồ án môn Trí tuệ nhân tạo, hệ thống tra cứu kiến thức Lập trình Hướng Đối Tượng (OOP) thông minh, tích hợp:
-
-* 🧠 **Trợ lý ảo AI (Chatbot):** Giải đáp thắc mắc về OOP theo thời gian thực sử dụng Google Gemini.
-* 📚 **Tra cứu kiến thức:** Xem các khái niệm OOP theo cấu trúc chương/mục chi tiết.
-* 🚀 **Công nghệ hiện đại:** Sử dụng Next.js (App Router) cho tốc độ tải trang nhanh và chuẩn SEO.
-
-### 🔧 Thành phần hệ thống
-
-* **Frontend**: Next.js 15 (App Router) + TailwindCSS 4 + ShadCN UI
-* **Backend**: Node.js + Express (Proxy AI Server)
-* **Database**: MongoDB (Lưu trữ bài học & lịch sử chat)
-* **AI Engine**: Google Gemini Pro API
-* **Triển khai**: Docker Compose
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=googlebard&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 ---
 
-## ⚙️ **Công nghệ sử dụng**
+## 🚀 Tính Năng Nổi Bật (Key Features)
 
-| Công nghệ          | Vai trò                           |
-| ------------------ | --------------------------------- |
-| **Next.js 15** | Framework Fullstack (SSR + CSR)   |
-| **Google Gemini** | Trí tuệ nhân tạo (Chatbot)        |
-| **ExpressJS** | Server Backend API & Auth         |
-| **MongoDB** | Lưu trữ dữ liệu phi cấu trúc      |
-| **TailwindCSS 4** | Tối ưu UI nhanh & responsive      |
-| **Docker Compose** | Triển khai nhanh toàn bộ hệ thống |
+* 🤖 **AI Tutor Chatbot (CuteBot):** Tích hợp **Google Gemini 1.5 Flash** với kỹ thuật **RAG (Retrieval-Augmented Generation)**, giúp giải đáp thắc mắc dựa trên ngữ cảnh bài học thực tế.
+* 🌳 **Cây Kiến Thức (Knowledge Tree):** Cấu trúc bài học phân cấp (Chương -> Bài -> Mục) trực quan, dễ dàng theo dõi tiến độ.
+* 🔍 **Tìm Kiếm Thông Minh (Hybrid Search):** Kết hợp thuật toán **A* (Keyword Matching)** và **Vector Search (Semantic Search)** để đem lại kết quả chính xác nhất.
+* 💻 **Đa Ngôn Ngữ Lập Trình:** Hỗ trợ xem ví dụ code song song giữa các ngôn ngữ **C++, Java, C#, Python**.
+* ⚡ **Hiệu Năng Cao:** Sử dụng **Next.js Hybrid Rendering** và tối ưu hóa **App Shell** cho trải nghiệm mượt mà.
 
 ---
 
-# 🚀 **Cách chạy dự án**
+## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
 
-Bạn có **2 cách chạy**:
+| Thành phần | Công nghệ |
+| :--- | :--- |
+| **Frontend** | Next.js 14, React, Tailwind CSS, Lucide React, Axios |
+| **Backend** | Node.js, Express.js, JWT (planned), Bcrypt |
+| **Database** | MongoDB Atlas, Mongoose ODM |
+| **AI Engine** | Google Generative AI SDK (Gemini), Vector Embeddings |
+| **Deployment** | Render (Web Service), Docker |
 
 ---
 
-# 🅰️ **Cách 1 — Chạy nhanh bằng Docker (Khuyến nghị)**
-
-### 1️⃣ Clone dự án
+## 📂 Cấu Trúc Dự Án (Project Structure)
 
 ```bash
-git clone [https://github.com/MinQuan-kun/OOP-LOOKUP-SYSTEM.git](https://github.com/MinQuan-kun/OOP-LOOKUP-SYSTEM.git)
-cd oop-lookup-system
-````
+OOP-LOOKUP-SYSTEM/
+├── backend/                 # Mã nguồn Backend (Server & API)
+│   ├── src/
+│   │   ├── config/          # Cấu hình Database
+│   │   ├── controllers/     # Xử lý logic (AI, Search A*, Auth)
+│   │   ├── models/          # Mongoose Schemas (Lesson, User...)
+│   │   └── routes/          # API Endpoints
+│   └── scripts/             # Script tạo Vector Embeddings
+├── frontend/                # Mã nguồn Frontend (Next.js)
+│   ├── src/
+│   │   ├── app/             # App Router (Pages)
+│   │   ├── components/      # UI Components (CuteBot, Tree...)
+│   │   └── lib/             # Tiện ích (Axios config)
+├── docs/                    # Tài liệu báo cáo đồ án
+└── docker-compose.yml       # Cấu hình Docker
 
-### 2️⃣ Chạy toàn bộ bằng Docker (MongoDB + Backend + Frontend)
-
-Nếu đang dùng Windows, chỉ cần chạy file batch:
-
-```bash
-start.bat
 ```
 
-Hoặc chạy lệnh thủ công (cho Mac/Linux):
+---
 
-```bash
-docker compose up --build -d
-```
+## ⚙️ Cài Đặt & Chạy (Installation)
 
-### 3️⃣ Truy cập ứng dụng
+### Yêu cầu tiên quyết
 
-| Thành phần  | URL                                                    |
-| ----------- | ------------------------------------------------------ |
-| Frontend    | [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)         |
-| Backend API | [http://localhost:5001/api](https://www.google.com/search?q=http://localhost:5001/api) |
-| MongoDB     | `mongodb://localhost:27017`                            |
+* [Node.js](https://nodejs.org/) (v18 trở lên)
+* [MongoDB Atlas](https://www.mongodb.com/) (Connection String)
+* [Google AI Studio API Key](https://aistudio.google.com/)
 
-### 4️⃣ Dừng ứng dụng
-
-```bash
-docker compose down
-```
-
------
-
-# 🅱️ **Cách 2 — Chạy thủ công không dùng Docker**
-
-Nếu máy bạn **không có Docker** hoặc muốn chạy môi trường phát triển (Dev).
-
-### 1️⃣ Cài đặt Dependencies
-
-**Backend:**
+### 1. Cấu hình Backend
 
 ```bash
 cd backend
 npm install
-# Tạo file .env và điền GEMINI_API_KEY nếu cần
+
+# Tạo file .env và điền thông tin:
+# MONGODB_URI=mongodb+srv://...
+# GEMINI_API_KEY=AIzaSy...
+# PORT=5001
+
+npm start
+
 ```
 
-**Frontend:**
-
-```bash
-cd ../frontend
-npm install
-```
-
-### 2️⃣ Chạy Backend
-
-Mở terminal 1:
-
-```bash
-cd backend
-npm run dev
-```
-
-👉 Server chạy tại: [http://localhost:5001](https://www.google.com/search?q=http://localhost:5001)
-
-### 3️⃣ Chạy Frontend (Next.js)
-
-Mở terminal 2:
+### 2. Cấu hình Frontend
 
 ```bash
 cd frontend
+npm install
+
+# Tạo file .env.local và điền thông tin:
+# NEXT_PUBLIC_API_URL=http://localhost:5001/api
+
 npm run dev
-```
-
-👉 Web chạy tại: [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)
-
------
-
-## 📂 **Cấu trúc thư mục**
 
 ```
-oop-lookup-system/
-│
-├── backend/        # Express API + AI Controller
-├── frontend/       # Next.js App Router Source Code
-├── start.bat       # Script khởi động nhanh (Windows)
-├── docker-compose.yml
-└── README.md
+
+### 3. Chạy bằng Docker (Khuyên dùng)
+
+Nếu máy bạn đã cài Docker, chỉ cần chạy 1 lệnh duy nhất:
+
+```bash
+docker-compose up --build
+
 ```
 
------
+Truy cập ứng dụng tại: `http://localhost:3000`
 
-## 🧰 **Lệnh hữu ích**
+---
 
-| Mục tiêu             | Lệnh                            |
-| -------------------- | ------------------------------- |
-| Build Docker (Sạch)  | `docker compose build --no-cache`|
-| Xem logs             | `docker compose logs -f`        |
-| Cài thư viện         | `npm install`                   |
-| Chạy Dev Mode        | `npm run dev`                   |
+## 👥 Thành Viên Thực Hiện (The Team)
 
+Dự án được thực hiện bởi nhóm sinh viên Khoa Công nghệ Thông tin:
 
+| STT | Họ và Tên | Mã Sinh Viên | Vai trò |
+| --- | --- | --- | --- |
+| 1 | **Nguyễn Hữu Minh Quân** | 49.01.104.120 | Leader, Fullstack Dev, AI Integration |
+| 2 | **Bùi Minh Tín** | 49.01.104.152 | Backend Dev, Search Algorithms |
+| 3 | **Nguyễn Thái Bình** | 49.01.104.011 | Content Creator, Database |
+| 4 | **Võ Nguyễn Minh Hoàng** | 49.01.104.048 | Frontend UI, Tester |
+| 5 | **Nguyễn Uyên Vy** | 49.01.104.180 | Documenter, Content |
+
+---
+
+## 📸 Demo Screenshots
+
+*(Chèn ảnh chụp màn hình giao diện web của bạn vào đây)*
+
+* *Trang chủ & Cây kiến thức*
+*Giao diện Chatbot AI*
+* *Kết quả tìm kiếm*
+
+---
+## 🌐 Liên Kết (Deployment)
+
+* **Frontend URL:** [https://oop-frontend.onrender.com](https://oop-frontend.onrender.com)
+* **Backend API:** [https://oop-backend.onrender.com](https://oop-backend-mz4u.onrender.com)
