@@ -1,9 +1,7 @@
 "use client";
 import React from "react";
 
-// Nhận vào danh sách kết quả (ở đây là kết quả AI)
 const RelatedContent = ({ searchResults, onSelectLesson }) => {
-  // Nếu searchResults là null (chưa tìm kiếm), trả về null để ẩn đi (hoặc hiện cái khác tuỳ ý)
   if (!searchResults) {
     return null;
   }

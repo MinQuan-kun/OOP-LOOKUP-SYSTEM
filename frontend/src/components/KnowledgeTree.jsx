@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import API from "@/lib/axios";
 import { useAuth } from '@/context/AuthContext';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // --- Hộp thoại xóa  ---
+  // 1 Hộp thoại xóa  
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,
     type: null,
@@ -30,13 +30,13 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     title: ''
   });
 
-  // --- Hộp thoại thêm  ---
+  // 2 Hộp thoại thêm  
   const [addModal, setAddModal] = useState({
     isOpen: false,
-    type: null, 
-    title: '',  
-    chapterId: null, 
-    rootSlug: null   
+    type: null,
+    title: '',
+    chapterId: null,
+    rootSlug: null
   });
 
   const KNOWLEDGE_ROOTS = [
@@ -61,7 +61,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
             return {
               ...chapter,
               id: `${rootType.id}-${chapter.id}`,
-              originalChapterId: chapter.id, 
+              originalChapterId: chapter.id,
               children: matchingLessons
             };
           }).filter(Boolean);
@@ -93,13 +93,13 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     }
   };
 
-  // --- 3. Các hàm mở model thêm ---
+  //  3. Các hàm mở model thêm
   const openAddChapterModal = (e) => {
     e.stopPropagation();
     setAddModal({
       isOpen: true,
       type: 'chapter',
-      title: '', 
+      title: '',
       chapterId: null,
       rootSlug: null
     });
@@ -110,67 +110,76 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
     setAddModal({
       isOpen: true,
       type: 'lesson',
-      title: '', 
+      title: '',
       chapterId: chapterId,
       rootSlug: rootSlug
     });
   };
 
-  // --- 4. Hàm thực thi thêm  ---
+  //  4. Hàm thực thi thêm
   const executeAdd = async () => {
     if (!addModal.title.trim()) {
-        toast.warning("Vui lòng nhập tên!");
-        return;
+      toast.error("Vui lòng nhập tên!");
+      return;
     }
 
-    try {
-        if (addModal.type === 'chapter') {
-            // Api thêm chương
-            const newOrder = originalChapters.length + 1;
-            await API.post('/chapter', {
-                title: addModal.title,
-                order: newOrder
-            });
-            toast.success("Đã thêm chương mới!");
-        } else {
-            // Api thêm bài học
-            await API.post('/lesson', {
-                title: addModal.title,
-                chapter_id: addModal.chapterId,
-                knowledge_type_slug: addModal.rootSlug
-            });
-            toast.success("Đã thêm bài học!");
-        }
-        
-        // Reset và đóng modal
-        setRefreshKey(prev => prev + 1);
-        setAddModal({ ...addModal, isOpen: false });
+    const isChapter = addModal.type === 'chapter';
 
+    // Tạo promise request
+    const addPromise = isChapter
+      ? API.post('/chapter', { title: addModal.title, order: originalChapters.length + 1 })
+      : API.post('/lesson', { title: addModal.title, chapter_id: addModal.chapterId, knowledge_type_slug: addModal.rootSlug });
+
+    // Hiển thị toast loading -> success/error
+    toast.promise(addPromise, {
+      loading: 'Đang thêm mới...',
+      success: isChapter ? 'Đã thêm chương mới!' : 'Đã thêm bài học!',
+      error: (err) => `Lỗi: ${err.response?.data?.message || err.message}`
+    });
+
+    try {
+      await addPromise;
+      setRefreshKey(prev => prev + 1);
+      setAddModal({ ...addModal, isOpen: false });
     } catch (error) {
-        toast.error("Lỗi: " + (error.response?.data?.message || error.message));
+      // Lỗi đã được toast xử lý
     }
   };
 
-  // --- Hàm Xóa  ---
+  // --- Hàm Xóa ---
   const openDeleteModal = (e, type, id, title) => {
     e.stopPropagation();
     setDeleteModal({ isOpen: true, type, id, title });
   };
 
+  // 5. Hàm thực thi Xóa
   const executeDelete = async () => {
+    const isChapter = deleteModal.type === 'chapter';
+
+    // Tạo promise xóa
+    const deletePromise = isChapter
+      ? API.delete(`/chapter/${deleteModal.id}`)
+      : API.delete(`/lesson/${deleteModal.id}`);
+
+    // Hiển thị toast thông minh
+    toast.promise(deletePromise, {
+      loading: isChapter ? 'Đang xóa chương...' : 'Đang xóa bài học...',
+      success: isChapter ? 'Đã xóa chương!' : 'Đã xóa bài học!',
+      error: (err) => `Xóa thất bại: ${err.response?.data?.message || err.message}`
+    });
+
     try {
-      if (deleteModal.type === 'chapter') {
-        await API.delete(`/chapter/${deleteModal.id}`);
-        toast.success("Đã xóa chương!");
-      } else if (deleteModal.type === 'lesson') {
-        await API.delete(`/lesson/${deleteModal.id}`);
-        toast.success("Đã xóa bài học!");
-        if (activeNode === deleteModal.id) onSelectLesson('');
+      await deletePromise;
+
+      // Nếu xóa bài đang xem thì reset view
+      if (!isChapter && activeNode === deleteModal.id) {
+        if (onSelectLesson) onSelectLesson('');
       }
+
       setRefreshKey(prev => prev + 1);
       setDeleteModal({ ...deleteModal, isOpen: false });
+
     } catch (error) {
-      toast.error("Lỗi xóa: " + (error.response?.data?.message || error.message));
       setDeleteModal({ ...deleteModal, isOpen: false });
     }
   };
@@ -187,10 +196,10 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
             Cây kiến thức
           </h2>
           {isAdmin && (
-              <button onClick={openAddChapterModal} className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-1" title="Thêm chương mới">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" /></svg>
-                  Chương
-              </button>
+            <button onClick={openAddChapterModal} className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-1" title="Thêm chương mới">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" /></svg>
+              Chương
+            </button>
           )}
         </div>
 
@@ -216,32 +225,32 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
                 {isRootExpanded && (
                   <div className="ml-3 pl-2 border-l border-gray-200 mt-1 space-y-1">
                     {rootFolder.children.length === 0 && <div className="text-xs text-gray-400 italic pl-4 py-1">Chưa có dữ liệu</div>}
-                    
+
                     {rootFolder.children.map(chapter => {
                       const isChapterExpanded = expandedNodes.includes(chapter.id);
                       return (
                         <div key={chapter.id}>
                           <div className="flex items-center justify-between hover:bg-gray-100 rounded transition-colors pr-2 group/chapter">
-                              <button onClick={() => toggleNode(chapter.id)} className="flex-1 flex items-center gap-2 px-2 py-1.5 text-left">
-                                <span className={`text-gray-400 transition-transform duration-200 ${isChapterExpanded ? 'rotate-90' : ''}`}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
-                                </span>
-                                <span className="text-yellow-500">
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                                </span>
-                                <span className="font-semibold text-xs text-gray-700">{chapter.title}</span>
-                              </button>
+                            <button onClick={() => toggleNode(chapter.id)} className="flex-1 flex items-center gap-2 px-2 py-1.5 text-left">
+                              <span className={`text-gray-400 transition-transform duration-200 ${isChapterExpanded ? 'rotate-90' : ''}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
+                              </span>
+                              <span className="text-yellow-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
+                              </span>
+                              <span className="font-semibold text-xs text-gray-700">{chapter.title}</span>
+                            </button>
 
-                              {isAdmin && (
-                                  <div className="flex items-center gap-1 opacity-0 group-hover/chapter:opacity-100 transition-opacity">
-                                      <button onClick={(e) => openAddLessonModal(e, chapter.originalChapterId, rootFolder.id)} className="p-1 text-blue-400 hover:text-blue-600 hover:bg-blue-50 rounded" title="Thêm bài">
-                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
-                                      </button>
-                                      <button onClick={(e) => openDeleteModal(e, 'chapter', chapter.originalChapterId, chapter.title)} className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded" title="Xóa chương">
-                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
-                                      </button>
-                                  </div>
-                              )}
+                            {isAdmin && (
+                              <div className="flex items-center gap-1 opacity-0 group-hover/chapter:opacity-100 transition-opacity">
+                                <button onClick={(e) => openAddLessonModal(e, chapter.originalChapterId, rootFolder.id)} className="p-1 text-blue-400 hover:text-blue-600 hover:bg-blue-50 rounded" title="Thêm bài">
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" /></svg>
+                                </button>
+                                <button onClick={(e) => openDeleteModal(e, 'chapter', chapter.originalChapterId, chapter.title)} className="p-1 text-red-400 hover:text-red-600 hover:bg-red-50 rounded" title="Xóa chương">
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
+                                </button>
+                              </div>
+                            )}
                           </div>
 
                           {isChapterExpanded && (
@@ -249,15 +258,15 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
                               {chapter.children.length === 0 && <div className="text-xs text-gray-400 italic pl-6 py-1">Chưa có bài học</div>}
                               {chapter.children.map(lesson => (
                                 <div key={lesson.id} className={`flex items-center justify-between rounded group/lesson pr-2 transition-colors ${activeNode === lesson.id ? 'bg-blue-100' : 'hover:bg-gray-50'}`}>
-                                    <button onClick={() => { setActiveNode(lesson.id); if (onSelectLesson) onSelectLesson(lesson.slug); }} className={`flex-1 flex items-center gap-2 px-2 py-1.5 text-xs text-left ${activeNode === lesson.id ? 'text-blue-700 font-medium' : 'text-gray-600'}`}>
-                                      <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 shrink-0 ${activeNode === lesson.id ? 'text-blue-500' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                                      <span className="truncate">{lesson.title}</span>
+                                  <button onClick={() => { setActiveNode(lesson.id); if (onSelectLesson) onSelectLesson(lesson.slug); }} className={`flex-1 flex items-center gap-2 px-2 py-1.5 text-xs text-left ${activeNode === lesson.id ? 'text-blue-700 font-medium' : 'text-gray-600'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 shrink-0 ${activeNode === lesson.id ? 'text-blue-500' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                    <span className="truncate">{lesson.title}</span>
+                                  </button>
+                                  {isAdmin && (
+                                    <button onClick={(e) => openDeleteModal(e, 'lesson', lesson.id, lesson.title)} className="p-1 text-red-300 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover/lesson:opacity-100 transition-opacity" title="Xóa bài học">
+                                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                                     </button>
-                                    {isAdmin && (
-                                      <button onClick={(e) => openDeleteModal(e, 'lesson', lesson.id, lesson.title)} className="p-1 text-red-300 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover/lesson:opacity-100 transition-opacity" title="Xóa bài học">
-                                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
-                                      </button>
-                                    )}
+                                  )}
                                 </div>
                               ))}
                             </div>
@@ -273,7 +282,6 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
         </div>
       </div>
 
-      {/* --- 5. Dialog xác nhận xóa --- */}
       <Dialog open={deleteModal.isOpen} onOpenChange={(open) => setDeleteModal({ ...deleteModal, isOpen: open })}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -284,9 +292,9 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
             <DialogDescription className="pt-2">
               Bạn có chắc chắn muốn xóa <strong>{deleteModal.title}</strong>?
               {deleteModal.type === 'chapter' && (
-                <div className="mt-3 p-3 bg-amber-50 text-amber-800 text-sm rounded-md border border-amber-200">
+                <span className="block mt-3 p-3 bg-amber-50 text-amber-800 text-sm rounded-md border border-amber-200">
                   ⚠️ <strong>Lưu ý:</strong> Nếu chương này đang chứa bài học, hệ thống sẽ ngăn chặn việc xóa.
-                </div>
+                </span>
               )}
               {deleteModal.type === 'lesson' && <span className="block mt-2 text-gray-500">Hành động này không thể hoàn tác.</span>}
             </DialogDescription>
@@ -298,7 +306,7 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
         </DialogContent>
       </Dialog>
 
-      {/* --- 6. dialog thêm --- */}
+      {/* --- Dialog thêm --- */}
       <Dialog open={addModal.isOpen} onOpenChange={(open) => setAddModal({ ...addModal, isOpen: open })}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
@@ -310,15 +318,15 @@ const KnowledgeTree = ({ onSelectLesson, filters = [] }) => {
               Nhập tên cho {addModal.type === 'chapter' ? 'chương' : 'bài học'} mới của bạn.
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="py-2">
-            <Input 
+            <Input
               value={addModal.title}
               onChange={(e) => setAddModal({ ...addModal, title: e.target.value })}
               placeholder={addModal.type === 'chapter' ? "Ví dụ: CHƯƠNG 8: Test" : "Nhập tên bài học..."}
               className="col-span-3 focus-visible:ring-blue-500"
               onKeyDown={(e) => {
-                  if (e.key === 'Enter') executeAdd();
+                if (e.key === 'Enter') executeAdd();
               }}
               autoFocus
             />

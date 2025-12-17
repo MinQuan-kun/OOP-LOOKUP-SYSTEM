@@ -17,19 +17,19 @@ router.get("/tree", getKnowledgeTree);
 // 2. Tìm kiếm AI (Cho Sidebar phải)
 router.get("/search", searchLessons);
 
-// 2.5 Tìm kiếm A* (Cho Main Content) - MỚI
+// 3 Tìm kiếm A* (Cho Main Content)
 router.get("/search-astar", searchLessonsAStar);
 
-// 3. Lấy chi tiết bài học
+// 4. Lấy chi tiết bài học
 router.get("/:slug", getLessonDetail);
 
-// 4. Cập nhật bài học
+// 5. Cập nhật bài học
 router.put("/:id", updateLesson);
 
-// 5. Tạo bài học mới
+// 6. Tạo bài học mới
 router.post("/", createLesson);
 
-// 6. Xóa bài học
+// 7. Xóa bài học
 router.delete("/:id", deleteLesson);
 
 export default router;

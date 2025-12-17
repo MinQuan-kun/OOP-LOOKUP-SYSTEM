@@ -24,10 +24,10 @@ const HomePage = () => {
   ]);
 
   // --- STATE TÌM KIẾM ---
-  // 1. Kết quả A* (Hiện ở Main Content)
+  // Kết quả A*
   const [mainSearchResults, setMainSearchResults] = useState(null);
 
-  // 2. Kết quả AI (Hiện ở Related Content)
+  // 2. Kết quả AI
   const [relatedSearchResults, setRelatedSearchResults] = useState(null);
 
   // Khi chọn một bài học từ Cây kiến thức hoặc Kết quả tìm kiếm

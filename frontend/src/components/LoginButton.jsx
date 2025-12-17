@@ -9,16 +9,15 @@ const LoginButton = () => {
   const { user, logout } = useAuth(); 
 
   const handleLogout = () => {
-    logout(); // Gọi hàm logout từ Context (nó sẽ tự xóa localStorage, toast thông báo, v.v.)
-    // Không cần navigate('/') ở đây vì trong AuthContext đã có navigate('/login') hoặc bạn có thể tùy chỉnh
+    logout();
+   
   };
 
-  // --- PHẦN GIAO DIỆN (UI) GIỮ NGUYÊN HOÀN TOÀN ---
   return (
     <div className="absolute top-0 left-0 w-full flex justify-end items-center px-8 py-4 z-50 pointer-events-none">
       
       {user ? (
-        // --- TRƯỜNG HỢP ĐÃ LOGIN ---
+        //  TRƯỜNG HỢP ĐÃ LOGIN 
         <div className="pointer-events-auto flex items-center gap-3 bg-white/90 backdrop-blur-md px-5 py-2 rounded-full shadow-lg border border-white/50 transition-all hover:bg-white">
           {/* Avatar hoặc Icon User */}
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
@@ -44,7 +43,7 @@ const LoginButton = () => {
           </button>
         </div>
       ) : (
-        // --- TRƯỜNG HỢP CHƯA LOGIN ---
+        // TRƯỜNG HỢP CHƯA LOGIN 
         <button
           onClick={() => router.push('/login')}
           className="pointer-events-auto bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white text-base font-bold py-2 px-6 rounded-full shadow-lg transform transition hover:scale-105 border border-white/20 backdrop-blur-sm"

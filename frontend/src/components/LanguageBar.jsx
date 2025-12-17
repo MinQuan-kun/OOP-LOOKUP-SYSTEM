@@ -5,7 +5,7 @@ const LanguageBar = ({ activeLang, setActiveLang }) => {
   const languages = [
     { id: 'cpp', label: 'C++' },
     { id: 'java', label: 'Java' },
-    { id: 'csharp', label: 'C#' }, // ID phải khớp với Database seed.js
+    { id: 'csharp', label: 'C#' },
     { id: 'dart', label: 'Dart' },
     { id: 'ruby', label: 'Ruby' },
     { id: 'php', label: 'PHP' },
@@ -17,7 +17,7 @@ const LanguageBar = ({ activeLang, setActiveLang }) => {
         {languages.map((lang) => (
           <button
             key={lang.id}
-            onClick={() => setActiveLang(lang.id)} // Gọi hàm cập nhật state ở HomePage
+            onClick={() => setActiveLang(lang.id)}
             className={`
               relative h-full flex-1 w-full flex items-center justify-center
               text-sm md:text-base font-bold transition-colors duration-200

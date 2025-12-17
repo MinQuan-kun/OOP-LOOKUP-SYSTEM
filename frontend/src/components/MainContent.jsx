@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import API from "@/lib/axios";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import toast from 'react-hot-toast'; // Import toast
 
-// Thêm prop searchResults và onSelectResult
+// Nhận prop searchResults và onSelectResult từ cha
 const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
   const [lesson, setLesson] = useState(null);
   const [showCode, setShowCode] = useState(false);
@@ -34,7 +35,7 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
 
   // Fetch bài học chi tiết
   useEffect(() => {
-    // Nếu đang hiển thị search results (A*) thì không fetch bài học
+    // Nếu đang hiển thị kết quả tìm kiếm thì không fetch bài học theo slug
     if (searchResults !== null) return;
 
     if (!slug) return;
@@ -53,9 +54,9 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
     };
 
     fetchLesson();
-  }, [slug, lang, searchResults]); // Thêm searchResults vào dependency
+  }, [slug, lang, searchResults]);
 
-  // Xử lý sự kiện chỉnh sửa (giữ nguyên logic cũ của bạn)
+  // Xử lý sự kiện chỉnh sửa
   const handleEditClick = () => {
     setEditForm({
       title: lesson.title || "",
@@ -69,9 +70,19 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
     setIsEditing(true);
   };
 
+  // Xử lý Lưu thay đổi (Dùng toast thay cho alert)
   const handleSave = async () => {
+    const savePromise = API.put(`/lesson/${lesson._id}`, { ...editForm, lang: lang });
+
+    toast.promise(savePromise, {
+      loading: 'Đang lưu thay đổi...',
+      success: 'Cập nhật thành công!',
+      error: (err) => `Lưu thất bại: ${err.response?.data?.message || err.message}`
+    });
+
     try {
-      await API.put(`/lesson/${lesson._id}`, { ...editForm, lang: lang });
+      await savePromise;
+      
       setLesson((prev) => {
         const updatedLesson = {
           ...prev,
@@ -92,21 +103,19 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
         }
         return updatedLesson;
       });
-      alert("Cập nhật thành công!");
+      
       setIsEditing(false);
     } catch (error) {
-      alert(
-        "Lưu thất bại: " + (error.response?.data?.message || error.message)
-      );
+      console.error(error);
     }
   };
 
-  // --- TRƯỜNG HỢP 1: HIỂN THỊ KẾT QUẢ TÌM KIẾM A* ---
+  // --- TRƯỜNG HỢP 1: HIỂN THỊ KẾT QUẢ TÌM KIẾM ---
   if (searchResults) {
     if (searchResults.length === 0) {
       return (
         <div className="bg-white min-h-[500px] rounded-xl shadow-sm border border-gray-200 p-10 flex items-center justify-center text-gray-400">
-          Không tìm thấy kết quả A* nào phù hợp.
+          Không tìm thấy kết quả nào phù hợp.
         </div>
       );
     }
@@ -114,10 +123,7 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
     return (
       <div className="bg-white h-[calc(100vh-140px)] min-h-[500px] overflow-y-auto custom-scrollbar rounded-xl shadow-sm border border-gray-200 p-6 md:p-10">
         <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-          <span className="bg-indigo-100 text-indigo-700 p-2 rounded-lg">
-            ⚡
-          </span>
-          Kết quả tìm kiếm A* (Heuristic Search)
+          Kết quả tìm kiếm
         </h2>
         <div className="grid gap-4">
           {searchResults.map((result) => (
@@ -130,12 +136,6 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
                 <h3 className="font-bold text-lg text-indigo-700 group-hover:text-indigo-600">
                   {result.title}
                 </h3>
-                {/* Hiển thị điểm A* cost */}
-                {result.score !== undefined && (
-                  <span className="text-xs font-mono bg-gray-200 text-gray-600 px-2 py-1 rounded">
-                    Cost: {result.score}
-                  </span>
-                )}
               </div>
               <p className="text-sm text-gray-600 line-clamp-2">
                 {result.snippet}
@@ -147,7 +147,7 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
     );
   }
 
-  // --- TRƯỜNG HỢP 2: HIỂN THỊ CHI TIẾT BÀI HỌC (Logic cũ) ---
+  // --- TRƯỜNG HỢP 2: HIỂN THỊ CHI TIẾT BÀI HỌC ---
   if (!slug)
     return (
       <div className="bg-white min-h-[500px] rounded-xl shadow-sm border border-gray-200 p-10 flex items-center justify-center text-gray-400 flex-col">
@@ -171,6 +171,7 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
     <div className="bg-white h-[calc(100vh-140px)] min-h-[500px] overflow-y-auto custom-scrollbar rounded-xl shadow-sm border border-gray-200 p-6 md:p-10 relative">
       {!isEditing ? (
         <>
+          {/*  PHẦN HIỂN THỊ NỘI DUNG */}
           <div className="absolute top-6 right-8 z-10">
             <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase border border-gray-200">
               {lang}
@@ -195,7 +196,9 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
           {lesson.code_example?.syntax_note && (
             <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-lg">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-amber-600">⚠</span>
+                <span className="text-amber-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>
+                </span>
                 <h3 className="font-bold text-amber-800 uppercase text-sm">
                   Lưu ý trong {lang}:
                 </h3>
@@ -212,9 +215,16 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
           {lesson.code_example ? (
             lesson.code_example.is_supported === false ? (
               <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-5 flex items-start gap-3">
-                <h3 className="font-bold text-red-700">
-                  Không hỗ trợ trong {lang.toUpperCase()}
-                </h3>
+                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <div>
+                    <h3 className="font-bold text-red-700">
+                    Không hỗ trợ trong {lang.toUpperCase()}
+                    </h3>
+                    <p className="text-sm text-red-600 mt-1">
+                        Khái niệm này không tồn tại hoặc không được hỗ trợ trực tiếp trong ngôn ngữ này.
+                        {lesson.code_example.syntax_note ? " (Xem lưu ý ở trên)" : ""}
+                    </p>
+                </div>
               </div>
             ) : lesson.code_example.code_content &&
               lesson.code_example.code_content.trim() !== "" ? (
@@ -230,7 +240,7 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
                         : "bg-white border-gray-300"
                     }`}
                   >
-                    {showCode && <span className="text-white text-xs">✓</span>}
+                    {showCode && <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>}
                   </div>
                   <label className="font-bold text-gray-700 cursor-pointer text-sm md:text-base">
                     {showCode ? "Ẩn ví dụ minh họa" : "Xem ví dụ minh họa"}
@@ -239,11 +249,14 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
 
                 {showCode && (
                   <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-                    <h3 className="text-lg font-bold text-gray-800 mb-3">
+                    <h3 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                       Ví dụ minh họa (
                       {lesson.code_example.language.toUpperCase()})
                     </h3>
                     <div className="relative group rounded-lg overflow-hidden border border-gray-700 shadow-inner">
+                        <div className="absolute top-0 right-0 bg-gray-700 text-xs text-white px-2 py-1 rounded-bl-md z-10">
+                          {lesson.code_example.language}
+                        </div>
                       <SyntaxHighlighter
                         language={
                           lesson.code_example.language === "csharp"
@@ -287,25 +300,115 @@ const MainContent = ({ slug, lang, searchResults, onSelectResult }) => {
           )}
         </>
       ) : (
-        // FORM EDIT (Rút gọn cho ngắn, bạn dùng lại phần cũ)
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-indigo-700">
-            Chỉnh sửa bài học
-          </h2>
-          {/* ... Inputs cho Title, Content, Code ... */}
-          {/* Giữ nguyên phần Form Inputs như file cũ của bạn */}
+        //  FORM CHỈNH SỬA 
+        <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">
+          <div className="flex justify-between items-center border-b pb-4">
+            <h2 className="text-xl font-bold text-indigo-700">
+              Chỉnh sửa bài học
+            </h2>
+            <button onClick={() => setIsEditing(false)} className="text-gray-500 hover:text-gray-700">✕ Hủy bỏ</button>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Tiêu đề bài học</label>
+            <input 
+                type="text" 
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none" 
+                value={editForm.title} 
+                onChange={(e) => setEditForm({ ...editForm, title: e.target.value })} 
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Nội dung lý thuyết (HTML)</label>
+            <textarea 
+                rows={10} 
+                className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-sm" 
+                value={editForm.content} 
+                onChange={(e) => setEditForm({ ...editForm, content: e.target.value })} 
+            />
+          </div>
+
+          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-4">
+            <div className="flex items-center gap-2">
+              <input 
+                type="checkbox" 
+                id="has_code" 
+                checked={editForm.has_code} 
+                onChange={(e) => setEditForm({ ...editForm, has_code: e.target.checked })} 
+                className="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500 border-gray-300 cursor-pointer" 
+              />
+              <label htmlFor="has_code" className="text-sm font-bold text-gray-700 select-none cursor-pointer">Có ví dụ code minh họa ({lang.toUpperCase()})?</label>
+            </div>
+
+            {editForm.has_code && (
+              <div className="animate-in fade-in slide-in-from-top-2 duration-200 space-y-4 pl-6 border-l-2 border-indigo-200">
+                {/* 1. CHECKBOX HỖ TRỢ */}
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="checkbox" 
+                    id="is_supported" 
+                    checked={editForm.is_supported} 
+                    onChange={(e) => setEditForm({ ...editForm, is_supported: e.target.checked })} 
+                    className="w-4 h-4 text-green-600 rounded focus:ring-green-500 border-gray-300 cursor-pointer" 
+                  />
+                  <label htmlFor="is_supported" className="text-sm font-semibold text-gray-700 cursor-pointer">
+                    Ngôn ngữ {lang.toUpperCase()} có hỗ trợ tính năng này không?
+                  </label>
+                </div>
+
+                {/* 2. TEXTAREA LƯU Ý RIÊNG */}
+                <div>
+                  <label className="block text-xs font-bold text-amber-600 mb-1">Lưu ý đặc thù / Sự khác biệt cú pháp (HTML)</label>
+                  <textarea 
+                    rows={3} 
+                    className="w-full p-2 border border-amber-200 rounded focus:ring-2 focus:ring-amber-500 outline-none text-sm bg-amber-50/50" 
+                    value={editForm.syntax_note} 
+                    onChange={(e) => setEditForm({ ...editForm, syntax_note: e.target.value })} 
+                    placeholder="Ví dụ: C++ dùng dấu :, Java dùng extends..." 
+                  />
+                </div>
+
+                {/* 3. CODE CONTENT*/}
+                {editForm.is_supported && (
+                  <>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-500 mb-1">Đoạn mã nguồn</label>
+                      <textarea 
+                        rows={6} 
+                        className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-sm bg-slate-900 text-slate-100" 
+                        value={editForm.code_content} 
+                        onChange={(e) => setEditForm({ ...editForm, code_content: e.target.value })} 
+                        placeholder="// Nhập code ví dụ tại đây..." 
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-500 mb-1">Giải thích code</label>
+                      <input 
+                        type="text" 
+                        className="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none text-sm" 
+                        value={editForm.explanation} 
+                        onChange={(e) => setEditForm({ ...editForm, explanation: e.target.value })} 
+                        placeholder="Giải thích ngắn gọn..." 
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+          
           <div className="flex justify-end gap-3 pt-4 border-t">
-            <button
-              onClick={() => setIsEditing(false)}
-              className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded font-medium"
+            <button 
+                onClick={() => setIsEditing(false)} 
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded font-medium"
             >
-              Hủy bỏ
+                Hủy bỏ
             </button>
-            <button
-              onClick={handleSave}
-              className="px-6 py-2 bg-indigo-600 text-white rounded font-bold hover:bg-indigo-700 shadow-md active:scale-95"
+            <button 
+                onClick={handleSave} 
+                className="px-6 py-2 bg-indigo-600 text-white rounded font-bold hover:bg-indigo-700 shadow-md active:scale-95"
             >
-              Lưu thay đổi
+                Lưu thay đổi
             </button>
           </div>
         </div>

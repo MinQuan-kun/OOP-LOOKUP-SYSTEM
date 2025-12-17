@@ -117,67 +117,82 @@ export const getLessonDetail = async (req, res) => {
   }
 };
 
-// --- 3. TÌM KIẾM AI (VECTOR SEARCH) - Dùng cho Sidebar phải ---
+// --- 3. TÌM KIẾM AI 
 export const searchLessons = async (req, res) => {
   try {
     const { q } = req.query;
-
-    if (!q) return res.status(400).json({ message: "Vui lòng nhập từ khóa" });
-
-    // Bước 1: Tạo Vector cho từ khóa tìm kiếm
-    const queryVector = await getEmbedding(q);
-
-    if (!queryVector) {
-      // Fallback: Nếu AI lỗi, dùng tìm kiếm thường (Regex)
-      const basicResults = await Lesson.find({
-        $or: [
-          { title: { $regex: q, $options: "i" } },
-          { content: { $regex: q, $options: "i" } },
-        ],
-      })
-        .select("title slug content chapter")
-        .limit(5);
-      return res.status(200).json(basicResults);
+    // 1. Chặn từ khóa quá ngắn hoặc rỗng để tránh spam kết quả rác
+    if (!q || q.trim().length < 2) {
+      return res.status(200).json([]); // Trả về rỗng ngay
     }
 
-    // Bước 2: Tìm kiếm Vector trên MongoDB Atlas
-    const results = await Lesson.aggregate([
-      {
-        $vectorSearch: {
-          index: "vector_index", // Tên Index bạn tạo trên Compass
-          path: "embedding",
-          queryVector: queryVector,
-          numCandidates: 100,
-          limit: 5, // Chỉ lấy 5 kết quả liên quan nhất cho sidebar
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-          title: 1,
-          slug: 1,
-          content: 1,
-          score: { $meta: "vectorSearchScore" },
-        },
-      },
-    ]);
+    let results = [];
 
+    // BƯỚC 1: Thử tìm bằng AI (Vector Search)
+    try {
+      const queryVector = await getEmbedding(q);
+      
+      if (queryVector) {
+        const vectorResults = await Lesson.aggregate([
+          {
+            $vectorSearch: {
+              index: "vector_index", 
+              path: "embedding",
+              queryVector: queryVector,
+              numCandidates: 100,
+              limit: 10,
+            },
+          },
+          {
+            $project: {
+              _id: 1, title: 1, slug: 1, content: 1,
+              score: { $meta: "vectorSearchScore" },
+            },
+          },
+          // Chỉ lấy kết quả giống trên 75%. 
+          { $match: { score: { $gt: 0.75 } } } 
+        ]);
+
+        if (vectorResults.length > 0) {
+          results = vectorResults;
+        }
+      }
+    } catch (vectorError) {
+
+    }
+
+    // BƯỚC 2: Nếu không ra gì, thử tìm chính xác (Regex)
+    if (results.length === 0) {
+      results = await Lesson.find({
+        $or: [
+          // Tìm chính xác cụm từ trong tiêu đề
+          { title: { $regex: q, $options: "i" } }, 
+          // Tìm trong nội dung
+          { content: { $regex: q, $options: "i" } }
+        ],
+      })
+      .select("title slug content")
+      .limit(10)
+      .lean();
+    }
+
+    // BƯỚC 3: Format kết quả
     const formattedResults = results.map((item) => {
-      const cleanContent =
-        item.content.replace(/<[^>]*>?/gm, " ").substring(0, 100) + "...";
+      const plainText = item.content ? item.content.replace(/<[^>]*>?/gm, " ") : "";
       return {
         _id: item._id,
         title: item.title,
         slug: item.slug,
-        snippet: cleanContent,
-        score: item.score,
+        snippet: plainText.substring(0, 100) + (plainText.length > 100 ? "..." : ""),
+        score: item.score ? item.score.toFixed(2) : "Match", 
       };
     });
 
     res.status(200).json(formattedResults);
+
   } catch (error) {
-    console.error("Error searching lessons:", error);
-    res.status(500).json({ message: "Lỗi Server khi tìm kiếm" });
+    console.error("Error searching:", error);
+    res.status(500).json({ message: "Lỗi Server" });
   }
 };
 

@@ -5,8 +5,8 @@ import API from "@/lib/axios";
 const SearchFilterBar = ({
   selectedFilters,
   setSelectedFilters,
-  onMainResults, // Callback trả kết quả A* vào khung giữa
-  onRelatedResults, // Callback trả kết quả AI vào khung phải
+  onMainResults, 
+  onRelatedResults, 
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
