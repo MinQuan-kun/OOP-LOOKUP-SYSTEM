@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-
+import bcrypt from 'bcrypt';
 // --- Hàm Đăng ký ---
 export const register = async (req, res) => {
   try {
