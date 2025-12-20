@@ -127,11 +127,11 @@ Dự án được thực hiện bởi nhóm sinh viên Khoa Công nghệ Thông 
 
 ## 📸 Demo Screenshots
 
-*(Chèn ảnh chụp màn hình giao diện web của bạn vào đây)*
+### 1. Trang chủ & Cây kiến thức
+![Giao diện trang chủ](frontend/public/MainScreen.png)
 
-* *Trang chủ & Cây kiến thức*
-*Giao diện Chatbot AI*
-* *Kết quả tìm kiếm*
+### 2. Chatbot AI
+![Giao diện Chatbot](frontend/public/Chatbox.png)
 
 ---
 ## 🌐 Liên Kết (Deployment)
